@@ -1,0 +1,40 @@
+.account-page {
+    text-align: center;
+    padding: 20px;
+}
+
+.foto-perfil {
+    display: block;
+    margin-top: 20px;
+    position: absolute;
+    top: 190px;
+    left: 5%;
+}
+
+.home{
+    display: flex;
+    flex-direction: column;
+    padding: 20px; 
+    align-items: flex-end;
+    position: absolute;
+    top: 100px;
+    right: 45px;
+}
+
+
+.home a {
+    margin: 10px 10px;
+    text-decoration: none;
+    color: black;
+    font-size: 1.5em;
+    
+}
+
+.home a i {
+    margin-right: 5px;
+}
+
+
+.name{
+    font-weight: bold;
+}
