@@ -6,19 +6,79 @@
 }
 
 .footer-content {
+    display: flex;
+    flex-wrap: wrap;
     margin: 0px 3rem;
     padding-top: 1%;
-    display: grid;
-    grid-template-columns: repeat(4, 25%);
+    justify-content: space-between;
 }
 
-.footer-about,
-.about-more,
-.about-account {
-    display: grid;
-    padding: 10px;
+.footer-content div {
+    padding: 15px;
+}
+
+.xxss {
+    padding-left: 0px !important;
+}
+
+.about-more a {
+    display: flex;
+    width: 100%;
+    margin: auto;
+    height: 100%;
 }
 
 .about-more img {
-    max-width: 300px;
+    max-width: 150px;
+    margin: auto;
+}
+
+.footer-about,
+.footer-more,
+.footer-account {
+    width: 40%;
+}
+
+
+.footer-account,
+.footer-about,
+.footer-more {
+    display: grid;
+}
+
+
+
+@media only screen and (min-width:768px) {
+    .footer-content {}
+}
+
+@media only screen and (min-width:1024px) {
+
+    .footer {
+        width: 100%;
+        overflow: hidden;
+        border-top: solid 1px black;
+
+    }
+
+    .footer-content {
+        margin: 0px 3rem;
+        padding-top: 1%;
+        display: grid;
+        grid-template-columns: repeat(4, 25%);
+    }
+
+    .footer-about,
+    .about-more,
+    .about-account {
+        display: grid;
+        padding: 10px;
+    }
+
+    .about-more img {
+        margin-top: 0px;
+        max-width: 300px;
+        width: 100%;
+
+    }
 }
