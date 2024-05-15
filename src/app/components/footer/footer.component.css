@@ -1,0 +1,24 @@
+.footer {
+    width: 100%;
+    overflow: hidden;
+    border-top: solid 1px black;
+
+}
+
+.footer-content {
+    margin: 0px 3rem;
+    padding-top: 1%;
+    display: grid;
+    grid-template-columns: repeat(4, 25%);
+}
+
+.footer-about,
+.about-more,
+.about-account {
+    display: grid;
+    padding: 10px;
+}
+
+.about-more img {
+    max-width: 300px;
+}

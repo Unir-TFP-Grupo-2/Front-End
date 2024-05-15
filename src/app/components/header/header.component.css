@@ -1,0 +1,28 @@
+.nav {
+    margin: 0px 3rem;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: solid 1px black;
+    box-shadow: 0 0 0 1;
+
+}
+
+.nav-li {
+    display: block;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.nav-li a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: black;
+}
+
+.nav-li a:hover {
+    border-bottom: solid 1px black;
+}
+
+img {
+    width: 150px;
+}

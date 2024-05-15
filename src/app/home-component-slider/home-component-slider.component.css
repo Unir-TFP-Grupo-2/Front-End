@@ -1,0 +1,8 @@
+.carousell {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    margin: 0px 3rem;
+
+}
+
+.carousell-content {}
