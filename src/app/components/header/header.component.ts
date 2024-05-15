@@ -12,8 +12,17 @@ export class HeaderComponent {
 
   addClassOpen() {
     const nav = document.querySelector(".nav");
-    console.log(nav);
+    const menu_flotante = document.querySelector(".menu-flotante");
     nav?.classList.add("open");
+    menu_flotante?.classList.add("hidden");
+  }
+
+  removeClassOpen() {
+    const nav = document.querySelector(".nav");
+    const menu_flotante = document.querySelector(".menu-flotante");
+
+    menu_flotante?.classList.remove("hidden");
+    nav?.classList.remove("open");
   }
 }
 
