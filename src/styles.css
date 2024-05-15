@@ -10,3 +10,22 @@ body {
 .hidden {
     visibility: hidden;
 }
+
+
+.button.login {
+    padding: 10px;
+
+}
+
+.button.register {
+    padding: 10px;
+    background-color: rgba(0, 123, 255, 0.4);
+    box-shadow: 0px 0px 0px;
+}
+
+.button.register:hover {
+    padding: 10px;
+    background-color: rgba(0, 123, 255, 0.4);
+    box-shadow: 1px 1px 1px;
+
+}

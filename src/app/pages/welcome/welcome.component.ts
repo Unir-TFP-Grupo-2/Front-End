@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { HomeComponentSliderComponent } from '../../home-component-slider/home-component-slider.component';
-import { HomeComponentGrid2Component } from '../../home-component-grid2/home-component-grid2.component';
-import { HomeComponentCaracteristicasComponent } from '../../home-component-caracteristicas/home-component-caracteristicas.component';
-import { HomeComponentFuncionComponent } from '../../home-component-funcion/home-component-funcion.component';
-import { ComponentFaqsComponent } from '../../component-faqs/component-faqs.component';
+import { HomeComponentSliderComponent } from '../../components/home-component-slider/home-component-slider.component';
+import { HomeComponentGrid2Component } from '../../components/home-component-grid2/home-component-grid2.component';
+import { HomeComponentCaracteristicasComponent } from '../../components/home-component-caracteristicas/home-component-caracteristicas.component';
+import { HomeComponentFuncionComponent } from '../../components/home-component-funcion/home-component-funcion.component';
+import { ComponentFaqsComponent } from '../../components/component-faqs/component-faqs.component';
 
 @Component({
   selector: 'app-welcome',
