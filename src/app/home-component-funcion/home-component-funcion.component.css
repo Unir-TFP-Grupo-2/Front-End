@@ -1,0 +1,32 @@
+.funciones {
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+}
+
+
+.funcion {
+    padding: 100px;
+    border: solid 1px black;
+    background-color: #007BFF;
+
+}
+
+h3 {
+    text-align: center;
+}
+
+.title {
+    max-width: max-content;
+    padding: 0px 20px;
+    font-size: 50px;
+    border-radius: 50px;
+}
+
+
+.title span {
+    font-size: 50px;
+}
+
+.funcion p {
+    font-size: 20px;
+}
