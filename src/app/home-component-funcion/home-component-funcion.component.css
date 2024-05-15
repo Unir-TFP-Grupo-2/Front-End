@@ -1,32 +1,48 @@
-.funciones {
-    display: grid;
-    grid-template-columns: repeat(2, 50%);
-}
-
-
-.funcion {
-    padding: 100px;
-    border: solid 1px black;
-    background-color: #007BFF;
-
-}
-
 h3 {
     text-align: center;
 }
 
+.funciones {
+    display: grid;
+    text-align: center;
+
+}
+
+
+.funcion {
+    padding: 10px;
+}
+
+
+h4 {
+    margin: 5px;
+}
+
 .title {
-    max-width: max-content;
-    padding: 0px 20px;
-    font-size: 50px;
-    border-radius: 50px;
+    width: 139px;
+    height: 139px;
+    display: flex;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: rgba(0, 123, 255, 0.4);
+    font-size: 80px;
+    margin: auto;
 }
 
 
 .title span {
-    font-size: 50px;
+    font-family: "Playfair Display", serif;
+    font-weight: 600;
+    font-style: italic;
 }
 
 .funcion p {
     font-size: 20px;
+}
+
+@media only screen and (min-width: 1025px) {
+    .funciones {
+        display: grid;
+        grid-template-columns: repeat(4, 25%);
+    }
 }
