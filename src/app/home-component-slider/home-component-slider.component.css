@@ -1,14 +1,39 @@
-@media only screen and (max-width: 600px) {
-    .carousell {
+span {
+    display: flex;
+}
+
+span::after {
+    content: "|";
+    display: block;
+}
+
+.banner-img {
+    display: flex;
+}
+
+.banner-img img {
+    margin: auto;
+    width: 100%;
+    max-width: 300px;
+}
+
+@media only screen and (min-width: 1025px) {
+    .banner {
         display: grid;
-        grid-template-columns: 40% 60%;
+        grid-template-columns: repeat(2, 50%);
         margin: 0px 3rem;
 
     }
-}
 
-.carousell-content {}
 
-.carousell-img img {
-    max-width: 200px;
+    .banner-content {
+        width: 70%;
+        margin: auto;
+    }
+
+
+
+    .banner-img img {
+        max-width: 500px;
+    }
 }
