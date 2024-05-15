@@ -1,8 +1,14 @@
-.carousell {
-    display: grid;
-    grid-template-columns: 40% 60%;
-    margin: 0px 3rem;
+@media only screen and (max-width: 600px) {
+    .carousell {
+        display: grid;
+        grid-template-columns: 40% 60%;
+        margin: 0px 3rem;
 
+    }
 }
 
 .carousell-content {}
+
+.carousell-img img {
+    max-width: 200px;
+}

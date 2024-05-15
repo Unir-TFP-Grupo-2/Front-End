@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { NavigationCancel, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -10,4 +10,10 @@ import { RouterLink } from '@angular/router';
 })
 export class HeaderComponent {
 
+  addClassOpen() {
+    const nav = document.querySelector(".nav");
+    console.log(nav);
+    nav?.classList.add("open");
+  }
 }
+
