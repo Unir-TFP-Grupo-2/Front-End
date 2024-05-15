@@ -1,0 +1,23 @@
+h4 {
+    text-align: center;
+}
+
+.accordion {
+    max-width: 800px;
+    margin: auto;
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+.accordion-item.active .accordion-content {
+    max-height: 500px;
+}
+
+.accordion-header {
+    cursor: pointer;
+    border-bottom: solid 1px black;
+}
