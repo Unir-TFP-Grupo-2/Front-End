@@ -95,10 +95,10 @@ header {
     }
 
     .nav {
-        width: auto;
-        position: initial;
         display: flex;
         flex-direction: row;
+        width: auto;
+        position: initial;
         height: auto;
         transform: none;
         margin: 0px 3rem;
@@ -111,7 +111,8 @@ header {
     }
 
     .nav-li {
-        display: block;
+        display: flex;
+        flex-direction: row;
         margin-top: auto;
         margin-bottom: auto;
     }
@@ -122,9 +123,7 @@ header {
         color: black;
     }
 
-    .nav-li a:hover {
-        border-bottom: solid 1px black;
-    }
+
 
     img {
         width: 150px;

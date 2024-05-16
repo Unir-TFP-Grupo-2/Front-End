@@ -17,6 +17,13 @@ span::after {
     max-width: 300px;
 }
 
+.register {
+    background-color: rgba(0, 123, 255, 0.4);
+    color: white;
+}
+
+
+
 @media only screen and (min-width: 1025px) {
     .banner {
         display: grid;

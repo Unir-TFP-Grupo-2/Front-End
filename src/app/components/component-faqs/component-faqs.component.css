@@ -10,14 +10,16 @@ h4 {
 .accordion-content {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease-out;
+    transition: max-height 1s ease-out;
 }
 
 .accordion-item.active .accordion-content {
-    max-height: 500px;
+    max-height: 600px;
 }
 
 .accordion-header {
+    font-style: italic;
     cursor: pointer;
     border-bottom: solid 1px black;
+
 }
