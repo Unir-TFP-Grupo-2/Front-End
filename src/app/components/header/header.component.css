@@ -1,7 +1,11 @@
 header {
-    position: relative;
+    position: sticky;
+    top: 0;
     z-index: 1000;
+    width: 100%;
+    background-color: white;
 }
+
 
 .menu-flotante {
     cursor: pointer;
@@ -103,7 +107,6 @@ header {
         transform: none;
         margin: 0px 3rem;
         justify-content: space-between;
-        border-bottom: solid 1px black;
         visibility: visible;
         max-height: 100%;
         overflow: hidden;

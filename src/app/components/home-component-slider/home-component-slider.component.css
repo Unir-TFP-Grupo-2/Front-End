@@ -6,6 +6,7 @@ span {
     width: 70%;
     margin: auto;
     text-align: center;
+
 }
 
 span::after {
@@ -32,20 +33,39 @@ span::after {
     margin-bottom: 50px;
 }
 
+.banner-content .palabras {
+    justify-content: center;
+}
 
 @media only screen and (min-width: 1025px) {
     .banner {
         display: grid;
         grid-template-columns: repeat(2, 50%);
-        margin: 0px 3rem;
+        background-image: url('../../../assets/banner-home/banner-desktop.webp');
+        background-size: 100%;
+        background-repeat: no-repeat;
+        height: 100vh;
 
     }
 
     .banner-content {
         text-align: left;
+        color: black !important;
+        background: rgba(255, 255, 255, 0.4);
+        padding: 30px;
     }
 
+
+    .banner-content h1 {
+        color: black !important;
+    }
+
+    .banner-content .palabras {
+        justify-content: flex-start;
+    }
+
+
     .banner-img img {
-        max-width: 500px;
+        display: none;
     }
 }
