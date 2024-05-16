@@ -6,6 +6,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { GroupsComponent } from './pages/groups/groups.component';
 import { AccountComponent } from './pages/account/account.component';
 import { AboutComponent } from './pages/about/about.component';
+import { RecoverComponent } from './pages/recover/recover.component';
 
 export const routes: Routes = [
     {path: "", pathMatch: "full", redirectTo: "welcome"},
@@ -15,5 +16,7 @@ export const routes: Routes = [
     {path: "home", component: HomeComponent},
     {path: "groups", component: GroupsComponent},
     {path: "account", component: AccountComponent},
-    {path: "about", component: AboutComponent}
+    {path: "about", component: AboutComponent},
+    {path: "recover", component: RecoverComponent}
+    
 ];
