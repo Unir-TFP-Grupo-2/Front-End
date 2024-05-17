@@ -81,15 +81,6 @@ a:hover {
     width: 100%;
 }
 
-input {
-    font-family: "Playfair Display", serif;
-    font-style: italic;
-    border: none;
-    border-bottom: solid 1px black;
-    padding: 5px;
-    font-size: 15px;
-}
-
 .separador {
     width: 100%;
     border-bottom: solid 1px #F4F4F4;
