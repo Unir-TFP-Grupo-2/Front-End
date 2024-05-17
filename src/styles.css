@@ -7,8 +7,11 @@
     --primary: rgba(0, 153, 114, 0.6);
 }
 
-body {
+body,
+html {
     font-family: "Poppins", sans-serif;
+    overflow: hidden;
+    margin: 0px;
 }
 
 h1,
