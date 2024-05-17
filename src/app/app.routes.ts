@@ -17,6 +17,7 @@ export const routes: Routes = [
     {path: "groups", component: GroupsComponent},
     {path: "account", component: AccountComponent},
     {path: "about", component: AboutComponent},
+    {path: "logica", component: LoginComponent},
     {path: "recover", component: RecoverComponent}
     
 ];
