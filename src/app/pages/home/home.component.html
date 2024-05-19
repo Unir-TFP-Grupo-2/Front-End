@@ -1,1 +1,26 @@
-<p>home works!</p>
+<body>
+  <section class="section-primary">
+    <div class="nav">
+      <div class="slogan">
+        <span class="slogan-1">Crea un grupo</span>
+        <div class="slogan-2">
+          <div class="slogan-3">
+            <span>y no te lies</span>
+            <span>con las cuentas</span>
+          </div>
+          <button class="btn-new-group" (click)="abrirPopup()">Crear</button>
+        </div>
+      </div>
+    </div>
+    <div>
+      <app-mini-group class="list-groups"></app-mini-group>
+    </div>
+  </section>
+
+  <div class="popup-overlay" *ngIf="mostrarPopup">
+    <div class="popup-content">
+      <app-new-user (cerrar)="cerrarPopup()"></app-new-user>
+    </div>
+  </div>
+</body>
+
