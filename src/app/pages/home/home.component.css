@@ -1,0 +1,225 @@
+body {
+    margin: 0;
+    max-width: 1200px;
+    min-height: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    background-image: url('../../../assets/img/fondo-home.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .section-primary {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 2rem;
+    margin: 0 5rem;
+    padding-bottom: 2rem;
+  }
+  
+  .nav {
+    display: flex;
+    align-items: flex-end;
+  }
+  
+  .slogan-1 {
+    display: flex;
+    font-size: x-large;
+    font-weight: 600;
+    color: #123553;
+  }
+  
+  .slogan-2 {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    color: #123553;
+  }
+  
+  .slogan-3 {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .btn-new-group {
+    cursor: pointer;
+    height: 30px;
+    border-radius: 10px;
+    background-color: #c0dedc;
+    font-weight: 600;
+    border: 2px solid #123553;
+    color: #123553;
+  }
+  
+  .btn-new-group:hover {
+    background-color: #123553;
+    color: #d6e6e6;
+    transform: scale(1.05);
+  }
+  
+  .btn-new-group:active{
+    box-shadow: 0 4px 16px #123553
+  }
+  
+  .list-groups {
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  
+  @media (max-width: 900px) {
+    .list-groups {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @media (max-width: 660px) {
+    body {
+      background-image: url('../../../assets/img/fondo-home-2.jpg');
+    }
+  
+    .nav {
+      padding-top: 50px;
+    }
+  
+    .section-primary {
+      display: flex;
+      flex-direction: column;
+      margin: 0 1rem;
+    }
+  }
+  
+  @media (min-width: 1220px) {
+    body {
+      background: linear-gradient(to right, #00000000 85%, #ffffff 100%), url('../../../assets/img/fondo-home.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+  }
+  
+  .popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  body {
+    margin: 0;
+    max-width: 1200px;
+    min-height: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    background-image: url('../../../assets/img/fondo-home.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .section-primary {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 2rem;
+    margin: 0 5rem;
+    padding-bottom: 2rem;
+  }
+  
+  .nav {
+    display: flex;
+    align-items: flex-end;
+  }
+  
+  .slogan-1 {
+    display: flex;
+    font-size: x-large;
+    font-weight: 600;
+    color: #123553;
+  }
+  
+  .slogan-2 {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    color: #123553;
+  }
+  
+  .slogan-3 {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .btn-new-group {
+    cursor: pointer;
+    height: 30px;
+    border-radius: 10px;
+    background-color: #c0dedc;
+    font-weight: 600;
+    border: 2px solid #123553;
+    color: #123553;
+  }
+  
+  .btn-new-group:hover {
+    background-color: #123553;
+    color: #d6e6e6;
+    transform: scale(1.05);
+  }
+  
+  .btn-new-group:active{
+    box-shadow: 0 4px 16px #123553
+  }
+  
+  .list-groups {
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  
+  @media (max-width: 900px) {
+    .list-groups {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @media (max-width: 660px) {
+    body {
+      background-image: url('../../../assets/img/fondo-home-2.jpg');
+    }
+  
+    .nav {
+      padding-top: 50px;
+    }
+  
+    .section-primary {
+      display: flex;
+      flex-direction: column;
+      margin: 0 1rem;
+    }
+  }
+  
+  @media (min-width: 1220px) {
+    body {
+      background: linear-gradient(to right, #00000000 85%, #ffffff 100%), url('../../../assets/img/fondo-home.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+  }
+  
+  .popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
