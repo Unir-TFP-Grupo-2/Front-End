@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { MiniGroupComponent } from '../../components/mini-group/mini-group.component';
+import { NewUserComponent } from '../../components/new-user/new-user.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [MiniGroupComponent],
+  imports: [MiniGroupComponent, NewUserComponent, CommonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
