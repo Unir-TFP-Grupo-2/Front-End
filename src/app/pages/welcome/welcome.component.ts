@@ -5,6 +5,7 @@ import { HomeComponentCaracteristicasComponent } from '../../components/home-com
 import { HomeComponentFuncionComponent } from '../../components/home-component-funcion/home-component-funcion.component';
 import { ComponentFaqsComponent } from '../../components/component-faqs/component-faqs.component';
 
+
 @Component({
   selector: 'app-welcome',
   standalone: true,
