@@ -38,3 +38,13 @@
 .name{
     font-weight: bold;
 }
+
+.my-element {
+    position: absolute;
+  }
+  
+  @media (max-width: 600px) {
+    .my-element {
+      position: static;
+    }
+  }
