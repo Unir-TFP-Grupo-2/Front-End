@@ -20,4 +20,6 @@ export class HomeComponent {
   cerrarPopup() {
     this.mostrarPopup = false;
   }
+
+  
 }

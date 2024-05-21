@@ -1,30 +1,37 @@
+/* Estilos generales */
 .group-section {
     display: flex;
     justify-content: center;
     padding: 1rem;
     border-radius: 30px;
     width: fit-content;
-    padding-bottom: 1.5rem;
     gap: 1rem;
-    color:#123553 ;
-    background-color:white;
+    color: #123553;
+    background-color: white;
 }
 
+/* Estilos para títulos */
 h2 {
-    font-size: large;
     margin: 0;
 }
 
+/* Estilos para texto resaltado */
 span {
     font-weight: 500;
 }
 
+.form-label{
+    font-size: large;
+}
+
+/* Estilos para el formulario del grupo */
 .group-form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
+/* Estilos para grupos de elementos en el formulario */
 .form-group {
     position: relative;
     display: flex;
@@ -32,74 +39,120 @@ span {
     gap: 0.2rem;
 }
 
-.form-input{
-   border-color:#123553 ;
+/* Estilos para los campos de entrada */
+.form-input {
+    border: none;
+    border-color: #123553;
+    position: relative;
 }
 
-.form-input:focus{
+.form-input:focus {
     outline: none;
 }
 
-.form-textarea{
-    resize: none; 
+/* Estilos para el área de texto */
+.form-textarea {
+    resize: none;
     border-radius: 5px;
-    height: 2.5rem;
+    height: 80px;
     border: none;
-    background-color: #d6e6e6; 
-    padding: 0.2rem; 
-    font-size: x-small;
+    background-color: #d6e6e6;
+    padding: 0.2rem;
+    font-size: small;
     outline: none;
     overflow-y: hidden;
 }
 
-.btn-add {
+.btn-add{
     position: absolute;
+    right: 0;
+    top: 35px;
     cursor: pointer;
-    right: -10px;
-    top: 45px;
-    border-radius: 5px;
-    background-color:transparent;
-    font-size: small;
+    background-color: #d6e6e6;
+    font-size: medium;
     font-weight: 600;
-    border: none;
-    color: #123553;
+    color: #123553
+    
 }
 
-.btn-remove{
+/* Estilos para botones de agregar y remover */
+.btn-add,
+.btn-remove {
     cursor: pointer;
-    margin:0;
-    border:none;
+    border: none;
     background-color: transparent;
-    color: #a51c1c;
-    font-size: x-small;
+    font-size: small;
 }
 
-.btn-remove:hover{
+.btn-remove {
+    color: #a51c1c;
+}
+
+.btn-add:hover,
+.btn-remove:hover {
     transform: scale(1.4);
 }
 
-.form-submit{
+/* Estilos para el botón de cerrar el popup */
+.btn-close-popup {
+    position: relative;
+    right: -25px;
+    top: -15px;
+    color: #123553;
+    cursor: pointer;
+    display: flex;
+    align-self: flex-start;
+    font-size: small;
+    font-weight: 800;
+    border: none;
+    background-color: transparent;
+}
+
+.btn-close-popup:hover {
+    transform: scale(1.4);
+}
+
+/* Estilos para la lista de participantes */
+.participants-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* Estilos para la lista de integrantes */
+ul {
+    margin-top: 0;
+    padding: 0;
+}
+
+li {
+    font-size: x-small;
+    list-style-type: none;
+    justify-content: baseline;
+    padding-left: 0.3rem;
+}
+
+/* Estilos para el botón de enviar el formulario */
+.form-submit {
     cursor: pointer;
     height: 1.5rem;
-    width: 5rem;
+    width: 130px;
     border-radius: 5px;
     background-color: #d6e6e6;
-    font-size: x-small;
+    font-size: medium;
     font-weight: 600;
     border: none;
     color: #123553;
 }
 
-.form-submit:hover, .btn-add:hover {
+.form-submit:hover {
     background-color: #123553;
     color: #d6e6e6;
     transform: scale(1.05);
-}
-
-.form-submit:hover, .btn-add:active {
     box-shadow: 0 4px 16px #123553;
 }
 
+/* Estilos para la sección de integrantes */
 .integrantes {
     display: flex;
     flex-direction: column;
@@ -108,50 +161,31 @@ span {
     font-size: small;
 }
 
-.participants-list {
-    display: flex;
-    flex-direction: column;
-    align-items:flex-start;
-}
-span{
-    padding-top: 0.5rem;
-}
-
-.form-submit {
-    align-self: center;
-}
-
-ul {
-    margin-top: 0;
-    padding: 0;
-}
-
-li {
-    font-size: xx-small;
-    list-style-type: none;
-    justify-content: baseline;
-    padding-left: 0.3rem;
-}
-
-.btn-close-popup{
-    position: relative;
-    right: -10px;
-    top: -10px;
-    color: #123553;
-    cursor: pointer;
-    display: flex;
-    align-self: flex-start;
-    font-size:x-small;
-    font-weight: 800;
-    border: none;
-    background-color: transparent; 
-}
-
-.btn-close-popup:hover{
-    transform: scale(1.4);
-}
-
-.participants-header{ 
+/* Estilos para el encabezado de la lista de participantes */
+.participants-header {
     display: flex;
 }
 
+@media (max-width: 460px) {
+    .group-section{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 340px;
+        padding: 1rem;
+        border-radius: 30px;
+        gap: 1rem;
+    }
+
+    .btn-close-popup {
+        position: relative;
+        left: 230px;
+        top: -360px;
+    }
+}
+
+@media (max-width: 390px) {
+    .group-section{
+        width: 280px;
+    }
+}

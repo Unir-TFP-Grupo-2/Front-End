@@ -6,6 +6,7 @@
 :root {
 
     --primary: #22aaa1;
+    --secondary: #131A22;
 }
 
 body,
@@ -84,3 +85,5 @@ a {
     border-bottom: solid 1px #F4F4F4;
     margin: 50px 0px;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
