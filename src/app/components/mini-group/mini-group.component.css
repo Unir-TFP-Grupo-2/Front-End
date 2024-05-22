@@ -1,117 +1,124 @@
 .mini-group{
-    display: flex;
-    flex-direction: column;
-    min-width: 200px;
-    min-height: 200px;
-    border-radius: 35px;
-    background-color: rgb(150, 206, 255);
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+  max-height: 240px;
+  min-height: 200px;
+  border-radius: 35px;
+  background-color: rgb(150, 206, 255);
 }
 
 .header-group{
-    display: flex;
-    padding: 0.7rem;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 10px 0 20px;
 }
 
 .date{
-    font-size: x-small;
+  font-size: x-small;
 }
 
-.btn-group-name{
+.btn-settings{
   cursor: pointer;
+  background-color: transparent;
+  border: none;
+}
+
+.btn-settings:hover{
+  transform: scale(1.4);
+}
+
+.settings{
+  width: 16px;
+}
+
+.btn-group-name {
   display: flex;
-  padding: 0 12px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: none;
-  background-color: transparent;
+  text-align: center;
+  min-height: 70px;
+  max-height: 70px;
   font-size: medium;
   font-weight: 600;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0 12px;
+}
+
+.btn-group-name span{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
   word-break: break-word;
-  hyphens: auto;
-  min-height: 70px;
 }
 
 .btn-group-name:hover{
-    transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .group-accounts{
-    padding: 20px 10px 10px 10px;
-
+  padding: 20px 10px 10px 10px;
 }
 
 .progress-container {
-    width: 100%;
-    background-color: #f3f3f3;
-    border-radius: 25px;
-    overflow: hidden;
-  }
-  .progress-bar {
-    border-radius: 20px;
-    height: 3px;
-    margin: 0 10px 10px 10px;
-    
-    background-color: #c84242;
-    transition: width 0.3s ease-in-out;
-  }
-
-  .btn-settings{
-    cursor: pointer;
-    background-color: transparent;
-    border: none;
-  }
-
-  .btn-settings:hover{
-    transform: scale(1.4);
-  }
-
-  .settings{
-    width: 16px;
-  }
-
-  .group-user{
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    position: relative;
-    padding: 0.5rem 1rem 0.5rem 1rem;
-    border-top: 2px solid white;
+  width: 100%;
+  background-color: #f3f3f3;
+  border-radius: 25px;
+  overflow: hidden;
 }
 
-  .icon-user-1{
-    width: 30px;
-  }
-
-  .icon-user-2{
-    width: 30px;
-    position: absolute;
-    top: 10px;
-    left: 35px; 
-  }
-
-  .user-actions{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-  }
-
-  .total-users-group{
-    font-size: x-small;
-  }
-
-  .btn-add-user-group{
-    cursor: pointer;
-    background-color: rgb(194, 226, 255) ;
-    border: none;
-    border-radius: 10px;
-    color: rgb(24, 147, 255);
-    font-weight: 600;
-  }
-
-  .btn-add-user-group:hover{
-    transform: scale(1.4);
+.progress-bar {
+  height: 3px;
+  margin: 0 10px 10px 10px;
+  background-color: #c84242;
+  border-radius: 20px;
+  transition: width 0.3s ease-in-out;
 }
 
+.group-user{
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 10px 20px 10px 20px;
+  border-top: 2px solid white;
+  gap: 20px;
+}
+
+.icon-user-1{
+  width: 30px;
+}
+
+.icon-user-2{
+  width: 30px;
+  position: absolute;
+  top: 10px;
+  left: 35px; 
+}
+
+.user-actions{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.total-users-group{
+  font-size: x-small;
+}
+
+.btn-add-user-group{
+  cursor: pointer;
+  background-color: rgb(194, 226, 255) ;
+  border: none;
+  border-radius: 10px;
+  color: rgb(24, 147, 255);
+  font-weight: 600;
+}
+
+.btn-add-user-group:hover{
+  transform: scale(1.4);
+}

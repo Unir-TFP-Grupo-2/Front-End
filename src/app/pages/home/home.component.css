@@ -1,33 +1,32 @@
 body {
-    margin: 0;
+    margin-top:20px ;
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
   }
   
 .img-home{
-  max-width: 470px;
+  max-width: 440px;
   border-radius: 20px;
   background-image: url('../../../assets/img/home-img1.jpeg');
   background-size: cover;
-  background-position: center;
+  
 }
 
-  .section-primary {
-    
+.section-primary {
     display: grid;
     min-height: 600px;
     grid-template-columns: 2fr 3fr;
-    gap: 2rem;
-    margin: 0 5rem;
-    padding-bottom: 2rem;
+    gap: 40px;
+    margin: 0 40px;
+    padding-bottom: 40px;
   }
   
   .nav {
     display: flex;
     flex-direction: column;
     padding-right: 20px;
-    gap: 1rem;
+    gap: 20px;
     /* align-items: center; alinea el crea grupo*/ 
     margin-top: auto;
   }
@@ -75,12 +74,11 @@ body {
   }
   
   .list-groups {
-    margin-top: 1rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1rem; 
+    gap: 20px; 
     justify-content: center; 
-    align-content: center;
+    align-content:center;
     height: 100%; 
   }
 
