@@ -1,0 +1,47 @@
+<div>
+    <h2>Gestionar Gastos</h2>
+  
+    <div>
+      <input [(ngModel)]="nuevoUsuario" placeholder="Agregar usuario" />
+      <button (click)="agregarUsuario()">Agregar Usuario</button>
+    </div>
+  
+    <div>
+      <h3>Registrar Gasto</h3>
+      <input [(ngModel)]="nuevoGasto.usuario" placeholder="Usuario" />
+      <input [(ngModel)]="nuevoGasto.cantidad" type="number" placeholder="Cantidad" />
+      <input [(ngModel)]="nuevoGasto.descripcion" placeholder="Descripción" />
+      <button (click)="registrarGasto()">Registrar Gasto</button>
+    </div>
+  
+    <div>
+      <h3>Usuarios</h3>
+      <ul>
+        <li *ngFor="let usuario of usuarios">{{ usuario }}</li>
+      </ul>
+    </div>
+  
+    <div>
+      <h3>Gastos Individuales</h3>
+      <ul>
+        <li *ngFor="let usuario of usuarios">{{ usuario }}: {{ gastosIndividuales[usuario] }}</li>
+      </ul>
+    </div>
+  
+    <div>
+      <h3>Deudas</h3>
+      <ul>
+        <li *ngFor="let usuario of usuarios">{{ usuario }}: {{ deudas[usuario] }}</li>
+      </ul>
+    </div>
+  
+    <div>
+      <h3>Transacciones Necesarias</h3>
+      <ul>
+        <li *ngFor="let transaccion of transacciones">
+          {{ transaccion.deudor }} debe pagar a {{ transaccion.acreedor }}: {{ transaccion.cantidad }}
+        </li>
+      </ul>
+    </div>
+  </div>
+  

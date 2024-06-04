@@ -13,13 +13,15 @@
             </div>
         </div>
         <div>
-            <app-mini-group class="list-groups"></app-mini-group>
+            @for(group of groups; track group.id){
+            <app-mini-group class="list-groups" [miGroup]="group"></app-mini-group>
+            }
         </div>
     </section>
 
     <div class="popup-overlay" *ngIf="mostrarPopup">
         <div class="popup-content">
-            <app-new-user (cerrar)="cerrarPopup()"></app-new-user>
+            <app-new-group (cerrar)="cerrarPopup()"></app-new-group>
         </div>
     </div>
 </body>

@@ -3,13 +3,13 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-new-user',
+  selector: 'app-new-group',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './new-user.component.html',
-  styleUrl: './new-user.component.css'
+  templateUrl: './new-group.component.html',
+  styleUrl: './new-group.component.css'
 })
-export class NewUserComponent {
+export class NewGroupComponent {
   groupForm: FormGroup;
   participants: string[] = [];
 
