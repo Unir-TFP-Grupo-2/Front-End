@@ -19,8 +19,29 @@ body {
     grid-template-columns: 2fr 3fr;
     gap: 40px;
     margin: 0 40px;
-    padding-bottom: 40px;
   }
+
+  .pagination{
+    display: flex;
+    padding-right: 30px;
+    padding-bottom: 10px;
+    justify-content: flex-end;
+  }
+  .pagination ::ng-deep .ngx-pagination .current {
+    cursor: pointer;
+    background:var(--primary);
+    border-radius: 10px;
+  }
+  .ngx-pagination a, .ngx-pagination button {
+    border-radius: 10px;
+  }
+
+  .pagination ::ng-deep .ngx-pagination .current:hover {
+    background-color: var(--tertiary);
+    color: #d6e6e6;
+    transform: scale(1.05);
+  }
+  
   
   .nav {
     display: flex;
@@ -44,7 +65,7 @@ body {
     max-width: 250px;
     gap: 2rem;
     align-items: center;
-    color:var(--secondary)
+    color:var(--tertiary)
   }
   
   .slogan-3 {
@@ -56,21 +77,21 @@ body {
     cursor: pointer;
     height: 40px;
     border-radius: 10px;
-    color: var(--secondary);
+    color: white;
     font-weight: 600;
     font-size: medium;
     background-color: var(--primary);
-    border: 2px solid var(--secondary);
+    border: 2px solid var(--tertiary);
   }
   
   .btn-new-group:hover {
-    background-color: var(--secondary);
+    background-color: var(--tertiary);
     color: #d6e6e6;
     transform: scale(1.05);
   }
   
   .btn-new-group:active{
-    box-shadow: 0 4px 16px #123553
+    box-shadow: 0 4px 16px var(--tertiary)
   }
   
   .list-groups {
@@ -123,6 +144,7 @@ body {
     }
 
     .nav{
+      margin-top: 0;
       background-color: white;
       padding: 0 40px
     }
@@ -149,6 +171,8 @@ body {
   }
 
   @media (max-width: 460px) {
+    
+
     .list-groups {
       grid-template-columns: 1fr;
     }

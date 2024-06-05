@@ -4,7 +4,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { RouterLink } from '@angular/router';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { FormGroup } from '@angular/forms';
-import { IGroup } from '../../../../interfaces/igroup';
+import { IGroup } from '../../../../core/interfaces/igroup';
+
 
 @Component({
   selector: 'app-mini-group',
@@ -20,9 +21,9 @@ export class MiniGroupComponent implements OnInit {
   
   @Input() value: number = 50; 
   colors = [
-    'rgb(150, 206, 255)','rgb(255, 183, 197)','rgb(255, 255, 186)','rgb(186, 255, 201)',
-    'rgb(255, 223, 186)'
-  ];
+    '#FFF5EE', '#FFF0F5', '#F8C8DC', '#FADADD', '#FFE4E1', '#FFDAB9', '#FAFAD2', '#F5DEB3', '#F0E68C', '#E6E6FA','#D8BFD8', '#D3D3D3', '#E0FFFF', '#E0EEE0', '#E3F2FD', '#A7D9C9', '#A2D2F2', '#B0E0E6', '#DCC6E0', '#DDA0DD','#FFB6C1', '#E6E6FA', '#FFFACD', '#FFE4E1', '#E0FFFF', '#F0E68C', '#F5DEB3', '#F8C8DC', '#FAFAD2'
+]
+
 
   miniGroupColor!: string;
   addUserButtonColor!: string;
