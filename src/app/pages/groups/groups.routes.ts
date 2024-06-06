@@ -3,5 +3,5 @@ import { GroupsComponent } from "./groups.component";
 
 
 export const GROUPS_ROUTES: Routes = [
-    {path: "groups", component: GroupsComponent},
+    {path: "grupo/:id", component: GroupsComponent},
 ]

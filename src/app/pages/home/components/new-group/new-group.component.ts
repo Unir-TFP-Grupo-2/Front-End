@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Component, EventEmitter, Output, inject } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { GroupsService } from '../../../../core/services/groups.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-group',
@@ -10,19 +12,34 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './new-group.component.css'
 })
 export class NewGroupComponent {
-  groupForm: FormGroup;
+  formGroup: FormGroup;
+
+  formBuilder = inject(FormBuilder);
+  groupsService = inject(GroupsService);
+  router = inject(Router);
   participants: string[] = [];
 
-  @Output() cerrar = new EventEmitter();
+  @Output() cerrar = new EventEmitter<void>();
+  
 
-  constructor(private fb: FormBuilder) {
-    this.groupForm = this.fb.group({
-      participantInput: ['']
+  /**
+   * Constructor de NewGroupComponent.
+   * 
+   * @param {FormBuilder} fb - El form builder usado para crear formularios reactivos.
+   */
+  constructor() {
+    this.formGroup = this.formBuilder.group({
+      groupName: [null, Validators.required],
+      groupDescription: null ,
+      participantInput: null,
     });
   }
 
-  addParticipant() {
-    const participantInput = this.groupForm.get('participantInput');
+  /**
+   * Agrega un nuevo participante a la lista de participantes.
+   */
+  addParticipant(): void {
+    const participantInput = this.formGroup.get('participantInput');
     const participantValue = participantInput?.value.trim();
 
     if (participantValue) {
@@ -31,18 +48,31 @@ export class NewGroupComponent {
     }
   }
 
-  removeParticipant(index: number) {
+  /**
+   * Elimina un participante de la lista de participantes.
+   * 
+   * @param {number} index - El índice del participante a eliminar.
+   */
+  removeParticipant(index: number): void {
     this.participants.splice(index, 1);
   }
 
-  onSubmit() {
-    const formValue = this.groupForm.value;
-    formValue.participants = this.participants;
-    console.log(formValue);
+  /**
+   * Envía los datos del formulario y la lista de participantes.
+   */
+  async onSubmit() {
+    const response = await this.groupsService.create(this.formGroup.value);
+    console.log(response)
+    /* para redireccionar despues al grupo*/
+    this.router.navigateByUrl('/group/id') 
   } 
 
-  cerrarPopup() {
+  /**
+   * Emite un evento para cerrar el popup.
+   */
+  cerrarPopup(): void {
     this.cerrar.emit();
   }
 }
+
 

@@ -1,5 +1,5 @@
 export interface IGroup {
-        id: string;
+        group_id: string;
         title: string;
         description: string;
         date: Date;

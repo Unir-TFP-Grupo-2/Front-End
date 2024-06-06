@@ -12,11 +12,13 @@
                 </div>
             </div>
         </div>
-        <div>
-            @for(group of groups; track group.id){
-            <app-mini-group class="list-groups" [miGroup]="group"></app-mini-group>
+        <div class="list-groups">
+            @for(group of groups | paginate:{itemsPerPage:6, currentPage: page}; track group.group_id){
+            <app-mini-group [miGroup]="group"></app-mini-group>
             }
+           
         </div>
+       
     </section>
 
     <div class="popup-overlay" *ngIf="mostrarPopup">
@@ -24,4 +26,5 @@
             <app-new-group (cerrar)="cerrarPopup()"></app-new-group>
         </div>
     </div>
+    <pagination-controls class="pagination" (pageChange)="page = $event" previousLabel="" nextLabel=""></pagination-controls>
 </body>
