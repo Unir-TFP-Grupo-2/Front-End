@@ -2,14 +2,17 @@ import { Component, inject } from '@angular/core';
 import { MiniGroupComponent } from './components/mini-group/mini-group.component';
 import { NewGroupComponent } from './components/new-group/new-group.component';
 import { CommonModule } from '@angular/common';
-import { IGroup } from '../../interfaces/igroup';
+import { IGroup } from '../../core/interfaces/igroup';
 import { GroupsService } from '../../core/services/groups.service';
 import { ActivatedRoute } from '@angular/router';
+import { NgxPaginationModule } from 'ngx-pagination';
+
+
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [MiniGroupComponent, NewGroupComponent, CommonModule],
+  imports: [MiniGroupComponent, NewGroupComponent, CommonModule, NgxPaginationModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -18,16 +21,22 @@ export class HomeComponent {
 
   groupServices = inject(GroupsService)
   activatedRoute = inject(ActivatedRoute)
-  
-  /* Buscador async ngOnInit(): Promise<void> {
 
+  page: number = 1;
+
+  async ngOnInit(): Promise<void> {
     try {
-      let data = await this.groupServices.getAll()
-      this.groups = data.results
-      console.log(this.groups)
+      let response = await this.groupServices.getAll();
+      this.groups = response;
+      console.log('Respuesta del servicio:', response);
+    } catch (error) {
+      console.error('Error al obtener grupos:', error);
+    }
+  }
 
 
-      this.activatedRoute.queryParams.subscribe((params: any) => {
+
+     /*  this.activatedRoute.queryParams.subscribe((params: any) => {
         const buscar = params.query
         console.log(buscar)
         if (buscar) {
@@ -38,15 +47,12 @@ export class HomeComponent {
           this.groups = filterGroups
         } if (buscar === undefined || buscar === '') {
           console.log(buscar)
-          this.groups = data.results
+          this.groups = response.results
         }
-      })
-    } catch (err) {
-      console.log(err)
-    }
-  } */
+      }) */
 
 
+  
 
 
   mostrarPopup = false;

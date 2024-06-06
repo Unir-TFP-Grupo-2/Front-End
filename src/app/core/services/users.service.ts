@@ -59,7 +59,8 @@ export class UsersService {
       const user = await firstValueFrom(
         this.httpClient.post<LoginResponse>(`${this.baseUrl}/login`, body, { headers })
       );
-      this.router.navigate(['/login']); // Redirige a la página de inicio
+      
+      this.router.navigate(['/home']); // Redirige a la página de inicio
       return user;
     } catch (error) {
       console.error('Error durante el login:', error);

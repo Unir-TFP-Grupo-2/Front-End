@@ -13,7 +13,7 @@ type CreateGroup = {title: string, description: string; participants: string[]; 
 })
 export class GroupsService {
 
-  private baseUrl: string = `${environment.apiUrl}/groups`;
+  private baseUrl: string = `${environment.apiUrl}/grupos`;
   private httpClient = inject(HttpClient)
 
   createHeaders(){
@@ -25,14 +25,14 @@ export class GroupsService {
   }
 
   getAll(): Promise<IGroup[]> {
-  const httpOptions = {
+  /* const httpOptions = {
     headers: new HttpHeaders({
       'Authorization': localStorage.getItem('token_group')!
     })
-  }
+  } */
 
       return firstValueFrom(
-        this.httpClient.get<IGroup[]>(this.baseUrl, httpOptions)
+        this.httpClient.get<IGroup[]>(this.baseUrl,/*  httpOptions */)
       )
     }
 
