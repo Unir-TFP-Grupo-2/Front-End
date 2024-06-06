@@ -35,8 +35,10 @@ export const routes: Routes = [
         loadChildren: () => import('./pages/about/about.routes').then(m => m.ABOUT_ROUTES)
     },
 
-
-
+    {
+        path:'',
+        loadChildren: () => import('./pages/contact/contact.routes').then(m => m.CONTACT_ROUTES)
+    },
 
     {path: "logica", component: GestionGastosComponent},
     
