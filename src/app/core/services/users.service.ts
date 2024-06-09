@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, lastValueFrom } from 'rxjs';
 import { IUser } from '../interfaces/iuser';
 import { Router } from '@angular/router';
 
@@ -18,6 +18,10 @@ export class UsersService {
 
   private httpClient = inject(HttpClient)
   private router = inject(Router)
+
+  
+
+    
 
   /**
    * Registra un nuevo usuario.
@@ -41,14 +45,30 @@ export class UsersService {
       console.error('Error durante el registro:', error);
       throw error;
     }
+    
+  }
+
+  create(formValue: IUser): Promise<IUser> {
+    return lastValueFrom(this.httpClient.post<IUser>(this.baseUrl, formValue))
   }
 
   /**
    * Inicia sesión con las credenciales proporcionadas.
    * 
+   * 
+   * 
+   * 
+   * 
    * @param {LoginBody} body - El cuerpo de la solicitud que contiene el correo electrónico y la contraseña.
    * @returns {Promise<LoginResponse>} - Una promesa que se resuelve con la respuesta de inicio de sesión.
    */
+
+  getById(id: string): Promise<LoginBody> {
+    return lastValueFrom(this.httpClient.get<IUser>(`${this.baseUrl}/${id}`))
+
+  }
+
+
   async login(body: LoginBody): Promise<LoginResponse> {
     const token = localStorage.getItem('authToken'); // Asumiendo que el token se almacena en localStorage
     const headers = new HttpHeaders({
