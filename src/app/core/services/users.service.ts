@@ -14,7 +14,7 @@ type RecoverBody = { email: string }
   providedIn: 'root'
 })
 export class UsersService {
-  private baseUrl: string = `${environment.apiUrl}/user`;
+  private baseUrl: string = `${environment.apiUrl}/usuarios`;
   private httpClient = inject(HttpClient)
   private router = inject(Router)
 
@@ -28,7 +28,7 @@ export class UsersService {
    * @param {RegisterBody} newUser - El cuerpo de la solicitud que contiene los datos del nuevo usuario.
    * @returns {Promise<IUser>} - Una promesa que se resuelve con los datos del usuario registrado.
    */
-  async register(newUser: RegisterBody): Promise<IUser> {
+  async register(newUser: RegisterBody){
     const token = localStorage.getItem('authToken'); // Asumiendo que el token se almacena en localStorage
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
