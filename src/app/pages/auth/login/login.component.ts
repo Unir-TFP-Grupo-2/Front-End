@@ -32,33 +32,16 @@ export class LoginComponent {
   }, [])
 }
 
- ngOnInit() {
-  this.activatedRoute.params.subscribe(async (params:any) => {
-   if(params.id) {
-     const response = await this.usersService.getById(params.id)
-     console.log(response)
-     this.formLogin = new FormGroup({
-     email: new FormControl(response.email, [
-         Validators.required
-        ]),
-       password: new FormControl(response.password, [
-        Validators.required
-      ])
-     }, [])
-     }
-  })
-}
-
-
 
   async onSubmit(){
   try {
+    
       const response = await this.usersService.login(this.formLogin.value)
+      console.log(response)
       localStorage.setItem('token_usuario', response.token!)
-      
       this.router.navigateByUrl('/home');
-  } catch (err) {
-    console.log(err);   
+  } catch (err: any) {
+    console.log(err.error.error);   
     }
   }
 }

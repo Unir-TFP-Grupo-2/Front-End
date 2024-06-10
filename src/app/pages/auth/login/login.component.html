@@ -5,12 +5,12 @@
      </div>
      <form [formGroup]="formLogin" (ngSubmit)="onSubmit()">
        <div class="field">
-         <input type="text" formControlName="email" required>
-         <label>Email Address</label>
+         <input type="email" id="inputemailLogin" formControlName="email" required>
+         <label for="inputemailLogin">Email Address</label>
        </div>
        <div class="field">
-         <input type="password" formControlName="password" required>
-         <label>Password</label>
+         <input type="password" id="inputpasswordLogin" formControlName="password" required>
+         <label for="inputpasswordLogin">Password</label>
        </div>
        <div class="content">
          <div class="checkbox">

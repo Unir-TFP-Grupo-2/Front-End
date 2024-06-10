@@ -18,45 +18,38 @@ export class RegisterComponent {
   usersService = inject(UsersService)
   activatedRoute = inject(ActivatedRoute)
 
-  constructor() {
-    this.formRegister = this.formBuilder.group({
-      id: null,
-      name: null,
-      lastname: null,
-      photo: null,
-      email: null,
-      password: null,
-    })
-  }
+  // constructor() {
+  //   this.formRegister = this.formBuilder.group({
+  //     name: null,
+  //     lastname: null,
+  //     email: null,
+  //     password: null,
+  //   })
+  // }
 
-  ngOnInit() {
-    this.activatedRoute.params.subscribe(async (params:any) => {
-     if(params.id) {
-       const response = await this.usersService.getById(params.id)
-       console.log(response)
-       this.formRegister = new FormGroup({
-        name: new FormControl('', [
-          Validators.required
-        ]),
-        last_name: new FormControl('', [
-          Validators.required
-        ]),
-       email: new FormControl(response.email, [
-           Validators.required,
-           Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")
-          ]),
-         password: new FormControl(response.password, [
-          Validators.required
-        ])
-       }, [])
-       }
-    })
-  }
+  constructor() {
+    this.formRegister = new FormGroup({
+      name: new FormControl('', [
+
+      ]),
+      lastname: new FormControl('', [
+
+      ]),
+      email: new FormControl('', [
+        Validators.required,
+        Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")
+      ]),
+      password: new FormControl('', [
+        Validators.required
+      ]),
+  }, [])
+}
+
 
 
   async onSubmit(){
     const response = await this.usersService.register(this.formRegister.value)
-    if(response.id) {
+    if(response._id !== null) {
       alert(`El Usuario ${response.name} se ha añadido correctamente`)
       this.router.navigate(['/login'])
     }else {

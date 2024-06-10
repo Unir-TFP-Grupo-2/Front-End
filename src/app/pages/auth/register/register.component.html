@@ -5,24 +5,25 @@
      </div>
      <form [formGroup]="formRegister" (ngSubmit)="onSubmit()">
        <div class="field">
-         <input type="text" formControlName="name" required>
-         <label>Nombre</label>
+         <input type="text" id="inputname" formControlName="name" required>
+         <label for="inputname">Nombre</label>
        </div>
        <div class="field">
-         <input type="text" formControlName="lastname" required>
-         <label>Apellidos</label>
+         <input type="text" id="inputlastname" formControlName="lastname" required>
+         <label for="inputlastname">Apellidos</label>
        </div>
        <div class="field">
-         <input type="text" formControlName="email" required>
-         <label>Email Address</label>
+         <input type="email" id="inputemail" formControlName="email" required>
+         <label for="inputemail">Email Address</label>
        </div>
        <div class="field">
-         <input type="password" formControlName="password" required>
-         <label>Password</label>
+         <input type="password" id="inputpassword" formControlName="password" required>
+         <label for="inputpassword">Password</label>
        </div>
        <div class="field">
          <input type="submit" value="Registrate">
        </div>
+       
        <div class="signup-link">
          ¿Ya estas registrado? <a [routerLink]="['/login']">Log in</a>
        </div>

@@ -5,7 +5,7 @@ import { firstValueFrom, lastValueFrom } from 'rxjs';
 import { IUser } from '../interfaces/iuser';
 import { Router } from '@angular/router';
 
-type RegisterBody = { name: string, lastname: string, email: string, password: string, role: string }
+type RegisterBody = { name: string, lastname: string, email: string, password: string}
 type LoginBody = { email: string, password: string };
 type LoginResponse = { error?: string, massage?: string, token?: string }
 type RecoverBody = { email: string }
@@ -14,8 +14,7 @@ type RecoverBody = { email: string }
   providedIn: 'root'
 })
 export class UsersService {
-  private baseUrl: string = `${environment.apiUrl}/usuarios`;
-
+  private baseUrl: string = `${environment.apiUrl}/user`;
   private httpClient = inject(HttpClient)
   private router = inject(Router)
 
@@ -27,7 +26,7 @@ export class UsersService {
    * Registra un nuevo usuario.
    * 
    * @param {RegisterBody} newUser - El cuerpo de la solicitud que contiene los datos del nuevo usuario.
-   * @returns {Promise<Iuser>} - Una promesa que se resuelve con los datos del usuario registrado.
+   * @returns {Promise<IUser>} - Una promesa que se resuelve con los datos del usuario registrado.
    */
   async register(newUser: RegisterBody): Promise<IUser> {
     const token = localStorage.getItem('authToken'); // Asumiendo que el token se almacena en localStorage
@@ -37,7 +36,7 @@ export class UsersService {
 
     try {
       const user = await firstValueFrom(
-        this.httpClient.post<IUser>(`${this.baseUrl}/registro`, newUser, { headers })
+        this.httpClient.post<IUser>(`${this.baseUrl}/register`, newUser, { headers })
       );
       this.router.navigate(['/login']); // Redirige a la página de inicio
       return user;
@@ -48,9 +47,6 @@ export class UsersService {
     
   }
 
-  create(formValue: IUser): Promise<IUser> {
-    return lastValueFrom(this.httpClient.post<IUser>(this.baseUrl, formValue))
-  }
 
   /**
    * Inicia sesión con las credenciales proporcionadas.
@@ -63,10 +59,6 @@ export class UsersService {
    * @returns {Promise<LoginResponse>} - Una promesa que se resuelve con la respuesta de inicio de sesión.
    */
 
-  getById(id: string): Promise<LoginBody> {
-    return lastValueFrom(this.httpClient.get<IUser>(`${this.baseUrl}/${id}`))
-
-  }
 
 
   async login(body: LoginBody): Promise<LoginResponse> {
@@ -96,11 +88,11 @@ export class UsersService {
    * @param {RecoverBody} body - El cuerpo de la solicitud que contiene el correo electrónico.
    * @returns {Promise<v>} - Una promesa que se resuelve cuando la solicitud de recuperación se completa.
    */
- /*  recover(body: RecoverBody): Promise<> {
+recover(body: RecoverBody): Promise<any> {
     return firstValueFrom(
-      this.httpClient.post<>(`${this.baseUrl}/recover`, body)
+      this.httpClient.post<RecoverBody>(`${this.baseUrl}/recover`, body)
     );
-  } */
+  } 
 
 
 }
