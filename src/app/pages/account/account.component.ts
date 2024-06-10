@@ -9,14 +9,14 @@ import { RouterLink } from '@angular/router';
   styleUrl: './account.component.css'
 })
 export class AccountComponent {
-  Username = '';
-  name = '';
-  lastname = '';
-  email = '';
-  photo = '';
-  fechaNacimiento = '';
-  password = '';
-  Phone = '';
+  Username = 'PEDRO';
+  name = 'PEDRO';
+  lastname = 'FERNÁNDEZ';
+  email = 'PEDRO@GMAIL.COM';
+  photo = 'https://i.pravatar.cc/500?u=mariadelcarmen.herreravillanueva@peticiones.online';
+  fechaNacimiento = '22/02/1990';
+  password = '*********';
+  Phone = '652874555';
   
 }
 

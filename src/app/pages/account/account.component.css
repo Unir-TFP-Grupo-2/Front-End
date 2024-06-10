@@ -2,6 +2,7 @@
     text-align: center;
     padding: 20px;
     grid-auto-columns: 100%;
+    min-height: 1000px;
 }
 
 .foto-perfil {
@@ -11,6 +12,7 @@
     top: 190px;
     left: 5%;
     grid-auto-columns: 100%;
+    max-width: 200px;
 }
 
 .home {
