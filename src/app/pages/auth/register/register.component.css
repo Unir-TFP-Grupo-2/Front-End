@@ -122,3 +122,11 @@ form .pass-link a:hover,
 form .signup-link a:hover{
   text-decoration: underline;
 }
+
+@media (max-width: 600px) {
+  .container{
+    width: 90%; /* Ajusta el ancho del contenedor /
+    margin: 20px; / Reduce el margen */
+  }
+}
+

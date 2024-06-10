@@ -122,3 +122,28 @@ form .pass-link a:hover,
 form .signup-link a:hover{
   text-decoration: underline;
 }
+
+@media (max-width: 480px) {
+  .container {
+    width: 90%;
+    margin: 20px auto;
+  }
+  .container .title {
+    font-size: 30px;
+    line-height: 70px;
+  }
+  .container form .field {
+    margin-top: 10px;
+  }
+  .container form .field input {
+    font-size: 16px;
+    padding-left: 15px;
+  }
+  .container form .field label {
+    font-size: 16px;
+    left: 15px;
+  }
+  form .field input[type="submit"] {
+    font-size: 18px;
+  }
+}
