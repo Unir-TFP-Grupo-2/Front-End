@@ -9,6 +9,8 @@ type RegisterBody = { name: string, lastname: string, email: string, password: s
 type LoginBody = { email: string, password: string };
 type LoginResponse = { error?: string, massage?: string, token?: string }
 type RecoverBody = { email: string }
+type addFriend = {name: string, lastname: string, email: string}
+type deleteFriend = {name: string, lastname: string, email: string,}
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +20,6 @@ export class UsersService {
   private httpClient = inject(HttpClient)
   private router = inject(Router)
 
-  
-
-    
 
   /**
    * Registra un nuevo usuario.
@@ -36,7 +35,7 @@ export class UsersService {
 
     try {
       const user = await firstValueFrom(
-        this.httpClient.post<IUser>(`${this.baseUrl}/register`, newUser, { headers })
+        this.httpClient.post<IUser>(`${this.baseUrl}/register`, newUser, /* { headers } */)
       );
       this.router.navigate(['/login']); // Redirige a la página de inicio
       return user;
@@ -50,17 +49,9 @@ export class UsersService {
 
   /**
    * Inicia sesión con las credenciales proporcionadas.
-   * 
-   * 
-   * 
-   * 
-   * 
    * @param {LoginBody} body - El cuerpo de la solicitud que contiene el correo electrónico y la contraseña.
    * @returns {Promise<LoginResponse>} - Una promesa que se resuelve con la respuesta de inicio de sesión.
    */
-
-
-
   async login(body: LoginBody): Promise<LoginResponse> {
     const token = localStorage.getItem('authToken'); // Asumiendo que el token se almacena en localStorage
     const headers = new HttpHeaders({
@@ -71,15 +62,13 @@ export class UsersService {
       const user = await firstValueFrom(
         this.httpClient.post<LoginResponse>(`${this.baseUrl}/login`, body, { headers })
       );
-      
-      this.router.navigate(['/home']); // Redirige a la página de inicio
+      this.router.navigate(['/login']); // Redirige a la página de inicio
       return user;
     } catch (error) {
       console.error('Error durante el login:', error);
       throw error;
     }
   }
-
 
   
   /**
@@ -88,13 +77,26 @@ export class UsersService {
    * @param {RecoverBody} body - El cuerpo de la solicitud que contiene el correo electrónico.
    * @returns {Promise<v>} - Una promesa que se resuelve cuando la solicitud de recuperación se completa.
    */
-recover(body: RecoverBody): Promise<any> {
+  recover(body: RecoverBody): Promise<any> {
     return firstValueFrom(
       this.httpClient.post<RecoverBody>(`${this.baseUrl}/recover`, body)
     );
   } 
 
+  logout(): void {
+    localStorage.removeItem('token_usuario');
+  }
 
+  
+  
+  addFriend(newFriend: addFriend): Promise<IUser> {
+    return firstValueFrom(this.httpClient.post<IUser>(this.baseUrl, newFriend))
+    }
+
+  /* deleteFriend(deleteFriend: deleteFriend): Promise<IUser> {
+    return firstValueFrom(this.httpClient.delete<IUser>(this.baseUrl, deleteFriend))
+    }
+ */
 }
 
 

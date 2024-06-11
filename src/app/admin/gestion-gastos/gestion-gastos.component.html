@@ -1,4 +1,4 @@
-<div>
+<!-- <div>
     <h2>Gestionar Gastos</h2>
   
     <div>
@@ -45,3 +45,52 @@
     </div>
   </div>
   
+ -->
+
+ <section class="expense-section">
+  <form [formGroup]="formExpense" (ngSubmit)="onSubmit()" class="expense-form">
+    <h2 class="expense-title">Nuevo Gasto</h2>
+    
+    <div class="payer-section">
+      <span class="payer-label">¿Quién ha pagado?</span>
+      <div class="payer-input-group">
+        <input id="user" formControlName="user" class="payer-input" placeholder="......">
+        <div class="amount-input-group">
+          <input type="number" id="expense" formControlName="expense" class="amount-input" placeholder="0">
+          <span class="currency-symbol">€</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="recipient-section">
+      <div class="recipient-header">
+        <span class="recipient-label">¿Para quién?</span>
+        <div class="division-container">
+          <label for="division" class="division-label">División</label>
+          <select name="division" id="division" class="division-select" (change)="onSelectChange($event)">
+              <option value="1">simple</option>
+              <option value="2">por %</option>
+          </select>
+        </div>
+      </div>
+      @if (parent === "1") {
+        <mat-selection-list formControlName="quien">
+          <mat-list-option *ngFor="let member of allMembers" [value]="member">{{ member }}</mat-list-option>
+        </mat-selection-list>
+      }@else if(parent === '2'){
+        <label for="quien" *ngFor="let member of allMembers">{{member}} 
+          <input type="number" id="" formControlName="quien" >
+        </label>
+      }
+      </div>
+
+
+    <div class="subject-section">
+      <span class="subject-label">Asunto</span>
+      <input id="subject" formControlName="subject" class="subject-input" type="text" placeholder="Descripción del gasto">
+    </div>
+
+    <input type="submit" value="Guardar" class="submit-button"> 
+  </form>
+  <button class="close-button" (click)="cerrarPopup()">Cerrar</button>
+</section>

@@ -1,11 +1,8 @@
 /* Estilos generales */
 .group-section {
-    display: flex;
-    justify-content: center;
     padding: 30px;
+    padding-bottom: 0;
     border-radius: 30px;
-    width: fit-content;
-    gap: 40px;
     color: #123553;
     background-color: white;
 }
@@ -15,16 +12,12 @@ h2 {
     margin: 0;
 }
 
-/* Estilos para texto resaltado */
-span {
-    font-weight: 500;
-}
 
 .form-label{
+    min-width: 400px;
     font-size: large;
 }
 
-/* Estilos para el formulario del grupo */
 .group-form {
     display: flex;
     flex-direction: column;
@@ -39,65 +32,18 @@ span {
     gap: 0.2rem;
 }
 
-/* Estilos para los campos de entrada */
-.form-input {
+.form-input{
     border: none;
-    border-color: #123553;
-    position: relative;
-}
-
-.form-input:focus {
-    outline: none;
-}
-
-/* Estilos para el área de texto */
-.form-textarea {
-    resize: none;
     border-radius: 5px;
-    height: 80px;
-    border: none;
     background-color: #d6e6e6;
-    padding: 0.2rem;
-    font-size: small;
-    outline: none;
-    overflow-y: hidden;
 }
 
-.btn-add{
-    position: absolute;
-    right: 0;
-    top: 35px;
-    cursor: pointer;
-    background-color: #d6e6e6;
-    font-size: medium;
-    font-weight: 600;
-    color: #123553
-    
-}
-
-/* Estilos para botones de agregar y remover */
-.btn-add,
-.btn-remove {
-    cursor: pointer;
-    border: none;
-    background-color: transparent;
-    font-size: small;
-}
-
-.btn-remove {
-    color: #a51c1c;
-}
-
-.btn-add:hover,
-.btn-remove:hover {
-    transform: scale(1.4);
-}
 
 /* Estilos para el botón de cerrar el popup */
 .btn-close-popup {
     position: relative;
-    right: -15px;
-    top: -20px;
+    right: -390px;
+    top: -160px;
     color: #123553;
     cursor: pointer;
     display: flex;
@@ -112,31 +58,11 @@ span {
     transform: scale(1.4);
 }
 
-/* Estilos para la lista de participantes */
-.participants-list {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
 
-/* Estilos para la lista de integrantes */
-ul {
-    margin-top: 0;
-    padding: 0;
-}
-
-li {
-    font-size: x-small;
-    list-style-type: none;
-    justify-content: baseline;
-    padding-left: 0.3rem;
-}
-
-/* Estilos para el botón de enviar el formulario */
 .form-submit {
     cursor: pointer;
     height: 1.5rem;
-    width: 130px;
+    width: 150px;
     border-radius: 5px;
     background-color: #d6e6e6;
     font-size: medium;
@@ -152,19 +78,9 @@ li {
     box-shadow: 0 4px 16px #123553;
 }
 
-/* Estilos para la sección de integrantes */
-.integrantes {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 100%;
-    font-size: small;
-}
 
-/* Estilos para el encabezado de la lista de participantes */
-.participants-header {
-    display: flex;
-}
+
+
 
 @media (max-width: 460px) {
     .group-section{

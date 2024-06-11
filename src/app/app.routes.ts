@@ -37,8 +37,17 @@ export const routes: Routes = [
 
     {
         path:'',
+        loadChildren: () => import('./pages/friends/friends.routes').then(m => m.FRIENDS_ROUTES)
+    },
+
+    {
+        path:'',
         loadChildren: () => import('./pages/contact/contact.routes').then(m => m.CONTACT_ROUTES)
     },
+
+
+
+
 
     {path: "logica", component: GestionGastosComponent},
     

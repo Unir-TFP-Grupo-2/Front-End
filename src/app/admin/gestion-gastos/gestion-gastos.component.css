@@ -1,0 +1,160 @@
+/* Estilos generales */
+.expense-section {
+    padding: 30px;
+    padding-bottom: 0;
+    border-radius: 30px;
+    color: #123553;
+    background-color: white;
+}
+
+.expense-form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    max-width: 800px;
+}
+
+.expense-title {
+    margin: 0;
+}
+
+.payer-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.payer-label {
+    font-weight: 600;
+}
+
+.payer-input-group {
+    display: flex;
+    gap: 10px;
+}
+
+.payer-input {
+    font-size: large;
+    border: none;
+    width: 70%;
+}
+
+.amount-input-group {
+    display: flex;
+    align-items: center;
+}
+
+.amount-input {
+    font-size: xx-large;
+    max-width: 200px;
+    border: none;
+    text-align: right;
+    padding-right: 10px;
+}
+
+.currency-symbol {
+    font-size: xx-large;
+}
+
+.recipient-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.recipient-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.recipient-label {
+    font-weight: 600;
+    min-width: 400px;
+    font-size: large;
+}
+
+.division-container {
+    display: flex;
+    gap: 5px;
+    font-size: small;
+    align-items: center; 
+}
+
+.division-label {
+    align-items: center;
+}
+
+.division-select {
+    border: none;
+}
+
+.recipient-list {
+    /* Aquí puedes añadir estilos específicos para la lista de destinatarios */
+}
+
+.subject-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.subject-label {
+    font-weight: 600;
+}
+
+.subject-input {
+    border: none;
+    border-radius: 5px;
+    background-color: #d6e6e6;
+}
+
+.submit-button {
+    cursor: pointer;
+    height: 1.5rem;
+    width: 150px;
+    border-radius: 5px;
+    background-color: #d6e6e6;
+    font-size: medium;
+    font-weight: 600;
+    border: none;
+    color: #123553;
+}
+
+.close-button {
+    position: relative;
+    right: -390px;
+    top: -160px;
+    color: #123553;
+    cursor: pointer;
+    display: flex;
+    align-self: flex-start;
+    font-size: small;
+    font-weight: 800;
+    border: none;
+    background-color: transparent;
+}
+
+/* Media Queries */
+@media (max-width: 460px) {
+    .expense-section {
+        width: 340px;
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .close-button {
+        left: 220px;
+        top: -430px;
+    }
+}
+
+@media (max-width: 390px) {
+    .expense-section {
+        width: 280px;
+    }
+
+    .close-button {
+        left: 170px;
+        top: -430px;
+    }
+}

@@ -18,6 +18,8 @@ export class MiniGroupComponent implements OnInit {
 
   @Input() miGroup!: IGroup
 
+  participants: number = 8;
+
   
   @Input() value: number = 50; 
   colors = [

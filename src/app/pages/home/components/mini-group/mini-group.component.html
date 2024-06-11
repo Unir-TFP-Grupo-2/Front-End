@@ -6,15 +6,15 @@
         </button>
     </div>
     <button class="btn-group-name" [routerLink]="['/grupo', miGroup.group_id]"><span>{{miGroup.title}}</span></button>
-    <div class="progress-section">
-        <div class="group-accounts">Cuentas</div>
-        <div class="progress-bar" [ngStyle]="{'background-color': progressBarColor, 'width.%': value}"></div>
+    <div class="accounts">
+        <div class="total-accounts">Total: 568,50€</div>
+        <div class="difference-accounts">200.60€</div>
     </div>
     <div class="group-user">
         <img class="icon-user-1" src="../../../assets/icons/account-blue.png" alt="">
-        <img class="icon-user-2" src="../../../assets/icons/account-red.png" alt="">
+        <!-- <img class="icon-user-2" src="../../../assets/icons/account-red.png" alt=""> -->
         <div class="user-actions">
-            <span class="total-users-group">+9</span>
+            <span class="total-users-group">+{{participants}}</span>
             <button class="btn-add-user-group" [ngStyle]="{'background-color': addUserButtonColor}">+</button>
         </div>
     </div>

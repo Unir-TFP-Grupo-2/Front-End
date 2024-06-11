@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
+
 @Component({
   selector: 'app-recover',
   standalone: true,
@@ -9,5 +10,5 @@ import { RouterLink } from '@angular/router';
   styleUrl: './recover.component.css'
 })
 export class RecoverComponent {
-
+ 
 }

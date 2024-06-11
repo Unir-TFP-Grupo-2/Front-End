@@ -14,9 +14,10 @@
             </a>
         </div>
         <div class="nav-li">
-            <a class="underline" [routerLink]="['/groups']">Groups</a>
+            <a class="underline" [routerLink]="['/home']">Home</a>
             <a class="underline" [routerLink]="['/about']">About</a>
             <a class="underline" [routerLink]="['/account']">account</a>
+            <a class="underline" [routerLink]="['/welcome']" (click)="logout()">Salir</a>
         </div>
     </div>
 </header>

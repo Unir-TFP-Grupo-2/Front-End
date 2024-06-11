@@ -6,8 +6,9 @@
 :root {
 
     --primary: #22aaa1;
-    --secondary: #041b15;
+    --secondary: #0d3d3a;
     --tertiary: #136f63;
+    --quaternary: #d6e6e6;
 }
 
 body,

@@ -6,34 +6,45 @@ import { IGroup } from '../../core/interfaces/igroup';
 import { GroupsService } from '../../core/services/groups.service';
 import { ActivatedRoute } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { firstValueFrom } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [MiniGroupComponent, NewGroupComponent, CommonModule, NgxPaginationModule],
+  imports: [MiniGroupComponent, NewGroupComponent, CommonModule, NgxPaginationModule,],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
   groups: IGroup[] = []
 
-  groupServices = inject(GroupsService)
+  groupService = inject(GroupsService)
   activatedRoute = inject(ActivatedRoute)
 
   page: number = 1;
 
   async ngOnInit(): Promise<void> {
     try {
-      let response = await this.groupServices.getAll();
+      const response = await this.groupService.getAll();
       this.groups = response;
       console.log('Respuesta del servicio:', response);
-    } catch (error) {
+    } catch (error: unknown) {
       console.error('Error al obtener grupos:', error);
+      if (error instanceof HttpErrorResponse) {
+        if (error.status === 403) {
+          console.error('No tiene autorización para acceder a este recurso.');
+        } else if (error.status === 200) {
+          this.groups = []; // No hay grupos asociados
+          console.log('No hay grupos asociados a este usuario.');
+        }
+      } else {
+        console.error('Ocurrió un error inesperado:', error);
+      }
     }
   }
-
 
 
      /*  this.activatedRoute.queryParams.subscribe((params: any) => {
@@ -53,13 +64,11 @@ export class HomeComponent {
 
 
   
-
-
   mostrarPopup = false;
 
   abrirPopup() {
     this.mostrarPopup = true;
-  }
+}
 
   cerrarPopup() {
     this.mostrarPopup = false;

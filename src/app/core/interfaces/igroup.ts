@@ -3,5 +3,6 @@ export interface IGroup {
         title: string;
         description: string;
         date: Date;
+        numberparticipants: number
         participants: string[];
 }

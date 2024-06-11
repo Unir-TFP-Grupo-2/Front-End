@@ -20,7 +20,8 @@ export class NewGroupComponent {
   participants: string[] = [];
 
   @Output() cerrar = new EventEmitter<void>();
-  
+  amigos: string[] = ['Amigo 1', 'Amigo 2', 'Amigo 3']
+  dropdownVisible: boolean = false;
 
   /**
    * Constructor de NewGroupComponent.
@@ -32,8 +33,13 @@ export class NewGroupComponent {
       groupName: [null, Validators.required],
       groupDescription: null ,
       participantInput: null,
+      amigosSelect: [[]]
     });
   }
+  toggleDropdown() {
+    this.dropdownVisible = !this.dropdownVisible;
+  }
+
 
   /**
    * Agrega un nuevo participante a la lista de participantes.
@@ -61,11 +67,18 @@ export class NewGroupComponent {
    * Envía los datos del formulario y la lista de participantes.
    */
   async onSubmit() {
-    const response = await this.groupsService.create(this.formGroup.value);
-    console.log(response)
-    /* para redireccionar despues al grupo*/
-    this.router.navigateByUrl('/group/id') 
-  } 
+    if (this.formGroup.valid) {
+      try {
+        const response = await this.groupsService.create(this.formGroup.value);
+        console.log(response);
+        this.router.navigateByUrl('/group/id');
+      } catch (error) {
+        console.error('Error creating group:', error);
+      }
+    } else {
+      console.log('Formulario no válido');
+    }
+  }
 
   /**
    * Emite un evento para cerrar el popup.
