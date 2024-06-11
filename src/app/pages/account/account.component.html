@@ -15,6 +15,13 @@
     <p>Apellidos: {{lastname}}</p>
     <p>Telefono: {{Phone}}</p>
     <p>Email: {{email}}</p>
-    <p><a [routerLink]="['/recover']">Restablecer contraseña </a> {{password}}</p>
+    <p>
+      <a [routerLink]="['/recover']">Restablecer contraseña </a> 
+      <span class="password-text" [innerText]="passwordVisible ? password : '*'.repeat(password.length)"></span>
+      <button (click)="passwordVisible = !passwordVisible">
+        <i *ngIf="passwordVisible" class="fa-solid fa-eye-slash"></i>
+        <i *ngIf="!passwordVisible" class="fa-solid fa-eye"></i>
+      </button>
+    </p>
   </div>
 </div>

@@ -44,6 +44,10 @@
     position: absolute;
 }
 
+.password-text {
+    margin-right: 10px;
+  }
+
 @media (max-width: 450px) {
     .account-page {
         padding: 3.5em 1em;

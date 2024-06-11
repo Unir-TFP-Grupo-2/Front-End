@@ -1,10 +1,12 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-account',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, FormsModule, CommonModule],
   templateUrl: './account.component.html',
   styleUrl: './account.component.css'
 })
@@ -15,7 +17,8 @@ export class AccountComponent {
   email = 'PEDRO@GMAIL.COM';
   photo = 'https://i.pravatar.cc/500?u=mariadelcarmen.herreravillanueva@peticiones.online';
   fechaNacimiento = '22/02/1990';
-  password = '*********';
+  password = '2564564';
+  passwordVisible = false;
   Phone = '652874555';
   
 }
