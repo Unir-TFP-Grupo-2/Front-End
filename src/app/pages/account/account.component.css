@@ -8,7 +8,15 @@
 .foto-perfil {
     display: block;
     margin-top: 20px;
-    position: absolute;
+    top: 190px;
+    left: 5%;
+    grid-auto-columns: 100%;
+    max-width: 200px;
+}
+
+.photo-container{
+    display: block;
+    margin-top: 20px;
     top: 190px;
     left: 5%;
     grid-auto-columns: 100%;
@@ -20,7 +28,7 @@
     flex-direction: column;
     padding: 20px;
     align-items: flex-end;
-    position: absolute;
+    position: fixed;
     top: 100px;
     right: 45px;
 }
@@ -40,13 +48,27 @@
     font-weight: bold;
 }
 
+.user-details-container {
+    position: relative;
+    top: -240px;
+}
+
 .my-element {
     position: absolute;
 }
 
 .password-text {
     margin-right: 10px;
-  }
+    color: var(--secondary);
+}
+
+p {
+    color: var(--primary);
+}
+
+label {
+    color: var(--primary);
+}
 
 @media (max-width: 450px) {
     .account-page {

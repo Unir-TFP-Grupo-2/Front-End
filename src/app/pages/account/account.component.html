@@ -7,20 +7,33 @@
   </div>
 
     <hr>
-  <div class="name">
-    <img class="foto-perfil" [src]="photo" alt="Foto de perfil:">
-    <p>Nombre de usuario: {{Username}}</p>
-    <p>Nombre: {{name}}</p>
-    <p>Apellidos: {{lastname}}</p>
-    <p>Telefono: {{Phone}}</p>
-    <p>Email: {{email}}</p>
-    <p>
-      <a [routerLink]="['/recover']">Restablecer contraseña </a> 
-      <span class="password-text" [innerText]="passwordVisible ? password : '*'.repeat(password.length)"></span>
-      <button (click)="passwordVisible = !passwordVisible">
-        <i *ngIf="passwordVisible" class="fa-solid fa-eye-slash"></i>
-        <i *ngIf="!passwordVisible" class="fa-solid fa-eye"></i>
-      </button>
-    </p>
-  </div>
-</div>
+
+    <div class="name">
+      <div class="photo-container">
+        <img class="foto-perfil" [src]="photo ?? 'https://i.pravatar.cc/500?u=mariadelcarmen.herreravillanueva@peticiones.online'" alt="Foto de perfil:">
+        <input type="file" (change)="cambiarFoto($event)">
+      </div>
+      <div class="user-details-container">
+        <p>Nombre de usuario: <input [(ngModel)]="Username"></p>
+        <p>Nombre: <input [(ngModel)]="name"></p>
+        <p>Apellidos: <input [(ngModel)]="lastname"></p>
+        <p>Telefono: <input [(ngModel)]="Phone"></p>
+        <p>Email: <input [(ngModel)]="email"></p>
+        <p>
+          Contraseña actual:
+          <span class="password-text" [innerText]="passwordVisible ? password : '*'.repeat(password.length)"></span>
+          <button (click)="passwordVisible = !passwordVisible">
+            <i *ngIf="passwordVisible" class="fa-solid fa-eye-slash"></i>
+            <i *ngIf="!passwordVisible" class="fa-solid fa-eye"></i>
+          </button>
+          <button (click)="cambiarpassword = !cambiarpassword">Cambiar contraseña</button>
+        </p>
+        
+        <div *ngIf="cambiarpassword">
+          <label>Nueva contraseña: <input #newPassword type="password"></label>
+          <button (click)="cambiarPassword(newPassword.value)">Confirmar nueva contraseña</button>
+          
+        </div>
+        <button (click)="guardarCambios()">Guardar cambios</button>
+      </div>
+    </div>
