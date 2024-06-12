@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { GestionGastosComponent } from './admin/gestion-gastos/gestion-gastos.component';
+import { PruebaComponent } from './components/prueba/prueba.component';
 
 export const routes: Routes = [
 
@@ -48,7 +49,7 @@ export const routes: Routes = [
 
 
 
-
+    {path: "prueba", component: PruebaComponent},
     {path: "logica", component: GestionGastosComponent},
     
     
