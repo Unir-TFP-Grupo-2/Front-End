@@ -22,17 +22,15 @@ export class GroupsService {
   }
 
   getAll(): Promise<IGroup[]> {
-    const httpOptions = {
-      headers: this.createHeaders()
-    };
     return firstValueFrom(
-      this.httpClient.get<IGroup[]>(this.baseUrl, httpOptions)
+      this.httpClient.get<IGroup[]>(this.baseUrl, { headers: this.createHeaders() })
     );
   }
 
   getById(id: string): Promise<IGroup> {
+    console.log(`${this.baseUrl}/${id}`);
     return firstValueFrom(
-      this.httpClient.get<IGroup>(`${this.baseUrl}/${id}`, { headers: this.createHeaders() })
+      this.httpClient.get<IGroup>(`${this.baseUrl}/${id}`)
     );
   }
 
@@ -42,15 +40,15 @@ export class GroupsService {
     );
   }
 
-  insert(formGroup: IGroup): Promise<IGroup> {
+  insert(groupData: IGroup): Promise<IGroup> {
     return firstValueFrom(
-      this.httpClient.post<IGroup>(this.baseUrl, formGroup, { headers: this.createHeaders() })
+      this.httpClient.post<IGroup>(this.baseUrl, groupData, { headers: this.createHeaders() })
     );
   }
 
   create(newGroup: IGroup): Promise<IGroup> {
     return firstValueFrom(
-      this.httpClient.post<IGroup>(`${this.baseUrl}/`, newGroup, { headers: this.createHeaders() })
+      this.httpClient.post<IGroup>(this.baseUrl, newGroup, { headers: this.createHeaders() })
     );
   }
 }
