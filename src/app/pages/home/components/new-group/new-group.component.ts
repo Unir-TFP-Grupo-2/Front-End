@@ -3,6 +3,8 @@ import { Component, EventEmitter, Output, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { GroupsService } from '../../../../core/services/groups.service';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+import { IGroup } from '../../../../core/interfaces/igroup';
 
 @Component({
   selector: 'app-new-group',
@@ -68,15 +70,31 @@ export class NewGroupComponent {
    */
   async onSubmit() {
     if (this.formGroup.valid) {
+      const groupData: IGroup = {
+        group_id: '',
+        title: this.formGroup.get('groupName')?.value,
+        description: this.formGroup.get('groupDescription')?.value,
+        creation_date: new Date(),
+        numberparticipants: this.participants.length,
+        participants: this.participants
+      };
+      
       try {
-        const response = await this.groupsService.create(this.formGroup.value);
-        console.log(response);
-        this.router.navigateByUrl('/group/id');
+        const response = await this.groupsService.insert(groupData);
+        console.log('Response:', JSON.stringify(response, null, 2));
+        if (response.group_id !== null) { 
+          alert(`El grupo se ha añadido correctamente`);
+          this.cerrarPopup()
+          this.router.navigate([`/grupo/${response.group_id}`]);
+        } else {
+          alert('Hubo un problema, intentalo de nuevo');
+        }
       } catch (error) {
-        console.error('Error creating group:', error);
+        console.error('Error al crear el grupo:', error);
+        alert('Hubo un problema, intentalo de nuevo');
       }
     } else {
-      console.log('Formulario no válido');
+      alert('Por favor, completa todos los campos requeridos.');
     }
   }
 
@@ -86,6 +104,6 @@ export class NewGroupComponent {
   cerrarPopup(): void {
     this.cerrar.emit();
   }
+  
 }
-
 
