@@ -4,9 +4,9 @@
     </div>
     <h1 class="group-name">{{description}}</h1>
 
-    <div class="date">{{ group.creation_date | date }}</div>
-    <h1 class="group-name">{{ group.title }}</h1>
-    <p class="group-description">{{ group.description }}</p>
+    <div class="date"><!-- {{ group.creation_date | date }} --></div>
+    <h1 class="group-name"><!-- {{ group.title }} --></h1>
+    <p class="group-description"><!-- {{ group.description }} --></p>
     <div class="group-accounts">
         <div class="total-accounts">Total
             <span><!-- {{ group.total | currency: 'EUR' }} --></span>
@@ -16,7 +16,7 @@
         </div>
         <div class="total-account">
             <div>Operaciones: <!-- {{ group.operaciones }} --></div>
-            <div>Miembros: {{ group.numberparticipants }}</div>
+            <div>Miembros: <!-- {{ group.numberparticipants }} --></div>
             <div>Has gastado: <!-- {{ group.gastado | currency: 'EUR' }} --></div>
         </div>
     </div>
@@ -38,7 +38,7 @@
         <mat-tab-group>
             <mat-tab label="Gastos"> Content 1 </mat-tab>
             <mat-tab label="Miembros">
-                <div *ngFor="let participant of group.participants">{{ participant }}</div>
+               <!--  <div *ngFor="let participant of group.participants">{{ participant }}</div> -->
             </mat-tab>
             <mat-tab label="Saldos"> Content 3 </mat-tab>
         </mat-tab-group>

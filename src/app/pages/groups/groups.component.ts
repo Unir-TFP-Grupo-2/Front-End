@@ -3,11 +3,12 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { GroupsService } from '../../core/services/groups.service';
 import { ActivatedRoute } from '@angular/router';
 import { GestionGastosComponent } from '../../admin/gestion-gastos/gestion-gastos.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-groups',
   standalone: true,
-  imports: [MatTabsModule, GestionGastosComponent],
+  imports: [MatTabsModule, GestionGastosComponent, CommonModule],
   templateUrl: './groups.component.html',
   styleUrl: './groups.component.css'
 })
