@@ -31,8 +31,9 @@ export class GroupsService {
   }
 
   getById(id: string): Promise<IGroup> {
+    console.log(`${this.baseUrl}/${id}`);
     return firstValueFrom(
-      this.httpClient.get<IGroup>(`${this.baseUrl}/${id}`, { headers: this.createHeaders() })
+      this.httpClient.get<IGroup>(`${this.baseUrl}/${id}`)
     );
   }
 
