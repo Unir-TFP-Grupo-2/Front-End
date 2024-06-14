@@ -12,14 +12,14 @@ import { RouterLink } from '@angular/router';
   styleUrl: './account.component.css'
 })
 export class AccountComponent {
-  Username = 'PEDRO';
-  name = 'PEDRO';
-  lastname = 'FERNÁNDEZ';
-  email = 'PEDRO@GMAIL.COM';
-  fechaNacimiento = '22/02/1990';
-  password = '2564564';
+  Username = '';
+  name = '';
+  lastname = '';
+  email = '';
+  fechaNacimiento = '';
+  password = '';
   passwordVisible = false;
-  Phone = '652874555';
+  Phone = '';
   photo: string | undefined;
 
 
