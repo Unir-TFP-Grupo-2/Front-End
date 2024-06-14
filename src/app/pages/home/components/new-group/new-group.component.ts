@@ -38,6 +38,41 @@ export class NewGroupComponent {
       amigosSelect: [[]]
     });
   }
+
+    /**
+   * Envía los datos del formulario y la lista de participantes.
+   */
+    async onSubmit() {
+      if (this.formGroup.valid) {
+        const groupData: IGroup = {
+          group_id: '',
+          title: this.formGroup.get('groupName')?.value,
+          description: this.formGroup.get('groupDescription')?.value,
+          creation_date: new Date(),
+          numberparticipants: this.participants.length,
+          participants: this.participants
+        };
+        
+        try {
+          const response = await this.groupsService.insert(groupData);
+          console.log('Response:', JSON.stringify(response, null, 2));
+          if (response.group_id !== null) { 
+            alert(`El grupo se ha añadido correctamente`);
+            this.cerrarPopup()
+            this.router.navigate([`/grupo/${response.group_id}`]);
+          } else {
+            alert('Hubo un problema, intentalo de nuevo');
+          }
+        } catch (error) {
+          console.error('Error al crear el grupo:', error);
+          alert('Hubo un problema, intentalo de nuevo');
+        }
+      } else {
+        alert('Por favor, completa todos los campos requeridos.');
+      }
+    }
+
+  
   toggleDropdown() {
     this.dropdownVisible = !this.dropdownVisible;
   }
@@ -65,38 +100,7 @@ export class NewGroupComponent {
     this.participants.splice(index, 1);
   }
 
-  /**
-   * Envía los datos del formulario y la lista de participantes.
-   */
-  async onSubmit() {
-    if (this.formGroup.valid) {
-      const groupData: IGroup = {
-        group_id: '',
-        title: this.formGroup.get('groupName')?.value,
-        description: this.formGroup.get('groupDescription')?.value,
-        creation_date: new Date(),
-        numberparticipants: this.participants.length,
-        participants: this.participants
-      };
-      
-      try {
-        const response = await this.groupsService.insert(groupData);
-        console.log('Response:', JSON.stringify(response, null, 2));
-        if (response.group_id !== null) { 
-          alert(`El grupo se ha añadido correctamente`);
-          this.cerrarPopup()
-          this.router.navigate([`/grupo/${response.group_id}`]);
-        } else {
-          alert('Hubo un problema, intentalo de nuevo');
-        }
-      } catch (error) {
-        console.error('Error al crear el grupo:', error);
-        alert('Hubo un problema, intentalo de nuevo');
-      }
-    } else {
-      alert('Por favor, completa todos los campos requeridos.');
-    }
-  }
+
 
   /**
    * Emite un evento para cerrar el popup.

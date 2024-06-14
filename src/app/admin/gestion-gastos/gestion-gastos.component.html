@@ -74,20 +74,20 @@
         </div>
       </div>
       @if (parent === "1") {
-        <mat-selection-list formControlName="quien">
+        <mat-selection-list formControlName="integrants">
           <mat-list-option *ngFor="let member of allMembers" [value]="member">{{ member }}</mat-list-option>
         </mat-selection-list>
       }@else if(parent === '2'){
-        <label for="quien" *ngFor="let member of allMembers">{{member}} 
-          <input type="number" id="" formControlName="quien" >
+        <label for="integrants" *ngFor="let member of allMembers">{{member}} 
+          <input type="number" id="" formControlName="integrants" >
         </label>
       }
       </div>
 
 
-    <div class="subject-section">
       <span class="subject-label">Asunto</span>
-      <input id="subject" formControlName="subject" class="subject-input" type="text" placeholder="Descripción del gasto">
+        <div class="subject-section">
+      <input id="description" formControlName="description" class="subject-input" type="text" placeholder="Descripción del gasto">
     </div>
 
     <input type="submit" value="Guardar" class="submit-button"> 

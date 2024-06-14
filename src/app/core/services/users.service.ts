@@ -87,7 +87,9 @@ export class UsersService {
     localStorage.removeItem('token_usuario');
   }
 
-  
+  getEmail(email: string): Promise<{ email: string }> {
+    return firstValueFrom(this.httpClient.get<{ email: string }>(`${this.baseUrl}/email/${email}`));
+  }
   
   addFriend(newFriend: addFriend): Promise<IUser> {
     return firstValueFrom(this.httpClient.post<IUser>(this.baseUrl, newFriend))

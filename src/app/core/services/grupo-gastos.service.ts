@@ -1,4 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
+import { environment } from '../../../environments/environment.development';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { IExpense } from '../interfaces/iexpense';
+import { firstValueFrom } from 'rxjs';
+import { IGroup } from '../interfaces/igroup';
 
 @Injectable({
   providedIn: 'root'
@@ -6,6 +11,30 @@ import { Injectable } from '@angular/core';
 
 
 export class GrupoGastosService {
+  private baseUrl: string = `${environment.apiUrl}/gastos`;
+  private httpClient = inject(HttpClient);
+
+  private createHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token_usuario');
+    if (!token) {
+      throw new Error('Token de autenticación no encontrado');
+    }
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+  }
+
+  insert(expenseData: IExpense): Promise<IExpense> {
+    return firstValueFrom(
+      this.httpClient.post<IExpense>(this.baseUrl, expenseData, { headers: this.createHeaders() })
+    ).catch((error: HttpErrorResponse) => {
+      console.error('Error en la solicitud HTTP:', error.message, error.status, error.statusText, error.url);
+      throw error;
+    });
+  }
+
+
+
   private usuarios: string[] = [];
   private gastos: { usuario: string, cantidad: number, descripcion: string }[] = [];
 
