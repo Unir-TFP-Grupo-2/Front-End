@@ -49,7 +49,7 @@ export class NewGroupComponent {
           title: this.formGroup.get('groupName')?.value,
           description: this.formGroup.get('groupDescription')?.value,
           creation_date: new Date(),
-          numberparticipants: this.participants.length,
+          num_participants: this.participants.length,
           participants: this.participants
         };
         

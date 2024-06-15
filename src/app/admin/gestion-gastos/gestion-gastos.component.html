@@ -49,12 +49,16 @@
 
  <section class="expense-section">
   <form [formGroup]="formExpense" (ngSubmit)="onSubmit()" class="expense-form">
-    <h2 class="expense-title">Nuevo Gasto</h2>
-    
+    <div class="new-expense">
+      <h2 class="expense-title">Nuevo Gasto</h2>
+      <button class="close-button" (click)="cerrarPopup()">X</button>
+    </div>
     <div class="payer-section">
       <span class="payer-label">¿Quién ha pagado?</span>
       <div class="payer-input-group">
-        <input id="user" formControlName="user" class="payer-input" placeholder="......">
+        <select id="user" formControlName="user" class="payer-input">
+          <option class="select-option" *ngFor="let member of allMembers" [value]="member._id">{{ member.fullName }}</option>
+        </select>
         <div class="amount-input-group">
           <input type="number" id="expense" formControlName="expense" class="amount-input" placeholder="0">
           <span class="currency-symbol">€</span>
@@ -75,12 +79,15 @@
       </div>
       @if (parent === "1") {
         <mat-selection-list formControlName="integrants">
-          <mat-list-option *ngFor="let member of allMembers" [value]="member">{{ member }}</mat-list-option>
+          <mat-list-option *ngFor="let member of allMembers" [value]="member._id">{{ member.fullName }}</mat-list-option>
         </mat-selection-list>
       }@else if(parent === '2'){
-        <label for="integrants" *ngFor="let member of allMembers">{{member}} 
-          <input type="number" id="" formControlName="integrants" >
-        </label>
+        <mat-selection-list formControlName="integrants">
+          <mat-list-option *ngFor="let member of allMembers" [value]="member._id">{{ member.fullName }}
+            <input type="text" name="" id="">
+          </mat-list-option>
+          
+        </mat-selection-list>
       }
       </div>
 
@@ -92,5 +99,5 @@
 
     <input type="submit" value="Guardar" class="submit-button"> 
   </form>
-  <button class="close-button" (click)="cerrarPopup()">Cerrar</button>
+  
 </section>

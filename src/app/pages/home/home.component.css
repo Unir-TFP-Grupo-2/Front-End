@@ -93,32 +93,7 @@ body {
   .btn-new-group:active{
     box-shadow: 0 4px 16px var(--tertiary)
   }
-
-  .btn-new-friend {
-    position: fixed;
-    left: 488px;
-    cursor: pointer;
-    width: 145px;
-    height: 40px;
-    border-radius: 10px;
-    color: white;
-    font-weight: 600;
-    font-size: medium;
-    background-color: var(--secondary);
-    border: none;
-  }
-  
-  .btn-new-friend:hover {
-    background-color: var(--tertiary);
-    color: #d6e6e6;
-    transform: scale(1.05);
-  }
-  
-  .btn-new-friend:active{
-    box-shadow: 0 4px 16px var(--tertiary)
-  }
-
-  
+ 
   
   .list-groups {
     display: grid;

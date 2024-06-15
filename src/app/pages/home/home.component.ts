@@ -36,7 +36,7 @@ export class HomeComponent {
       if (error instanceof HttpErrorResponse) {
         if (error.status === 403) {
           console.error('No tiene autorización para acceder a este recurso.');
-        } else if (error.status === 200) {
+        } else if (error.status === 204) {
           this.groups = []; // No hay grupos asociados
           console.log('No hay grupos asociados a este usuario.');
         }

@@ -20,6 +20,16 @@ export class UsersService {
   private httpClient = inject(HttpClient)
   private router = inject(Router)
 
+  private createHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token_usuario');
+    if (!token) {
+      throw new Error('Token de autenticación no encontrado');
+    }
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+  }
+
 
   /**
    * Registra un nuevo usuario.
@@ -87,9 +97,17 @@ export class UsersService {
     localStorage.removeItem('token_usuario');
   }
 
+  getAll(): Promise<IUser[]> {
+    return firstValueFrom(
+      this.httpClient.get<IUser[]>(this.baseUrl, { headers: this.createHeaders() })
+    );
+  }
+
   getEmail(email: string): Promise<{ email: string }> {
     return firstValueFrom(this.httpClient.get<{ email: string }>(`${this.baseUrl}/email/${email}`));
   }
+  
+  
   
   addFriend(newFriend: addFriend): Promise<IUser> {
     return firstValueFrom(this.httpClient.post<IUser>(this.baseUrl, newFriend))

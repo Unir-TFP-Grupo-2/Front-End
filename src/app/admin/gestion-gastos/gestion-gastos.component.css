@@ -1,7 +1,22 @@
+/* Quitar flechas en navegadores webkit (Chrome, Safari, Opera) */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Quitar flechas en Firefox */
+input[type=number] {
+    -moz-appearance: textfield; /* Firefox */
+    appearance: textfield; /* Propiedad estándar */
+}
+
+input[type=number]:focus {
+    outline: none;
+}
 /* Estilos generales */
 .expense-section {
     padding: 30px;
-    padding-bottom: 0;
     border-radius: 30px;
     color: #123553;
     background-color: white;
@@ -16,6 +31,11 @@
 
 .expense-title {
     margin: 0;
+}
+
+.new-expense{
+    display: flex;
+    justify-content: space-between;
 }
 
 .payer-section {
@@ -34,12 +54,26 @@
 }
 
 .payer-input {
-    font-size: large;
+    cursor: pointer;
+    font-size:medium;
     border: none;
     width: 70%;
+ 
 }
 
+.payer-input:focus {
+    outline: none;
+}
+
+.select-option {
+    background-color: var(--quaternary) ;
+    color: #333;
+    padding: 10px;
+}
+
+
 .amount-input-group {
+    
     display: flex;
     align-items: center;
 }
@@ -88,10 +122,6 @@
     border: none;
 }
 
-.recipient-list {
-    /* Aquí puedes añadir estilos específicos para la lista de destinatarios */
-}
-
 .subject-section {
     display: flex;
     flex-direction: column;
@@ -103,6 +133,7 @@
 }
 
 .subject-input {
+    min-height: 30px;
     border: none;
     border-radius: 5px;
     background-color: #d6e6e6;
@@ -122,8 +153,6 @@
 
 .close-button {
     position: relative;
-    right: -390px;
-    top: -160px;
     color: #123553;
     cursor: pointer;
     display: flex;

@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, NgModule, OnInit } from '@angular/core';
+import { Component, Input, NgModule, OnInit, inject } from '@angular/core';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { FormGroup } from '@angular/forms';
 import { IGroup } from '../../../../core/interfaces/igroup';
+import { GroupsService } from '../../../../core/services/groups.service';
 
 
 @Component({
@@ -31,7 +32,11 @@ export class MiniGroupComponent implements OnInit {
   addUserButtonColor!: string;
   progressBarColor!: string;
 
-  ngOnInit() {
+  groupService = inject(GroupsService)
+  activatedRouter = inject(ActivatedRoute);
+
+  async ngOnInit(): Promise<void> {
+  
     this.miniGroupColor = this.getRandomColor();
     this.addUserButtonColor = this.getRandomColor();
   }
