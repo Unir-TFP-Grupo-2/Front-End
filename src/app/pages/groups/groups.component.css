@@ -1,109 +1,30 @@
-body {
-    color: var(--secondary);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top:20px ;
-    max-width: 1200px;
-    height: auto;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 40px 20px 100px 20px;
-    gap: 60px;
+.grupos {
+  display: grid;
+
+}
+
+.participantes_name {
+  font-weight: bolder;
+  color: var(--primary);
+}
+
+@media (min-width: 768px) {
+  .grupos {
+    grid-template-columns: repeat(2, 50%);
+    margin: 0px 3rem;
   }
 
-  .group{
-    display: flex;
-    flex-direction: column;
-    min-width: 200px;
-    max-width: 700px;
+  .grupos_description {
     width: 100%;
-    max-height: 360px;
-    min-height: 300px;
-    border-radius: 35px;
-    background-color: rgb(150, 206, 255);
-  }
-  
-  .header-group{
-    display: flex;
-    justify-content: space-between;
-    padding: 14px 10px 0 20px;
-  }
-  
-  .date{
-    font-size: x-small;
+    margin: auto;
+    text-align: center;
   }
 
-  
-  .group-name, .group-description{
+  .participantes {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 105px;
-    font-weight: 600;
-    padding: 10px 12px;
-    margin: 0;
-  }
-
-  .group-accounts{
-    background-color: rgb(194, 223, 253);
-    display: flex;
-    justify-content: space-between;
-    padding: 40px;
-  }
-  
-  .total-accounts{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    
-    border-radius: 10px;
-    width: 100px;
-    font-size: medium;
-    font-weight: 500;
-  }
-  
-  .group-user{
-    display: flex;
-    align-items: center;
-    position: relative;
-    padding: 10px 20px 10px 20px;
-    border-top: 2px solid white;
-    gap: 20px;
-  }
-  
-  
-  
-  .btn-add-user-group, .btn-add-expense{
-    cursor: pointer;
-    background-color: rgb(194, 226, 255) ;
-    border: none;
-    height: 30px;
-    border-radius: 10px;
-    color: rgb(24, 147, 255);
-    font-weight: 600;
-  }
-  
-  .btn-add-user-group:hover, .btn-add-expense:hover{
-    transform: scale(1.1);
-  }
-
-  img{
-    width: 60px;
-  }
-
-  
-  .popup-overlay {
-    position: fixed;
-    bottom: 0;
-    left: 0;
     width: 100%;
-    height: 130%;
-    background: rgba(0, 0, 0, 0.700);
-    display: flex;
+    margin: auto;
     justify-content: center;
-    align-items: center;
-    z-index: 9999;
+    gap: 50px;
+  }
 }

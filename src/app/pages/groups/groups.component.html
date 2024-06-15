@@ -1,52 +1,32 @@
-<body>
-    <div class="header-group">
-        <div class="date">{{title}}</div>
-    </div>
-    <h1 class="group-name">{{description}}</h1>
+<div class="grupos">
+    <div>
+        <div class="grupos_description">
+            <h2>{{title}}</h2>
+            <p>{{description}}</p>
+        </div>
+        <div class="participantes">
+            <div *ngFor="let participant of participantsUser" class="participante">
+                <p class="participantes_name"> <span>{{participant.name}} {{participant.lastname}}</span></p>
+                <div *ngFor="let gasto of participant.gastos_user" class="pagos">
+                    <p class="participantes_gasto">{{gasto.description}} - {{gasto.amount}}</p>
+                </div>
+                <p>Total pagado: 100</p>
+                <p>Debe: 100</p>
+            </div>
+        </div>
+        <div class="grupos_description">
+            <div>
+                <h2>total Gastado</h2>
+                <p>{{total_amount}}</p>
+            </div>
 
-    <div class="date"><!-- {{ group.creation_date | date }} --></div>
-    <h1 class="group-name"><!-- {{ group.title }} --></h1>
-    <p class="group-description"><!-- {{ group.description }} --></p>
-    <div class="group-accounts">
-        <div class="total-accounts">Total
-            <span><!-- {{ group.total | currency: 'EUR' }} --></span>
-        </div>
-        <div class="total-accounts">Cuentas
-            <span><!-- {{ group.cuentas | currency: 'EUR' }} --></span>
-        </div>
-        <div class="total-account">
-            <div>Operaciones: <!-- {{ group.operaciones }} --></div>
-            <div>Miembros: <!-- {{ group.numberparticipants }} --></div>
-            <div>Has gastado: <!-- {{ group.gastado | currency: 'EUR' }} --></div>
         </div>
     </div>
-    <div class="group-user">
-        <button class="btn-add-user-group">Añadir miembro</button>
-        <button class="btn-add-expense"></button>
-    </div>
-    <mat-tab-group>
-        <mat-tab label="Gastos"> Content 1 </mat-tab>
-        <mat-tab label="miembros">
-            <div>kASLAK</div>
-            <DIV>KDOKWOL</DIV>
-        </mat-tab>
-        <mat-tab label="Saldos"> Content 3 </mat-tab>
-    </mat-tab-group>
-
-    <button class="btn-add-expense" (click)="abrirPopup()">Añadir gasto</button>
-    <div class="mat-tab">
-        <mat-tab-group>
-            <mat-tab label="Gastos"> Content 1 </mat-tab>
-            <mat-tab label="Miembros">
-               <!--  <div *ngFor="let participant of group.participants">{{ participant }}</div> -->
-            </mat-tab>
-            <mat-tab label="Saldos"> Content 3 </mat-tab>
-        </mat-tab-group>
-    </div>
-
-    <div class="popup-overlay" *ngIf="mostrarPopup">
-        <div class="popup-content">
-            <app-gestion-gastos (cerrar)="cerrarPopup()"></app-gestion-gastos>
+    <div>
+        <h2>Gastos</h2>
+        <div *ngFor="let gasto of gastos" class="gastos">
+            <p>{{gasto.name}}{{gasto.lastname}}</p>
+            <p>{{gasto.amount}}</p>
         </div>
     </div>
-</body>
+</div>

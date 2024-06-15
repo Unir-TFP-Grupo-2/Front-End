@@ -3,6 +3,9 @@ export interface IGroup {
         title: string;
         description: string;
         creation_date: Date;
-        numberparticipants: number
+        numberparticipants: number;
+        total_amount?: number; 
+        gastos?: string[]; 
         participants: string[];
 }
+
