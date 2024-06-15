@@ -33,3 +33,11 @@
         <button (click)="guardarCambios()">Guardar cambios</button>
       </div>
     </div>
+
+    <!-- Lista de usuarios agregada -->
+    <ul>
+      <li *ngFor="let usuario of usuarios">
+        {{ usuario.name }} {{ usuario.lastname }} - {{ usuario.email }}
+      </li>
+    </ul>
+</div>
