@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { UsersService } from '../../core/services/users.service';
 
 @Component({
   selector: 'app-account',
@@ -23,6 +24,8 @@ export class AccountComponent {
   photo: string | undefined;
   usuarios: any[] = [];
   activatedRouter = inject(ActivatedRoute);
+  baseUrl: string;
+  httpClient: HttpClient;
 
   constructor(
     private http: HttpClient,
@@ -56,7 +59,7 @@ export class AccountComponent {
       next: (response: any) => {
         this.usuarios = response;
         console.log(this.usuarios);
-        this.Username = response.name;
+        this.username = response.name;
         this.name = response.name;
         this.lastname = response.lastname;
         this.email = response.email;
@@ -64,77 +67,67 @@ export class AccountComponent {
       error: (error) => {
         console.error('Error al obtener los usuarios:', error);
       }
-    }
-  }
-  cambiarFoto(event: any) {
-    if (event.target.files && event.target.files[0]) {
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        this.photo = e.target.result;
-      };
-      reader.readAsDataURL(event.target.files[0]);
-    }
-  }
-
-  cambiarFoto(event: any) {
-    if (event.target.files && event.target.files[0]) {
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        this.photo = e.target.result;
-      };
-      reader.readAsDataURL(event.target.files[0]);
-    }
-  }
-
-  guardarCambios() {
-    const userDetails = {
-      name: this.name,
-      lastname: this.lastname,
-      email: this.email,
-      photo: this.photo,
-      password: this.password
-    };
-
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + localStorage.getItem('token_usuario')
     });
-
-    this.http.put('https://mi-api.com/api/usuarios/1', userDetails, { headers })
-      .subscribe({
-        next: (response) => {
-          console.log('Cambios guardados:', response);
-        },
-        error: (error) => {
-          console.error('Error al guardar los cambios:', error);
-        }
-      });
   }
-
-
-  cambiarpassword = false;
-  passwordActual: string;
-
-  cambiarPassword(nuevaContraseña: string) {
-    const passwordDetails = {
-      password: nuevaContraseña
-    };
-
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + localStorage.getItem('token_usuario')
-    });
-
-    this.http.put('https://mi-api.com/usuarios/123/password', passwordDetails, { headers })
-      .subscribe({
-        next: (response) => {
-          console.log('Contraseña actualizada:', response);
-        },
-        error: (error) => {
-          console.error('Error al actualizar la contraseña:', error);
-        }
+    cambiarFoto(event: any) {
+      if (event.target.files && event.target.files[0]) {
+        const reader = new FileReader();
+        reader.onload = (e: any) => {
+          this.photo = e.target.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+      }
+    }
+  
+    guardarCambios() {
+      const token = localStorage.getItem('authToken');
+      const userDetails = {
+        name: this.name,
+        lastname: this.lastname,
+        email: this.email,
+        photo: this.photo,
+      };
+  
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
       });
+  
+      this.http.put('https://mi-api.com/api/usuarios/1', userDetails, { headers })
+        .subscribe({
+          next: (response) => {
+            console.log('Cambios guardados:', response);
+          },
+          error: (error) => {
+            console.error('Error al guardar los cambios:', error);
+          }
+        });
+    }
+  
+    cambiarpassword = false;
+    passwordActual: string | undefined;
+  
+    cambiarPassword(nuevaContraseña: string) {
+      const token = localStorage.getItem('authToken');
+      const passwordDetails = {
+        password: nuevaContraseña
+      };
+  
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      });
+  
+      this.http.put('https://mi-api.com/usuarios/123/password', passwordDetails, { headers })
+        .subscribe({
+          next: (response) => {
+            console.log('Contraseña actualizada:', response);
+          },
+          error: (error) => {
+            console.error('Error al actualizar la contraseña:', error);
+          }
+        });
+    }
   }
-}
 
 
