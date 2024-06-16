@@ -52,6 +52,11 @@ export class AccountComponent {
 
       next: (response: any) => {
         this.usuarios = response;
+        console.log(this.usuarios);
+        this.Username = response.name;
+        this.name = response.name;
+        this.lastname = response.lastname;
+        this.email = response.email;
       },
       error: (error) => {
         console.error('Error al obtener los usuarios:', error);
@@ -80,7 +85,7 @@ export class AccountComponent {
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJwZWRyb0BnbWFpbC5jb20iLCJpYXQiOjE3MTg1NDk4MDIsImV4cCI6MTcxODYzNjIw'
+      'Authorization': 'Bearer ' + localStorage.getItem('token_usuario')
     });
 
     this.http.put('https://mi-api.com/api/usuarios/1', userDetails, { headers })
@@ -105,7 +110,7 @@ export class AccountComponent {
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0NTc2Mjg4NH0.m5f5C4hsDFo5xgnIS6umTzXz3IAYjtwa6G0PL5U7kO4'
+      'Authorization': 'Bearer ' + localStorage.getItem('token_usuario')
     });
 
     this.http.put('https://mi-api.com/usuarios/123/password', passwordDetails, { headers })
