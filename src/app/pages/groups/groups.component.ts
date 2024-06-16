@@ -23,20 +23,26 @@ export class GroupsComponent {
   participantsUser = Array();
   gastos = Array();
   gastos_user = Array();
+  total_amount_user = 0;
 
   async ngOnInit(): Promise<void> {
+
     this.activatedRouter.params.subscribe(async (params: any) => {
+
       let responseGrupo = await this.groupService.getById(params.id);
       this.title = responseGrupo.title;
       this.description = responseGrupo.description;
       this.participantsUser = responseGrupo.participants;
       this.total_amount = responseGrupo.total_amount ?? 0;
       this.gastos = responseGrupo.gastos ?? [];
+
+    
     }
     );
 
   }
 
+  
 
   mostrarPopup = false;
 

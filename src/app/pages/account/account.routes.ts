@@ -3,5 +3,5 @@ import { AccountComponent } from "./account.component";
 
 
 export const ACCOUNT_ROUTES: Routes = [
-    {path: "account", component: AccountComponent},
+    {path: "account/:id", component: AccountComponent},
 ]

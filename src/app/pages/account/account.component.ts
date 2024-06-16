@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-account',
@@ -22,6 +22,7 @@ export class AccountComponent {
   Phone = '';
   photo: string | undefined;
   usuarios: any[] = [];
+  activatedRouter = inject(ActivatedRoute);
 
 
   private http: HttpClient;
@@ -30,17 +31,25 @@ export class AccountComponent {
     this.http = http;
     this.passwordActual = 'contraseñaActual';
   }
-  
+
   ngOnInit() {
-    this.obtenerUsuarios();
+    this.activatedRouter.params.subscribe(async (params: any) => {
+      this.obtenerUsuarios(params.id);
+    }
+    );
+    console.log(localStorage.getItem('token_usuario'));
+
   }
 
-  obtenerUsuarios() {
+  obtenerUsuarios(id: number) {
     const headers = new HttpHeaders({
-      'Authorization': 'Bearer tu_token_aquí'
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem('token_usuario')
     });
 
-    this.http.get('http://localhost:3000/api/usuarios', { headers }).subscribe({
+    this.http.get('http://localhost:3000/api/usuarios/' + id, { headers }).subscribe({
+
+
       next: (response: any) => {
         this.usuarios = response;
       },
@@ -50,65 +59,65 @@ export class AccountComponent {
     });
   }
 
-cambiarFoto(event: any) {
-  if (event.target.files && event.target.files[0]) {
-    const reader = new FileReader();
-    reader.onload = (e: any) => {
-      this.photo = e.target.result;
-    };
-    reader.readAsDataURL(event.target.files[0]);
+  cambiarFoto(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.photo = e.target.result;
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    }
   }
-}
 
-guardarCambios() {
-  const userDetails = {
-    name: this.name,
-    lastname: this.lastname,
-    email: this.email,
-    photo: this.photo,
-    password: this.password
-  };
+  guardarCambios() {
+    const userDetails = {
+      name: this.name,
+      lastname: this.lastname,
+      email: this.email,
+      photo: this.photo,
+      password: this.password
+    };
 
-  const headers = new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0NTc2Mjg4NH0.m5f5C4hsDFo5xgnIS6umTzXz3IAYjtwa6G0PL5U7kO4'
-  });
-
-  this.http.put('https://mi-api.com/api/usuarios/1', userDetails, { headers })
-    .subscribe({
-      next: (response) => {
-        console.log('Cambios guardados:', response);
-      },
-      error: (error) => {
-        console.error('Error al guardar los cambios:', error);
-      }
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJwZWRyb0BnbWFpbC5jb20iLCJpYXQiOjE3MTg1NDk4MDIsImV4cCI6MTcxODYzNjIw'
     });
-}
+
+    this.http.put('https://mi-api.com/api/usuarios/1', userDetails, { headers })
+      .subscribe({
+        next: (response) => {
+          console.log('Cambios guardados:', response);
+        },
+        error: (error) => {
+          console.error('Error al guardar los cambios:', error);
+        }
+      });
+  }
 
 
-cambiarpassword = false;
-passwordActual: string;
+  cambiarpassword = false;
+  passwordActual: string;
 
-cambiarPassword(nuevaContraseña: string) {
-  const passwordDetails = {
-    password: nuevaContraseña
-  };
+  cambiarPassword(nuevaContraseña: string) {
+    const passwordDetails = {
+      password: nuevaContraseña
+    };
 
-  const headers = new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0NTc2Mjg4NH0.m5f5C4hsDFo5xgnIS6umTzXz3IAYjtwa6G0PL5U7kO4'
-  });
-
-  this.http.put('https://mi-api.com/usuarios/123/password', passwordDetails, { headers })
-    .subscribe({
-      next: (response) => {
-        console.log('Contraseña actualizada:', response);
-      },
-      error: (error) => {
-        console.error('Error al actualizar la contraseña:', error);
-      }
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0NTc2Mjg4NH0.m5f5C4hsDFo5xgnIS6umTzXz3IAYjtwa6G0PL5U7kO4'
     });
-}
+
+    this.http.put('https://mi-api.com/usuarios/123/password', passwordDetails, { headers })
+      .subscribe({
+        next: (response) => {
+          console.log('Contraseña actualizada:', response);
+        },
+        error: (error) => {
+          console.error('Error al actualizar la contraseña:', error);
+        }
+      });
+  }
 }
 
 

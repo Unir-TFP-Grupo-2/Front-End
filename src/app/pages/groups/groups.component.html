@@ -10,7 +10,7 @@
                 <div *ngFor="let gasto of participant.gastos_user" class="pagos">
                     <p class="participantes_gasto">{{gasto.description}} - {{gasto.amount}}</p>
                 </div>
-                <p>Total pagado: 100</p>
+                <p>Total pagado: {{total_amount_user}}</p>
                 <p>Debe: 100</p>
             </div>
         </div>
@@ -25,7 +25,7 @@
     <div>
         <h2>Gastos</h2>
         <div *ngFor="let gasto of gastos" class="gastos">
-            <p>{{gasto.name}}{{gasto.lastname}}</p>
+            <p>{{gasto.name}} {{gasto.lastname}} {{gasto}}</p>
             <p>{{gasto.amount}}</p>
         </div>
         <button class="btn-new-group" (click)="abrirPopup()">Añadir Gasto</button>
