@@ -5,12 +5,14 @@ import { firstValueFrom, lastValueFrom } from 'rxjs';
 import { IUser } from '../interfaces/iuser';
 import { Router } from '@angular/router';
 
+
 type RegisterBody = { name: string, lastname: string, email: string, password: string}
 type LoginBody = { email: string, password: string };
 type LoginResponse = { error?: string, massage?: string, token?: string }
 type RecoverBody = { email: string }
 type addFriend = {name: string, lastname: string, email: string}
 type deleteFriend = {name: string, lastname: string, email: string,}
+type account = {name: string, lastname: string, email: string, password: string, phone: string, photo: string, fechaNacimiento: string}
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +21,20 @@ export class UsersService {
   private baseUrl: string = `${environment.apiUrl}/usuarios`;
   private httpClient = inject(HttpClient)
   private router = inject(Router)
+  private userService: any;
+ 
+  
+  async fetchUserAccount() {
+    try {
+      const user: any = await this.userService.account();
+      console.log('Datos del usuario:', user);
+    } catch (error) {
+      console.error('Error al obtener la cuenta del usuario:', error);
+    }
+  }
+
+
+
 
   private createHeaders(): HttpHeaders {
     const token = localStorage.getItem('token_usuario');
@@ -117,6 +133,24 @@ export class UsersService {
     return firstValueFrom(this.httpClient.delete<IUser>(this.baseUrl, deleteFriend))
     }
  */
+  
+ /**
+   * Obtiene la información de la cuenta del usuario actual.
+   * @returns {Promise<IUser>} - Una promesa que se resuelve con los datos del usuario.
+   */
+ async account(): Promise<IUser> {
+  const token = localStorage.getItem('authToken'); // Asumiendo que el token se almacena en localStorage
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${token}`
+  });
+
+  try {
+    return await firstValueFrom(this.httpClient.get<IUser>(`${this.baseUrl}/account`, { headers }));
+  } catch (error: any) {
+    console.error('Error al obtener la información de la cuenta:', error);
+    throw error; // O manejar el error de manera más específica
+  }
+}
 }
 
 
