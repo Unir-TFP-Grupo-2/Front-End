@@ -20,6 +20,7 @@ export class MiniGroupComponent implements OnInit {
   @Input() miGroup!: IGroup
 
   participants: number = 8;
+  parent: number = 0;
 
   
   @Input() value: number = 50; 
@@ -34,6 +35,16 @@ export class MiniGroupComponent implements OnInit {
 
   groupService = inject(GroupsService)
   activatedRouter = inject(ActivatedRoute);
+
+  getAbsoluteBalanceDifference(): number {
+    return Math.abs(this.miGroup.balance_difference ?? 0);
+  }
+
+  onSelectChange(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement;
+    this.parent = parseInt(selectElement.value, 10);
+    console.log(this.parent);
+  }
 
   async ngOnInit(): Promise<void> {
   

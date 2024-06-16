@@ -8,7 +8,11 @@
     <button class="btn-group-name" [routerLink]="['/grupo', miGroup.group_id]"><span>{{miGroup.title}}</span></button>
     <div class="accounts">
         <div class="total-accounts">Total: {{miGroup.total_amount}}€</div>
-        <div class="difference-accounts">200.60€</div>
+        @if (parent >= (miGroup.balance_difference ?? 0)) {
+            <div class="difference-accounts negative">Te deben: {{getAbsoluteBalanceDifference()}}€</div>
+        } @else {
+            <div class="difference-accounts positive">A pagar: {{getAbsoluteBalanceDifference()}}€</div>
+        }
     </div>
     <div class="group-user">
         <img class="icon-user-1" src="../../../assets/icons/account-blue.png" alt="">
@@ -19,3 +23,5 @@
         </div>
     </div>
 </div>
+
+

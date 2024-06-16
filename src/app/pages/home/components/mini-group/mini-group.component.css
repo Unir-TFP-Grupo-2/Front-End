@@ -16,6 +16,7 @@
 
 .date{
   font-size: x-small;
+  font-weight: 600;
 }
 
 .btn-settings{
@@ -74,7 +75,15 @@
 }
 
 .difference-accounts{
+  text-align: right;
+}
+
+.negative{
   color: #ff4343;
+}
+
+.positive{
+  color: #878787;
 }
 
 
