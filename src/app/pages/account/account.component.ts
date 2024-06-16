@@ -7,29 +7,32 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 @Component({
   selector: 'app-account',
   standalone: true,
-  imports: [RouterLink, FormsModule, CommonModule],
+  imports: [RouterLink, FormsModule, CommonModule, ReactiveFormsModule],
   templateUrl: './account.component.html',
   styleUrl: './account.component.css'
 })
 export class AccountComponent {
-  Username = '';
+  username = '';
   name = '';
   lastname = '';
   email = '';
   fechaNacimiento = '';
   password = '';
   passwordVisible = false;
-  Phone = '';
+  phone = '';
   photo: string | undefined;
   usuarios: any[] = [];
   activatedRouter = inject(ActivatedRoute);
 
-
-  private http: HttpClient;
-
-  constructor(http: HttpClient) {
-    this.http = http;
-    this.passwordActual = 'contraseñaActual';
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private usersService: UsersService,
+    private activatedRoute: ActivatedRoute
+  ) {
+    this.baseUrl = ''; // Inicializar con un valor por defecto o configurar adecuadamente
+    this.httpClient = http; // Asegurarse de que httpClient esté correctamente inicializado
   }
 
   ngOnInit() {
@@ -61,7 +64,16 @@ export class AccountComponent {
       error: (error) => {
         console.error('Error al obtener los usuarios:', error);
       }
-    });
+    }
+  }
+  cambiarFoto(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.photo = e.target.result;
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    }
   }
 
   cambiarFoto(event: any) {
@@ -124,6 +136,5 @@ export class AccountComponent {
       });
   }
 }
-
 
 
