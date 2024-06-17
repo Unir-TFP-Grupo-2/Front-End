@@ -1,23 +1,56 @@
 import { Routes } from '@angular/router';
-import { WelcomeComponent } from './pages/welcome/welcome.component';
-import { LoginComponent } from './pages/login/login.component';
-import { RegisterComponent } from './pages/register/register.component';
-import { HomeComponent } from './pages/home/home.component';
-import { GroupsComponent } from './pages/groups/groups.component';
-import { AccountComponent } from './pages/account/account.component';
-import { AboutComponent } from './pages/about/about.component';
-import { RecoverComponent } from './pages/recover/recover.component';
+import { GestionGastosComponent } from './admin/gestion-gastos/gestion-gastos.component';
+import { PruebaComponent } from './components/prueba/prueba.component';
 
 export const routes: Routes = [
+
     {path: "", pathMatch: "full", redirectTo: "welcome"},
-    {path: "welcome", component: WelcomeComponent },
-    {path: "login", component: LoginComponent},
-    {path: "register", component: RegisterComponent },
-    {path: "home", component: HomeComponent},
-    {path: "groups", component: GroupsComponent},
-    {path: "account", component: AccountComponent},
-    {path: "about", component: AboutComponent},
-    {path: "logica", component: LoginComponent},
-    {path: "recover", component: RecoverComponent}
+
+    {
+        path:'',
+        loadChildren: () => import('./pages/welcome/welcome.routes').then(m => m.WELCOME_ROUTES)
+    },
+
+    {
+        path:'',
+        loadChildren: () => import('./pages/auth/auth.routes').then(m => m.AUTH_ROUTES)
+    },
+
+    {
+        path:'',
+        loadChildren: () => import('./pages/home/home.routes').then(m => m.HOME_ROUTES)
+    },
+
+    {
+        path:'',
+        loadChildren: () => import('./pages/account/account.routes').then(m => m.ACCOUNT_ROUTES)
+    },
+
+    {
+        path:'',
+        loadChildren: () => import('./pages/groups/groups.routes').then(m => m.GROUPS_ROUTES)
+    },
+    
+    {
+        path:'',
+        loadChildren: () => import('./pages/about/about.routes').then(m => m.ABOUT_ROUTES)
+    },
+
+    {
+        path:'',
+        loadChildren: () => import('./pages/friends/friends.routes').then(m => m.FRIENDS_ROUTES)
+    },
+
+    {
+        path:'',
+        loadChildren: () => import('./pages/contact/contact.routes').then(m => m.CONTACT_ROUTES)
+    },
+
+
+
+
+    {path: "prueba", component: PruebaComponent},
+    {path: "logica", component: GestionGastosComponent},
+    
     
 ];

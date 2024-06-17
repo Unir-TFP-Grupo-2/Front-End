@@ -1,225 +1,188 @@
 body {
-    margin: 0;
+    margin-top:20px ;
     max-width: 1200px;
-    min-height: 300px;
     margin-left: auto;
     margin-right: auto;
-    background-image: url('../../../assets/img/fondo-home.jpg');
-    background-size: cover;
-    background-position: center;
   }
   
-  .section-primary {
+.img-home{
+  max-width: 440px;
+  border-radius: 20px;
+  background-image: url('../../../assets/img/home-img1.jpeg');
+  background-size: cover;
+  
+}
+
+.section-primary {
     display: grid;
+    min-height: 600px;
     grid-template-columns: 2fr 3fr;
-    gap: 2rem;
-    margin: 0 5rem;
-    padding-bottom: 2rem;
+    gap: 40px;
+    margin: 0 40px;
   }
+
+  .pagination{
+    display: flex;
+    padding-right: 30px;
+    padding-bottom: 10px;
+    justify-content: flex-end;
+  }
+  .pagination ::ng-deep .ngx-pagination .current {
+    cursor: pointer;
+    background:var(--primary);
+    border-radius: 10px;
+  }
+  .ngx-pagination a, .ngx-pagination button {
+    border-radius: 10px;
+  }
+
+  .pagination ::ng-deep .ngx-pagination .current:hover {
+    background-color: var(--tertiary);
+    color: #d6e6e6;
+    transform: scale(1.05);
+  }
+  
   
   .nav {
     display: flex;
-    align-items: flex-end;
+    flex-direction: column;
+    padding-right: 20px;
+    gap: 20px;
+    /* align-items: center; alinea el crea grupo*/ 
+    margin-top: auto;
   }
   
   .slogan-1 {
-    display: flex;
-    font-size: x-large;
+    font-size: xx-large;
+    min-width: 300px;
     font-weight: 600;
-    color: #123553;
+    color: var(--primary);
   }
   
   .slogan-2 {
     display: flex;
+    max-width: 250px;
     gap: 2rem;
     align-items: center;
-    color: #123553;
+    color:var(--tertiary)
   }
   
   .slogan-3 {
     display: flex;
     flex-direction: column;
+    color: var(--secondary);
   }
   
   .btn-new-group {
     cursor: pointer;
-    height: 30px;
+    height: 40px;
     border-radius: 10px;
-    background-color: #c0dedc;
+    color: white;
     font-weight: 600;
-    border: 2px solid #123553;
-    color: #123553;
+    font-size: medium;
+    background-color: var(--primary);
+    border: 2px solid var(--tertiary);
   }
   
   .btn-new-group:hover {
-    background-color: #123553;
+    background-color: var(--tertiary);
     color: #d6e6e6;
     transform: scale(1.05);
   }
   
   .btn-new-group:active{
-    box-shadow: 0 4px 16px #123553
+    box-shadow: 0 4px 16px var(--tertiary)
   }
+ 
   
   .list-groups {
-    margin-top: 1rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+    gap: 35px; 
+    justify-content: center; 
+    align-content:center;
+    height: 100%; 
   }
-  
-  @media (max-width: 900px) {
-    .list-groups {
-      grid-template-columns: 1fr;
-    }
-  }
-  
-  @media (max-width: 660px) {
-    body {
-      background-image: url('../../../assets/img/fondo-home-2.jpg');
-    }
-  
-    .nav {
-      padding-top: 50px;
-    }
-  
-    .section-primary {
-      display: flex;
-      flex-direction: column;
-      margin: 0 1rem;
-    }
-  }
-  
-  @media (min-width: 1220px) {
-    body {
-      background: linear-gradient(to right, #00000000 85%, #ffffff 100%), url('../../../assets/img/fondo-home.jpg');
-      background-size: cover;
-      background-position: center;
-    }
-  }
-  
+
   .popup-overlay {
     position: fixed;
-    top: 0;
+    bottom: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    height: 130%;
+    background: rgba(0, 0, 0, 0.7);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
-  }
-  body {
-    margin: 0;
-    max-width: 1200px;
-    min-height: 300px;
-    margin-left: auto;
-    margin-right: auto;
-    background-image: url('../../../assets/img/fondo-home.jpg');
-    background-size: cover;
-    background-position: center;
-  }
+    z-index: 9999;
+}
+
+/* .popup-content {
+    background: white;
+    border-radius: 30px;
+    position: relative;
+    max-width: 100%;
+    max-height: 100%;
+    overflow: auto;
+} */
+
+
   
-  .section-primary {
-    display: grid;
-    grid-template-columns: 2fr 3fr;
-    gap: 2rem;
-    margin: 0 5rem;
-    padding-bottom: 2rem;
-  }
+  @media (max-width: 1080px) {
+    body{
+      background-image: url('../../../assets/img/home-img1.jpeg');
+      background-size: cover;
+    }  
+
+    .img-home{
+      display: none;
+    }
+    .section-primary{
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .nav{
+      margin-top: 0;
+      background-color: white;
+      padding: 0 40px
+    }
+
+    .slogan{
+      display: flex;
+      border-radius: 20px;
+      padding: 0px 0 20px 20px;
+      
+    }
+
+    .slogan-1{
+      display: none;
+    }
+    .slogan-3{
+      display: none;
+      max-width: none;
+
+    }
   
-  .nav {
-    display: flex;
-    align-items: flex-end;
+    .list-groups {
+      grid-template-columns: 1fr 1fr;
+      margin: 0 50px;
+    }
   }
-  
-  .slogan-1 {
-    display: flex;
-    font-size: x-large;
-    font-weight: 600;
-    color: #123553;
-  }
-  
-  .slogan-2 {
-    display: flex;
-    gap: 2rem;
-    align-items: center;
-    color: #123553;
-  }
-  
-  .slogan-3 {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .btn-new-group {
-    cursor: pointer;
-    height: 30px;
-    border-radius: 10px;
-    background-color: #c0dedc;
-    font-weight: 600;
-    border: 2px solid #123553;
-    color: #123553;
-  }
-  
-  .btn-new-group:hover {
-    background-color: #123553;
-    color: #d6e6e6;
-    transform: scale(1.05);
-  }
-  
-  .btn-new-group:active{
-    box-shadow: 0 4px 16px #123553
-  }
-  
-  .list-groups {
-    margin-top: 1rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-  }
-  
-  @media (max-width: 900px) {
+
+  @media (max-width: 460px) {
+    
+
     .list-groups {
       grid-template-columns: 1fr;
     }
-  }
-  
-  @media (max-width: 660px) {
-    body {
-      background-image: url('../../../assets/img/fondo-home-2.jpg');
+    .popup-overlay {
+      position: fixed;
+      height: 100%;
     }
   
-    .nav {
-      padding-top: 50px;
-    }
-  
-    .section-primary {
-      display: flex;
-      flex-direction: column;
-      margin: 0 1rem;
-    }
   }
   
-  @media (min-width: 1220px) {
-    body {
-      background: linear-gradient(to right, #00000000 85%, #ffffff 100%), url('../../../assets/img/fondo-home.jpg');
-      background-size: cover;
-      background-position: center;
-    }
-  }
-  
-  .popup-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
+
   

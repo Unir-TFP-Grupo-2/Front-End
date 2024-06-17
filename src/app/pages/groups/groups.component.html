@@ -1,1 +1,39 @@
-<p>groups works!</p>
+<div class="grupos">
+    <div>
+        <div class="grupos_description">
+            <h2>{{title}}</h2>
+            <p>{{description}}</p>
+        </div>
+        <div class="participantes">
+            <div *ngFor="let participant of participantsUser" class="participante">
+                <p class="participantes_name"> <span>{{participant.name}} {{participant.lastname}}</span></p>
+                <div *ngFor="let gasto of participant.gastos_user" class="pagos">
+                    <p class="participantes_gasto">{{gasto.description}} - {{gasto.amount}}</p>
+                </div>
+                <p>Total pagado: {{total_amount_user}}</p>
+                <p>Debe: 100</p>
+            </div>
+        </div>
+        <div class="grupos_description">
+            <div>
+                <h2>total Gastado</h2>
+                <p>{{total_amount}}</p>
+            </div>
+
+        </div>
+    </div>
+    <div>
+        <h2>Gastos</h2>
+        <div *ngFor="let gasto of gastos" class="gastos">
+            <p>{{gasto.name}} {{gasto.lastname}} {{gasto}}</p>
+            <p>{{gasto.amount}}</p>
+        </div>
+        <button class="btn-new-group" (click)="abrirPopup()">Añadir Gasto</button>
+    </div>
+    
+    <div class="popup-overlay" *ngIf="mostrarPopup">
+        <div class="popup-content">
+            <app-gestion-gastos (cerrar)="cerrarPopup()"></app-gestion-gastos>
+        </div>
+    </div>
+</div>

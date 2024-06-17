@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NavigationCancel, RouterLink } from '@angular/router';
+import { UsersService } from '../../core/services/users.service';
 
 @Component({
   selector: 'app-header',
@@ -9,6 +10,8 @@ import { NavigationCancel, RouterLink } from '@angular/router';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
+
+  authService = inject(UsersService)
 
   addClassOpen() {
     const nav = document.querySelector(".nav");
@@ -23,6 +26,15 @@ export class HeaderComponent {
 
     menu_flotante?.classList.remove("hidden");
     nav?.classList.remove("open");
+  }
+
+  
+
+  logout(): void {
+    const confirmLogout = confirm("¿Realmente quieres salir?");
+    if (confirmLogout) {
+      this.authService.logout();
+    }
   }
 }
 

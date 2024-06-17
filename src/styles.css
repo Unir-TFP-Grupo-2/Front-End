@@ -4,13 +4,17 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css');
 
 :root {
-    --primary: rgba(0, 153, 114, 0.6);
+
+    --primary: #22aaa1;
+    --secondary: #0d3d3a;
+    --tertiary: #136f63;
+    --quaternary: #d6e6e6;
 }
 
 body,
 html {
     font-family: "Poppins", sans-serif;
-    overflow: hidden;
+    overflow: auto;
     margin: 0px;
 }
 
@@ -63,10 +67,7 @@ a {
     text-decoration: none;
 }
 
-a:hover {
-    color: var(--primary) !important;
 
-}
 
 .underline::after {
     content: '';
@@ -86,3 +87,5 @@ a:hover {
     border-bottom: solid 1px #F4F4F4;
     margin: 50px 0px;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

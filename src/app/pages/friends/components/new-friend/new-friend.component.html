@@ -1,0 +1,13 @@
+<section class="group-section">
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="group-form">
+      <h2>Añade Amigo</h2>
+      <div class="form-group">
+        <label for="friend" class="form-label"></label>
+        <input id="friend" formControlName="friend" class="form-input" placeholder="Introduce el email de tu amigo">
+      </div>
+      <input type="submit" value="Añadir" class="form-submit"> 
+    </form>
+    <button class="btn-close-popup" (click)="cerrarPopup()">X</button>
+</section>
+  
+  

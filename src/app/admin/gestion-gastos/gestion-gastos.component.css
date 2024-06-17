@@ -1,0 +1,189 @@
+/* Quitar flechas en navegadores webkit (Chrome, Safari, Opera) */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Quitar flechas en Firefox */
+input[type=number] {
+    -moz-appearance: textfield; /* Firefox */
+    appearance: textfield; /* Propiedad estándar */
+}
+
+input[type=number]:focus {
+    outline: none;
+}
+/* Estilos generales */
+.expense-section {
+    padding: 30px;
+    border-radius: 30px;
+    color: #123553;
+    background-color: white;
+}
+
+.expense-form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    max-width: 800px;
+}
+
+.expense-title {
+    margin: 0;
+}
+
+.new-expense{
+    display: flex;
+    justify-content: space-between;
+}
+
+.payer-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.payer-label {
+    font-weight: 600;
+}
+
+.payer-input-group {
+    display: flex;
+    gap: 10px;
+}
+
+.payer-input {
+    cursor: pointer;
+    font-size:medium;
+    border: none;
+    width: 70%;
+ 
+}
+
+.payer-input:focus {
+    outline: none;
+}
+
+.select-option {
+    background-color: var(--quaternary) ;
+    color: #333;
+    padding: 10px;
+}
+
+
+.amount-input-group {
+    
+    display: flex;
+    align-items: center;
+}
+
+.amount-input {
+    font-size: xx-large;
+    max-width: 200px;
+    border: none;
+    text-align: right;
+    padding-right: 10px;
+}
+
+.currency-symbol {
+    font-size: xx-large;
+}
+
+.recipient-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.recipient-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.recipient-label {
+    font-weight: 600;
+    min-width: 400px;
+    font-size: large;
+}
+
+.division-container {
+    display: flex;
+    gap: 5px;
+    font-size: small;
+    align-items: center; 
+}
+
+.division-label {
+    align-items: center;
+}
+
+.division-select {
+    border: none;
+}
+
+.subject-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.subject-label {
+    font-weight: 600;
+}
+
+.subject-input {
+    min-height: 30px;
+    border: none;
+    border-radius: 5px;
+    background-color: #d6e6e6;
+}
+
+.submit-button {
+    cursor: pointer;
+    height: 1.5rem;
+    width: 150px;
+    border-radius: 5px;
+    background-color: #d6e6e6;
+    font-size: medium;
+    font-weight: 600;
+    border: none;
+    color: #123553;
+}
+
+.close-button {
+    position: relative;
+    color: #123553;
+    cursor: pointer;
+    display: flex;
+    align-self: flex-start;
+    font-size: small;
+    font-weight: 800;
+    border: none;
+    background-color: transparent;
+}
+
+/* Media Queries */
+@media (max-width: 460px) {
+    .expense-section {
+        width: 340px;
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .close-button {
+        left: 220px;
+        top: -430px;
+    }
+}
+
+@media (max-width: 390px) {
+    .expense-section {
+        width: 280px;
+    }
+
+    .close-button {
+        left: 170px;
+        top: -430px;
+    }
+}

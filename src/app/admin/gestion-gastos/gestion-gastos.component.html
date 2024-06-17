@@ -1,0 +1,103 @@
+<!-- <div>
+    <h2>Gestionar Gastos</h2>
+  
+    <div>
+      <input [(ngModel)]="nuevoUsuario" placeholder="Agregar usuario" />
+      <button (click)="agregarUsuario()">Agregar Usuario</button>
+    </div>
+  
+    <div>
+      <h3>Registrar Gasto</h3>
+      <input [(ngModel)]="nuevoGasto.usuario" placeholder="Usuario" />
+      <input [(ngModel)]="nuevoGasto.cantidad" type="number" placeholder="Cantidad" />
+      <input [(ngModel)]="nuevoGasto.descripcion" placeholder="Descripción" />
+      <button (click)="registrarGasto()">Registrar Gasto</button>
+    </div>
+  
+    <div>
+      <h3>Usuarios</h3>
+      <ul>
+        <li *ngFor="let usuario of usuarios">{{ usuario }}</li>
+      </ul>
+    </div>
+  
+    <div>
+      <h3>Gastos Individuales</h3>
+      <ul>
+        <li *ngFor="let usuario of usuarios">{{ usuario }}: {{ gastosIndividuales[usuario] }}</li>
+      </ul>
+    </div>
+  
+    <div>
+      <h3>Deudas</h3>
+      <ul>
+        <li *ngFor="let usuario of usuarios">{{ usuario }}: {{ deudas[usuario] }}</li>
+      </ul>
+    </div>
+  
+    <div>
+      <h3>Transacciones Necesarias</h3>
+      <ul>
+        <li *ngFor="let transaccion of transacciones">
+          {{ transaccion.deudor }} debe pagar a {{ transaccion.acreedor }}: {{ transaccion.cantidad }}
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+ -->
+
+ <section class="expense-section">
+  <form [formGroup]="formExpense" (ngSubmit)="onSubmit()" class="expense-form">
+    <div class="new-expense">
+      <h2 class="expense-title">Nuevo Gasto</h2>
+      <button class="close-button" (click)="cerrarPopup()">X</button>
+    </div>
+    <div class="payer-section">
+      <span class="payer-label">¿Quién ha pagado?</span>
+      <div class="payer-input-group">
+        <select id="user" formControlName="user" class="payer-input">
+          <option class="select-option" *ngFor="let member of allMembers" [value]="member._id">{{ member.fullName }}</option>
+        </select>
+        <div class="amount-input-group">
+          <input type="number" id="expense" formControlName="expense" class="amount-input" placeholder="0">
+          <span class="currency-symbol">€</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="recipient-section">
+      <div class="recipient-header">
+        <span class="recipient-label">¿Para quién?</span>
+        <div class="division-container">
+          <label for="division" class="division-label">División</label>
+          <select name="division" id="division" class="division-select" (change)="onSelectChange($event)">
+              <option value="1">simple</option>
+              <option value="2">por %</option>
+          </select>
+        </div>
+      </div>
+      @if (parent === "1") {
+        <mat-selection-list formControlName="integrants">
+          <mat-list-option *ngFor="let member of allMembers" [value]="member._id">{{ member.fullName }}</mat-list-option>
+        </mat-selection-list>
+      }@else if(parent === '2'){
+        <mat-selection-list formControlName="integrants">
+          <mat-list-option *ngFor="let member of allMembers" [value]="member._id">{{ member.fullName }}
+            <input type="text" name="" id="">
+          </mat-list-option>
+          
+        </mat-selection-list>
+      }
+      </div>
+
+
+      <span class="subject-label">Asunto</span>
+        <div class="subject-section">
+      <input id="description" formControlName="description" class="subject-input" type="text" placeholder="Descripción del gasto">
+    </div>
+
+    <input type="submit" value="Guardar" class="submit-button"> 
+  </form>
+  
+</section>

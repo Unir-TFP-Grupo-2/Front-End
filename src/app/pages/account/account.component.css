@@ -1,40 +1,81 @@
 .account-page {
     text-align: center;
     padding: 20px;
+    grid-auto-columns: 100%;
+    min-height: 800px;
 }
 
 .foto-perfil {
     display: block;
     margin-top: 20px;
-    position: absolute;
     top: 190px;
     left: 5%;
+    grid-auto-columns: 100%;
+    max-width: 200px;
 }
 
-.home{
-    display: flex;
-    flex-direction: column;
-    padding: 20px; 
-    align-items: flex-end;
-    position: absolute;
-    top: 100px;
-    right: 45px;
+.photo-container{
+    display: block;
+    margin-top: 20px;
+    top: 190px;
+    left: 5%;
+    grid-auto-columns: 100%;
+    max-width: 200px;
 }
 
-
-.home a {
-    margin: 10px 10px;
-    text-decoration: none;
-    color: black;
-    font-size: 1.5em;
-    
-}
-
-.home a i {
-    margin-right: 5px;
-}
-
-
-.name{
+.name {
     font-weight: bold;
+}
+
+.user-details-container {
+    position: relative;
+    top: -240px;
+}
+
+.my-element {
+    position: absolute;
+}
+
+.password-text {
+    margin-right: 10px;
+    color: var(--secondary);
+}
+
+p {
+    color: var(--primary);
+}
+
+label {
+    color: var(--primary);
+}
+
+@media (max-width: 1200px) {
+    /* Estilos para pantallas grandes (por ejemplo, televisores) */
+}
+
+@media (max-width: 992px) {
+    /* Estilos para pantallas de escritorio */
+}
+
+@media (max-width: 768px) {
+    /* Estilos para tabletas */
+}
+
+@media (max-width: 576px) {
+    /* Estilos para teléfonos móviles */
+    .account-page {
+        padding: 1em;
+        min-height: auto; /* Ajusta la altura mínima para dispositivos móviles */
+    }
+
+    .foto-perfil, .photo-container {
+        position: static;
+        margin: 20px auto;
+        top: auto; /* Elimina la posición superior fija */
+        left: auto; /* Elimina la posición izquierda fija */
+    }
+
+    .user-details-container {
+        top: auto; /* Elimina la posición superior fija */
+    }
 }
