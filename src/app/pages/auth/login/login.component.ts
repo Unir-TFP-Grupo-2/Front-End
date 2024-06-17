@@ -39,10 +39,7 @@ export class LoginComponent {
       const response = await this.usersService.login(this.formLogin.value)
       console.log(response)
       localStorage.setItem('token_usuario', response.token!)
-<<<<<<< Updated upstream
-=======
       localStorage.setItem('user_id', response.user!);
->>>>>>> Stashed changes
       this.router.navigateByUrl('/home');
   } catch (err: any) {
     console.log(err.error.error);   

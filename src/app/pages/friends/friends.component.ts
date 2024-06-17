@@ -1,15 +1,11 @@
 import { CommonModule } from '@angular/common';
-<<<<<<< Updated upstream
-import { Component } from '@angular/core';
-import { NewFriendComponent } from './components/new-friend/new-friend.component';
-=======
 import { Component, inject } from '@angular/core';
 import { NewFriendComponent } from './components/new-friend/new-friend.component';
 import { ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { friendsService } from '../../core/services/friends.service';
 import { IUser } from '../../core/interfaces/iuser';
->>>>>>> Stashed changes
+
 
 @Component({
   selector: 'app-friends',
@@ -19,10 +15,7 @@ import { IUser } from '../../core/interfaces/iuser';
   styleUrl: './friends.component.css'
 })
 export class FriendsComponent {
-<<<<<<< Updated upstream
-  friends = ['Amigo 1', 'Amigo 2', 'Amigo 3', 'Amigo 4', 'Amigo 5']
 
-=======
   friends: IUser[] = []
   
 
@@ -49,7 +42,6 @@ export class FriendsComponent {
       }
     }
   }
->>>>>>> Stashed changes
 
   mostrarPopup = false;
 
