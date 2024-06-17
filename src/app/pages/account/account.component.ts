@@ -53,7 +53,9 @@ export class AccountComponent {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem('token_usuario')
+      
     });
+    console.log(localStorage.getItem('token_usuario'));
 
     this.http.get(`http://localhost:3000/api/usuarios/${id}`, { headers }).subscribe({
 

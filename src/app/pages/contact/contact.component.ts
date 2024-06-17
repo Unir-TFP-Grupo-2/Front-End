@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { from } from 'rxjs';
 
 @Component({
   selector: 'app-contact',
@@ -9,14 +10,16 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './contact.component.css'
 })
 export class ContactComponent {
-  name = '';  
-  email = '';
-  message = '';
+  to = '';  
+  from = '';
+  subject = '';
+  text = '';
   onSubmit() {
     const formData = {
-      name: this.name,
-      email: this.email,
-      message: this.message
+      to: this.to,
+      from: this.from,
+      subject: this.subject,
+      text: this.text
     };
     console.log(formData);
   }
