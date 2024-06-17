@@ -21,20 +21,11 @@
       <label for="amigosSelect" class="form-label">Selecciona amigos</label>
       <input id="amigosSelect" formControlName="amigosSelect" class="form-input" (click)="toggleDropdown()" placeholder="Selecciona amigos">
       <div *ngIf="dropdownVisible" class="dropdown">
-<<<<<<< Updated upstream
-        <div *ngFor="let amigo of amigos">
-          <input type="checkbox" [value]="amigo" formControlName="amigosSelect">{{ amigo }}
-        </div>
-      </div>
-    </div>
-=======
           <mat-selection-list formControlName="amigosSelect" (selectionChange)="onAmigosSelectChange($event)">
           <mat-list-option *ngFor="let friend of allFriends" [value]="friend._id">{{ friend.fullName }}</mat-list-option>
         </mat-selection-list>
         </div>
       </div>
-  
->>>>>>> Stashed changes
     
     <input type="submit" value="Crear Grupo" class="form-submit"> 
   </form>
@@ -46,10 +37,7 @@
         <button class="btn-close-popup" (click)="cerrarPopup()">X</button>
       </div>
       <ul>
-<<<<<<< Updated upstream
-=======
         <li>us</li>
->>>>>>> Stashed changes
         <li *ngFor="let participant of participants; let i = index">
           {{ participant }}
           <button class="btn-remove" type="button" (click)="removeParticipant(i)">x</button>
