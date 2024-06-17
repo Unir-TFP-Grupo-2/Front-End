@@ -23,6 +23,8 @@ export class AccountComponent {
   phone = '';
   photo: string | undefined;
   usuarios: any[] = [];
+
+  
   activatedRouter = inject(ActivatedRoute);
   baseUrl: string;
   httpClient: HttpClient;
@@ -53,7 +55,7 @@ export class AccountComponent {
       'Authorization': 'Bearer ' + localStorage.getItem('token_usuario')
     });
 
-    this.http.get('http://localhost:3000/api/usuarios/' + id, { headers }).subscribe({
+    this.http.get(`http://localhost:3000/api/usuarios/${id}`, { headers }).subscribe({
 
 
       next: (response: any) => {
@@ -80,28 +82,35 @@ export class AccountComponent {
     }
   
     guardarCambios() {
-      const token = localStorage.getItem('authToken');
-      const userDetails = {
-        name: this.name,
-        lastname: this.lastname,
-        email: this.email,
-        photo: this.photo,
-      };
-  
-      const headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      });
-  
-      this.http.put('https://mi-api.com/api/usuarios/1', userDetails, { headers })
-        .subscribe({
-          next: (response) => {
-            console.log('Cambios guardados:', response);
-          },
-          error: (error) => {
-            console.error('Error al guardar los cambios:', error);
-          }
-        });
+      const id = this.activatedRoute.snapshot.paramMap.get('id');
+  if (!id) {
+    console.error('El ID es nulo');
+    this.router.navigate(['/home']);
+    // Aquí puedes agregar lógica adicional, como mostrar un mensaje de error o redirigir.
+    return;
+  }
+  const token = localStorage.getItem('authToken');
+  const userDetails = {
+    name: this.name,
+    lastname: this.lastname,
+    email: this.email,
+    photo: this.photo,
+  };
+
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`
+  });
+
+  this.http.put(`https://mi-api.com/api/usuarios/${id}`, userDetails, { headers })
+    .subscribe({
+      next: (response) => {
+        console.log('Cambios guardados con éxito', response);
+      },
+      error: (error) => {
+        console.error('Error al guardar los cambios:', error);
+      }
+    });
     }
   
     cambiarpassword = false;
