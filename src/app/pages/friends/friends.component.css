@@ -55,6 +55,12 @@
     list-style-type: none;
 }
 
+<<<<<<< Updated upstream
+=======
+.friend-name{
+    color: var(--primary);
+}
+>>>>>>> Stashed changes
 
 .friend-details{
     display: flex;

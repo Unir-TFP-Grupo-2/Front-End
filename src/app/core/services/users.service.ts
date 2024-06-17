@@ -8,10 +8,15 @@ import { Router } from '@angular/router';
 
 type RegisterBody = { name: string, lastname: string, email: string, password: string}
 type LoginBody = { email: string, password: string };
+<<<<<<< Updated upstream
 type LoginResponse = { error?: string, massage?: string, token?: string }
 type RecoverBody = { email: string }
 type addFriend = {name: string, lastname: string, email: string}
 type deleteFriend = {name: string, lastname: string, email: string,}
+=======
+type LoginResponse = { error?: string, massage?: string, token?: string, user?: string }
+type RecoverBody = { email: string }
+>>>>>>> Stashed changes
 type account = {name: string, lastname: string, email: string, password: string, phone: string, photo: string, fechaNacimiento: string}
 
 @Injectable({
@@ -33,9 +38,12 @@ export class UsersService {
     }
   }
 
+<<<<<<< Updated upstream
 
 
 
+=======
+>>>>>>> Stashed changes
   private createHeaders(): HttpHeaders {
     const token = localStorage.getItem('token_usuario');
     if (!token) {
@@ -113,9 +121,15 @@ export class UsersService {
     localStorage.removeItem('token_usuario');
   }
 
+<<<<<<< Updated upstream
   getAll(): Promise<IUser[]> {
     return firstValueFrom(
       this.httpClient.get<IUser[]>(this.baseUrl, { headers: this.createHeaders() })
+=======
+  getAll(): Promise<IUser> {
+    return firstValueFrom(
+      this.httpClient.get<IUser>(this.baseUrl, { headers: this.createHeaders() })
+>>>>>>> Stashed changes
     );
   }
 
@@ -123,6 +137,7 @@ export class UsersService {
     return firstValueFrom(this.httpClient.get<{ email: string }>(`${this.baseUrl}/email/${email}`));
   }
   
+<<<<<<< Updated upstream
   
   
   addFriend(newFriend: addFriend): Promise<IUser> {
@@ -133,6 +148,9 @@ export class UsersService {
     return firstValueFrom(this.httpClient.delete<IUser>(this.baseUrl, deleteFriend))
     }
  */
+=======
+
+>>>>>>> Stashed changes
   
  /**
    * Obtiene la información de la cuenta del usuario actual.

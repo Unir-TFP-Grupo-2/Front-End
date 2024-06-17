@@ -5,5 +5,9 @@ export interface IUser {
     lastname: string;
     email: string;
     password: string;
+<<<<<<< Updated upstream
+=======
+    total_grupos_comunes?: number;
+>>>>>>> Stashed changes
     friends:[],
 }
