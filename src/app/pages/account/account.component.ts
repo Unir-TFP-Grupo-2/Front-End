@@ -29,6 +29,7 @@ export class AccountComponent {
   baseUrl: string;
   httpClient: HttpClient;
 
+
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -56,8 +57,8 @@ export class AccountComponent {
       
     });
     console.log(localStorage.getItem('token_usuario'));
-
-    this.http.get(`http://localhost:3000/api/usuarios/${id}`, { headers }).subscribe({
+    
+    this.http.get(`http://localhost:3000/api/usuarios/${localStorage.getItem('id_user')}`, { headers }).subscribe({
 
 
       next: (response: any) => {

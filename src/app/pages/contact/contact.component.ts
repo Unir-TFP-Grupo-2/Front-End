@@ -11,7 +11,7 @@ import { MessageService } from '../../services/message.service';
 })
 export class ContactComponent {
   to = '';  
-  from = '';
+  //from = '';
   subject = '';
   text = '';
 
@@ -20,7 +20,7 @@ export class ContactComponent {
   onSubmit() {
     const formData = {
       to: this.to,
-      from: this.from,
+      //from: this.from,
       subject: this.subject,
       text: this.text
     };
