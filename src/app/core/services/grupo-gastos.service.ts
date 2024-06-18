@@ -32,13 +32,7 @@ export class GrupoGastosService {
       throw error;
     });
   }
-<<<<<<< Updated upstream
 
-
-
-=======
-  
->>>>>>> Stashed changes
   private usuarios: string[] = [];
   private gastos: { usuario: string, cantidad: number, descripcion: string }[] = [];
 
