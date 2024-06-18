@@ -7,7 +7,7 @@ import { firstValueFrom } from "rxjs";
 @Injectable({
     providedIn: 'root'
 })
-export class friendsService {
+export class FriendsService {
     private baseUrl: string = `${environment.apiUrl}/amigos`;
     private httpClient = inject(HttpClient);
 

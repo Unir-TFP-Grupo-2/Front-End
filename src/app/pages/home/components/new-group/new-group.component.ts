@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { IGroup } from '../../../../core/interfaces/igroup';
 import { MatListModule, MatListOption, MatSelectionListChange } from '@angular/material/list';
-import { friendsService } from '../../../../core/services/friends.service';
+import { FriendsService} from '../../../../core/services/friends.service';
 import { UsersService } from '../../../../core/services/users.service';
 
 
@@ -24,7 +24,7 @@ export class NewGroupComponent {
   groupsService = inject(GroupsService);
 
   
-  friendsService = inject(friendsService)
+  friendsService = inject(FriendsService)
   userService = inject(UsersService);
   router = inject(Router);
 
@@ -75,7 +75,7 @@ export class NewGroupComponent {
       }
     }
 
-    /* const userID = localStorage.getItem('user_id');
+ /*   const userID = localStorage.getItem('user_id');
 
   if (userID) {
     try {
@@ -87,7 +87,7 @@ export class NewGroupComponent {
     } catch (error) {
       console.error('Error al obtener los datos del usuario:', error);
     }
-  } */
+ */
   }
 
 

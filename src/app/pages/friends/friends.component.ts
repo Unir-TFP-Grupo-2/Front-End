@@ -3,7 +3,7 @@ import { Component, inject } from '@angular/core';
 import { NewFriendComponent } from './components/new-friend/new-friend.component';
 import { ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
-import { friendsService } from '../../core/services/friends.service';
+import { FriendsService} from '../../core/services/friends.service';
 import { IUser } from '../../core/interfaces/iuser';
 
 
@@ -19,7 +19,7 @@ export class FriendsComponent {
   friends: IUser[] = []
   
 
-  friendsService = inject(friendsService)
+  friendsService = inject(FriendsService)
   activatedRoute = inject(ActivatedRoute)
 
   

@@ -1,10 +1,7 @@
-
 import { Component, EventEmitter, Output, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { GroupsService } from '../../../../core/services/groups.service';
 import { Router } from '@angular/router';
-
-
+import { FriendsService} from '../../../../core/services/friends.service';
 @Component({
   selector: 'app-new-friend',
   standalone: true,
@@ -15,7 +12,7 @@ import { Router } from '@angular/router';
 export class NewFriendComponent {
   formGroup: FormGroup;
   formBuilder = inject(FormBuilder);
-  groupsService = inject(GroupsService);
+  friendsService = inject(FriendsService)
   router = inject(Router)
 
   @Output() cerrar = new EventEmitter<void>();
@@ -23,27 +20,29 @@ export class NewFriendComponent {
   constructor() {
     this.formGroup = this.formBuilder.group({
       friend: [null, Validators.required],
-      groupDescription: null ,
-      participantInput: null,
-      amigosSelect: [[]]
     });
   }
 
   async onSubmit() {
     if (this.formGroup.valid) {
       try {
-        const response = await this.groupsService.create(this.formGroup.value);
+        const userId = localStorage.getItem('user_id');
+        if (!userId) {
+          throw new Error('User ID no encontrado en localStorage');
+        }
+        const friendEmail = this.formGroup.get('friend')?.value;
+        const response = await this.friendsService.addFriend(Number(userId), friendEmail);
         console.log(response);
-        this.router.navigateByUrl('/group/id');
+        this.router.navigateByUrl('/friends');
       } catch (error) {
-        console.error('Error creating group:', error);
+        console.error('Error añadiendo amigo:', error);
       }
     } else {
       console.log('Formulario no válido');
     }
   }
+
   cerrarPopup(): void {
     this.cerrar.emit();
   }
 }
-

@@ -57,8 +57,8 @@ export class AccountComponent {
       
     });
     console.log(localStorage.getItem('token_usuario'));
-    
-    this.http.get(`http://localhost:3000/api/usuarios/${localStorage.getItem('id_user')}`, { headers }).subscribe({
+    const userId = localStorage.getItem('user_id');
+    this.http.get(`http://localhost:3000/api/usuarios/${userId}`, { headers }).subscribe({
 
 
       next: (response: any) => {
