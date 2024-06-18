@@ -120,8 +120,6 @@ export class UsersService {
   }
     
   
-
-  
  /**
    * Obtiene la información de la cuenta del usuario actual.
    * @returns {Promise<IUser>} - Una promesa que se resuelve con los datos del usuario.

@@ -45,7 +45,7 @@ export class NewGroupComponent {
     this.formGroup = this.formBuilder.group({
       groupName: [null, Validators.required],
       groupDescription: null ,
-      participantInput: [null, Validators.required],
+      participantInput: [null,],
       amigosSelect: this.amigosSelectControl
     });
   }
