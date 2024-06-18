@@ -8,10 +8,8 @@ import { Router } from '@angular/router';
 
 type RegisterBody = { name: string, lastname: string, email: string, password: string}
 type LoginBody = { email: string, password: string };
-type LoginResponse = { error?: string, massage?: string, token?: string }
+type LoginResponse = { error?: string, massage?: string, token?: string, user?: string }
 type RecoverBody = { email: string }
-type addFriend = {name: string, lastname: string, email: string}
-type deleteFriend = {name: string, lastname: string, email: string,}
 type account = {name: string, lastname: string, email: string, password: string, phone: string, photo: string, fechaNacimiento: string}
 
 @Injectable({
@@ -32,9 +30,6 @@ export class UsersService {
       console.error('Error al obtener la cuenta del usuario:', error);
     }
   }
-
-
-
 
   private createHeaders(): HttpHeaders {
     const token = localStorage.getItem('token_usuario');
@@ -113,26 +108,19 @@ export class UsersService {
     localStorage.removeItem('token_usuario');
   }
 
-  getAll(): Promise<IUser[]> {
+
+  getAll(): Promise<IUser> {
     return firstValueFrom(
-      this.httpClient.get<IUser[]>(this.baseUrl, { headers: this.createHeaders() })
+      this.httpClient.get<IUser>(this.baseUrl, { headers: this.createHeaders() })
     );
   }
 
   getEmail(email: string): Promise<{ email: string }> {
     return firstValueFrom(this.httpClient.get<{ email: string }>(`${this.baseUrl}/email/${email}`));
   }
+    
   
-  
-  
-  addFriend(newFriend: addFriend): Promise<IUser> {
-    return firstValueFrom(this.httpClient.post<IUser>(this.baseUrl, newFriend))
-    }
 
-  /* deleteFriend(deleteFriend: deleteFriend): Promise<IUser> {
-    return firstValueFrom(this.httpClient.delete<IUser>(this.baseUrl, deleteFriend))
-    }
- */
   
  /**
    * Obtiene la información de la cuenta del usuario actual.

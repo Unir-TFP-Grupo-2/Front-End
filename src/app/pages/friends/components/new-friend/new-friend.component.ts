@@ -1,7 +1,9 @@
+
 import { Component, EventEmitter, Output, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { GroupsService } from '../../../../core/services/groups.service';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-new-friend',
@@ -44,5 +46,4 @@ export class NewFriendComponent {
     this.cerrar.emit();
   }
 }
-
 

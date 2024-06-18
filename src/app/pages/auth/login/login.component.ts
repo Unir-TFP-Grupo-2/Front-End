@@ -39,6 +39,7 @@ export class LoginComponent {
       const response = await this.usersService.login(this.formLogin.value)
       console.log(response)
       localStorage.setItem('token_usuario', response.token!)
+      localStorage.setItem('user_id', response.user!);
       this.router.navigateByUrl('/home');
   } catch (err: any) {
     console.log(err.error.error);   

@@ -5,5 +5,6 @@ export interface IUser {
     lastname: string;
     email: string;
     password: string;
+    total_grupos_comunes?: number;
     friends:[],
 }
