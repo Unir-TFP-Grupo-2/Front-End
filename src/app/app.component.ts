@@ -3,6 +3,8 @@ import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MessageService } from './services/message.service';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +15,14 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 })
 export class AppComponent {
   title = 'Front-End';
+
+  constructor(public _MessageService: MessageService) {
+  }
+  contactForm(form: any) {
+    this._MessageService.sendMessage(form.value).subscribe(() => {
+      swal("Formulario de contacto", "Mensaje enviado correctamente", 'success');
+    });
+  }
 }
 
 @NgModule ({

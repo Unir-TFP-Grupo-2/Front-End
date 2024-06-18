@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { from } from 'rxjs';
+import { MessageService } from '../../services/message.service';
 
 @Component({
   selector: 'app-contact',
@@ -14,6 +14,9 @@ export class ContactComponent {
   from = '';
   subject = '';
   text = '';
+
+  constructor(private messageService: MessageService) {}
+
   onSubmit() {
     const formData = {
       to: this.to,
@@ -21,8 +24,10 @@ export class ContactComponent {
       subject: this.subject,
       text: this.text
     };
-    console.log(formData);
+    
+    this.messageService.sendMessage(formData).subscribe({
+      next: (response) => console.log('Mensaje enviado con éxito', response),
+      error: (error) => console.error('Error al enviar mensaje', error)
+    });
   }
-
-
 }
