@@ -5,9 +5,16 @@
     </div>
     <ul class="friends-list">
         <li class="friend-item" *ngFor="let friend of friends">
+<<<<<<< Updated upstream
             <div class="friend-name">{{ friend }}</div>
             <div class="friend-details">
                 <span>Grupos en comun:</span>
+=======
+            <div class="friend-name">{{ friend.name }} {{friend.lastname}}</div>
+            <div class="friend-email"> {{friend.email}}</div>
+            <div class="friend-details">
+                <span>Grupos en comun: {{friend.total_grupos_comunes}}</span>
+>>>>>>> Stashed changes
                 <button class="btn-remove-friend"><img src="../../../assets/icons/eliminar.png" alt="eliminar"></button>
             </div>
         </li>

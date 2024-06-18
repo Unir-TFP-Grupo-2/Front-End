@@ -1,6 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NewFriendComponent } from './components/new-friend/new-friend.component';
+import { ActivatedRoute } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+import { friendsService } from '../../core/services/friends.service';
+import { IUser } from '../../core/interfaces/iuser';
+
 
 @Component({
   selector: 'app-friends',
@@ -10,8 +15,33 @@ import { NewFriendComponent } from './components/new-friend/new-friend.component
   styleUrl: './friends.component.css'
 })
 export class FriendsComponent {
-  friends = ['Amigo 1', 'Amigo 2', 'Amigo 3', 'Amigo 4', 'Amigo 5']
 
+  friends: IUser[] = []
+  
+
+  friendsService = inject(friendsService)
+  activatedRoute = inject(ActivatedRoute)
+
+  
+  async ngOnInit(): Promise<void> {
+    try {
+      const response = await this.friendsService.getAllFriend();
+      this.friends = response;
+      console.log('Respuesta del servicio:', response);
+    } catch (error: unknown) {
+      console.error('Error al obtener grupos:', error);
+      if (error instanceof HttpErrorResponse) {
+        if (error.status === 403) {
+          console.error('No tiene autorización para acceder a este recurso.');
+        } else if (error.status === 204) {
+          this.friends = []; // No hay grupos asociados
+          console.log('No hay grupos asociados a este usuario.');
+        }
+      } else {
+        console.error('Ocurrió un error inesperado:', error);
+      }
+    }
+  }
 
   mostrarPopup = false;
 
