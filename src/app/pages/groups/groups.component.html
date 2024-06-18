@@ -25,12 +25,12 @@
     <div>
         <h2>Gastos</h2>
         <div *ngFor="let gasto of gastos" class="gastos">
-            <p>{{gasto.name}} {{gasto.lastname}} {{gasto}}</p>
+            <p>{{gasto.name}} {{gasto.lastname}} </p>
             <p>{{gasto.amount}}</p>
         </div>
         <button class="btn-new-group" (click)="abrirPopup()">Añadir Gasto</button>
     </div>
-    
+
     <div class="popup-overlay" *ngIf="mostrarPopup">
         <div class="popup-content">
             <app-gestion-gastos (cerrar)="cerrarPopup()"></app-gestion-gastos>

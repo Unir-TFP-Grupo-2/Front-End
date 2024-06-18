@@ -12,6 +12,32 @@ import { UsersService } from '../../core/services/users.service';
 export class HeaderComponent {
 
   authService = inject(UsersService)
+  id = 0;
+
+  constructor() {
+    this.id = localStorage['id_user'];
+  }
+  async ngOnInit(): Promise<void> {
+    this.id = localStorage['id_user'];
+
+    // Asegurarse de que el DOM esté completamente cargado
+    const click = document.querySelector(".nav-li_a");
+    console.log(click);
+    if (click) {
+      click.addEventListener('click', function () {
+        console.log("hola");
+        const nav = document.querySelector(".nav");
+        const menu_flotante = document.querySelector(".menu-flotante");
+        if (menu_flotante && nav) {
+          menu_flotante.classList.remove("hidden");
+          nav.classList.remove("open");
+        }
+      });
+    } else {
+      console.log("Elemento .nav a no encontrado");
+    }
+
+  }
 
   addClassOpen() {
     const nav = document.querySelector(".nav");
@@ -23,12 +49,11 @@ export class HeaderComponent {
   removeClassOpen() {
     const nav = document.querySelector(".nav");
     const menu_flotante = document.querySelector(".menu-flotante");
-
     menu_flotante?.classList.remove("hidden");
     nav?.classList.remove("open");
   }
 
-  
+
 
   logout(): void {
     const confirmLogout = confirm("¿Realmente quieres salir?");
