@@ -37,7 +37,7 @@
         <button class="btn-close-popup" (click)="cerrarPopup()">X</button>
       </div>
       <ul>
-        <li>us</li>
+        
         <li *ngFor="let participant of participants; let i = index">
           {{ participant }}
           <button class="btn-remove" type="button" (click)="removeParticipant(i)">x</button>

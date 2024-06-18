@@ -55,9 +55,11 @@
     list-style-type: none;
 }
 
+
 .friend-name{
     color: var(--primary);
 }
+
 
 .friend-details{
     display: flex;
