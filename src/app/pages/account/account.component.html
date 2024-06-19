@@ -10,34 +10,28 @@
         <input type="file" (change)="cambiarFoto($event)">
       </div>
       <div class="user-details-container">
-        <p>Nombre de usuario: <input [(ngModel)]="username"></p>
         <p>Nombre: <input [(ngModel)]="name"></p>
         <p>Apellidos: <input [(ngModel)]="lastname"></p>
-        <p>Telefono: <input [(ngModel)]="phone"></p>
         <p>Email: <input [(ngModel)]="email"></p>
         <p>
           Contraseña actual:
-          <span class="password-text" [innerText]="passwordVisible ? password : '*'.repeat(password.length)"></span>
+          <input [type]="passwordVisible ? 'text' : 'password'" [(ngModel)]="password">
           <button (click)="passwordVisible = !passwordVisible">
             <i *ngIf="passwordVisible" class="fa-solid fa-eye-slash"></i>
             <i *ngIf="!passwordVisible" class="fa-solid fa-eye"></i>
           </button>
           <button (click)="cambiarpassword = !cambiarpassword">Cambiar contraseña</button>
         </p>
-        
         <div *ngIf="cambiarpassword">
-          <label>Nueva contraseña: <input #newPassword type="password"></label>
-          <button (click)="cambiarPassword(newPassword.value)">Confirmar nueva contraseña</button>
-          
+          <label>Nueva contraseña: 
+            <input [type]="newPasswordVisible ? 'text' : 'password'" #newPassword>
+            <button (click)="newPasswordVisible = !newPasswordVisible">
+              <i *ngIf="newPasswordVisible" class="fa-solid fa-eye-slash"></i>
+              <i *ngIf="!newPasswordVisible" class="fa-solid fa-eye"></i>
+            </button>
+          </label>          
         </div>
         <button (click)="guardarCambios()">Guardar cambios</button>
       </div>
     </div>
-
-    <!-- Lista de usuarios agregada -->
-    <ul>
-      <li *ngFor="let usuario of usuarios">
-        {{ usuario.name }} {{ usuario.lastname }} - {{ usuario.email }}
-      </li>
-    </ul>
 </div>

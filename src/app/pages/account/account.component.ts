@@ -13,14 +13,12 @@ import { UsersService } from '../../core/services/users.service';
   styleUrl: './account.component.css'
 })
 export class AccountComponent {
-  username = '';
   name = '';
   lastname = '';
   email = '';
-  fechaNacimiento = '';
   password = '';
+  newPasswordVisible = false;
   passwordVisible = false;
-  phone = '';
   photo: string | undefined;
   usuarios: any[] = [];
 
@@ -28,6 +26,8 @@ export class AccountComponent {
   activatedRouter = inject(ActivatedRoute);
   baseUrl: string;
   httpClient: HttpClient;
+  cambiarpassword: any;
+  passwordActual: any;
 
 
   constructor(
@@ -64,7 +64,6 @@ export class AccountComponent {
       next: (response: any) => {
         this.usuarios = response;
         console.log(this.usuarios);
-        this.username = response.name;
         this.name = response.name;
         this.lastname = response.lastname;
         this.email = response.email;
@@ -84,62 +83,66 @@ export class AccountComponent {
       }
     }
   
-    guardarCambios() {
-      const id = this.activatedRoute.snapshot.paramMap.get('id');
-  if (!id) {
-    console.error('El ID es nulo');
-    this.router.navigate(['/home']);
-    // Aquí puedes agregar lógica adicional, como mostrar un mensaje de error o redirigir.
-    return;
-  }
-  const token = localStorage.getItem('authToken');
-  const userDetails = {
-    name: this.name,
-    lastname: this.lastname,
-    email: this.email,
-    photo: this.photo,
-  };
-
-  const headers = new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${token}`
-  });
-
-  this.http.put(`https://mi-api.com/api/usuarios/${id}`, userDetails, { headers })
-    .subscribe({
-      next: (response) => {
-        console.log('Cambios guardados con éxito', response);
-      },
-      error: (error) => {
+    async guardarCambios() {
+      try {
+        const id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
+        if (!id) {
+          console.error('El ID es nulo');
+          await this.router.navigate(['/home']);
+          return;
+        }
+    
+        const token = localStorage.getItem('token_usuario');
+        if (!token) {
+          console.error('No se encontró el token de autenticación');
+          return;
+        }
+    
+        const userDetails: any = {
+          name: this.name,
+          lastname: this.lastname,
+          email: this.email,
+          photo: this.photo,
+        };
+    
+        if (this.cambiarpassword && this.passwordActual) {
+          userDetails.password = this.passwordActual;
+        }
+    
+        await this.updateUser(id);
+        console.log('Cambios guardados con éxito');
+      } catch (error) {
         console.error('Error al guardar los cambios:', error);
       }
-    });
     }
-  
-    cambiarpassword = false;
-    passwordActual: string | undefined;
-  
-    cambiarPassword(nuevaContraseña: string) {
-      const token = localStorage.getItem('authToken');
-      const passwordDetails = {
-        password: nuevaContraseña
-      };
-  
-      const headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      });
-  
-      this.http.put('https://mi-api.com/usuarios/123/password', passwordDetails, { headers })
-        .subscribe({
-          next: (response) => {
-            console.log('Contraseña actualizada:', response);
-          },
-          error: (error) => {
-            console.error('Error al actualizar la contraseña:', error);
-          }
-        });
-    }
+  updateUser(id: number) {
+    throw new Error('Method not implemented.');
   }
-
-
+  
+    async cambiarPassword(nuevaContraseña: string) {
+      const token = localStorage.getItem('token_usuario');
+      if (!token) {
+        console.error('No se encontró el token de autenticación.');
+        return;
+      }
+    
+      const passwordDetails = {
+        password: nuevaContraseña,
+      };
+    
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token
+        })
+      };
+    
+      try {
+        const id = this.activatedRoute.snapshot.paramMap.get('id');
+        await this.http.put(`https://mi-api.com/api/usuarios/${id}/cambiarPassword`, passwordDetails, httpOptions);
+        console.log('Contraseña actualizada con éxito');
+      } catch (error) {
+        console.error('Error al actualizar la contraseña:', error);
+      }
+  }
+}
