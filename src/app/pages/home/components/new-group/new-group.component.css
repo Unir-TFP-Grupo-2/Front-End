@@ -1,37 +1,52 @@
-/* Estilos generales */
 .group-section {
+    min-width: 400px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     padding: 30px;
     border-radius: 30px;
     width: fit-content;
-    gap: 40px;
+    gap: 20px;
     color: #123553;
     background-color: white;
 }
 
-/* Estilos para títulos */
+.group-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-close-popup {
+    position: relative;
+    top: -15px;
+    right: -15px;
+    color: #123553;
+    cursor: pointer;
+    font-size: medium;
+    font-weight: 800;
+    border: none;
+    background-color: transparent;
+}
+
+.btn-close-popup:hover {
+    transform: scale(1.4);
+}
+
 h2 {
     margin: 0;
 }
 
-/* Estilos para texto resaltado */
-span {
-    font-weight: 500;
-}
-
-.form-label{
-    font-size: large;
-}
-
-/* Estilos para el formulario del grupo */
 .group-form {
     display: flex;
-    flex-direction: column;
     gap: 1rem;
 }
 
-/* Estilos para grupos de elementos en el formulario */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
 .form-group {
     position: relative;
     display: flex;
@@ -39,7 +54,10 @@ span {
     gap: 0.2rem;
 }
 
-/* Estilos para los campos de entrada */
+.form-label {
+    font-size: large;
+}
+
 .form-input {
     border: none;
     border-color: #123553;
@@ -50,7 +68,6 @@ span {
     outline: none;
 }
 
-/* Estilos para el área de texto */
 .form-textarea {
     resize: none;
     border-radius: 5px;
@@ -63,7 +80,7 @@ span {
     overflow-y: hidden;
 }
 
-.btn-add{
+.btn-add {
     position: absolute;
     right: 0;
     top: 35px;
@@ -71,11 +88,9 @@ span {
     background-color: #d6e6e6;
     font-size: medium;
     font-weight: 600;
-    color: #123553
-    
+    color: #123553;
 }
 
-/* Estilos para botones de agregar y remover */
 .btn-add,
 .btn-remove {
     cursor: pointer;
@@ -93,33 +108,29 @@ span {
     transform: scale(1.4);
 }
 
-/* Estilos para el botón de cerrar el popup */
-.btn-close-popup {
-    position: relative;
-    right: -15px;
-    top: -20px;
-    color: #123553;
-    cursor: pointer;
+.dropdown {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.members-section {
     display: flex;
-    align-self: flex-start;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
     font-size: small;
-    font-weight: 800;
-    border: none;
-    background-color: transparent;
 }
 
-.btn-close-popup:hover {
-    transform: scale(1.4);
-}
-
-/* Estilos para la lista de participantes */
 .participants-list {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
 
-/* Estilos para la lista de integrantes */
+.participants-header {
+    display: flex;
+}
+
 ul {
     margin-top: 0;
     padding: 0;
@@ -132,7 +143,6 @@ li {
     padding-left: 0.3rem;
 }
 
-/* Estilos para el botón de enviar el formulario */
 .form-submit {
     cursor: pointer;
     height: 1.5rem;
@@ -152,53 +162,23 @@ li {
     box-shadow: 0 4px 16px #123553;
 }
 
-/* Estilos para la sección de integrantes */
-.integrantes {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 100%;
-    font-size: small;
-}
-
-/* Estilos para el encabezado de la lista de participantes */
-.participants-header {
-    display: flex;
-}
-
 @media (max-width: 460px) {
-    .group-section{
+    .group-section {
+        width: 360px;
+        padding: 20px;
+        border-radius: 30px;
+    }
+
+    .group-form{
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        width: 340px;
-        padding: 1rem;
-        border-radius: 30px;
-        gap: 1rem;
     }
 
-    .btn-close-popup {
-        position: relative;
-        left: 220px;
-        top: -430px;
-    }
 }
 
 @media (max-width: 390px) {
-    .group-section{
+    .group-section {
         width: 280px;
     }
-    .btn-close-popup {
-        position: relative;
-        left: 170px;
-        top: -430px;
-    }
+
 }
-
-    
-
-
-.dropdown {
-    max-height: 200px; /* Altura máxima del desplegable */
-    overflow-y: auto; /* Añade desplazamiento vertical si hay muchos elementos */
-  }

@@ -106,6 +106,7 @@ export class UsersService {
 
   logout(): void {
     localStorage.removeItem('token_usuario');
+    localStorage.removeItem('user_id')
   }
 
 
@@ -115,9 +116,17 @@ export class UsersService {
     );
   }
 
-  getEmail(email: string): Promise<{ email: string }> {
-    return firstValueFrom(this.httpClient.get<{ email: string }>(`${this.baseUrl}/email/${email}`));
+  /**
+   * Obtiene el email de un usuario por su ID.
+   * @param {string} userId - El ID del usuario.
+   * @returns {Promise<{ email: string }>} - Una promesa que se resuelve con el email del usuario.
+   */
+  getEmailByUserId(userId: string): Promise<{ email: string }> {
+    return firstValueFrom(
+      this.httpClient.get<{ email: string }>(`${this.baseUrl}/${userId}/email`, { headers: this.createHeaders() })
+    );
   }
+
     
   
  /**

@@ -14,6 +14,7 @@ input[type=number] {
 input[type=number]:focus {
     outline: none;
 }
+
 /* Estilos generales */
 .expense-section {
     padding: 30px;
@@ -29,13 +30,29 @@ input[type=number]:focus {
     max-width: 800px;
 }
 
+.header-section {
+    display: flex;
+    justify-content: space-between;
+}
+
 .expense-title {
     margin: 0;
 }
 
-.new-expense{
+.close-button {
+    position: relative;
+    color: #123553;
+    cursor: pointer;
     display: flex;
-    justify-content: space-between;
+    align-self: flex-start;
+    font-size: small;
+    font-weight: 800;
+    border: none;
+    background-color: transparent;
+}
+
+.close-button:hover {
+    transform: scale(1.1);
 }
 
 .payer-section {
@@ -55,10 +72,8 @@ input[type=number]:focus {
 
 .payer-input {
     cursor: pointer;
-    font-size:medium;
+    font-size: medium;
     border: none;
-    width: 70%;
- 
 }
 
 .payer-input:focus {
@@ -66,14 +81,12 @@ input[type=number]:focus {
 }
 
 .select-option {
-    background-color: var(--quaternary) ;
+    background-color: var(--quaternary);
     color: #333;
     padding: 10px;
 }
 
-
 .amount-input-group {
-    
     display: flex;
     align-items: center;
 }
@@ -103,7 +116,6 @@ input[type=number]:focus {
 
 .recipient-label {
     font-weight: 600;
-    min-width: 400px;
     font-size: large;
 }
 
@@ -111,10 +123,6 @@ input[type=number]:focus {
     display: flex;
     gap: 5px;
     font-size: small;
-    align-items: center; 
-}
-
-.division-label {
     align-items: center;
 }
 
@@ -151,20 +159,8 @@ input[type=number]:focus {
     color: #123553;
 }
 
-.close-button {
-    position: relative;
-    color: #123553;
-    cursor: pointer;
-    display: flex;
-    align-self: flex-start;
-    font-size: small;
-    font-weight: 800;
-    border: none;
-    background-color: transparent;
-}
-
 /* Media Queries */
-@media (max-width: 460px) {
+@media (max-width: 600px) {
     .expense-section {
         width: 340px;
         padding: 1rem;
@@ -174,6 +170,14 @@ input[type=number]:focus {
     .close-button {
         left: 220px;
         top: -430px;
+    }
+
+    .payer-input-group{
+        display: flex;
+        flex-direction: column;
+    }
+    .amount-input-group{
+        justify-content: end;
     }
 }
 

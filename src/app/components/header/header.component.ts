@@ -22,10 +22,8 @@ export class HeaderComponent {
 
     // Asegurarse de que el DOM esté completamente cargado
     const click = document.querySelector(".nav-li_a");
-    console.log(click);
     if (click) {
       click.addEventListener('click', function () {
-        console.log("hola");
         const nav = document.querySelector(".nav");
         const menu_flotante = document.querySelector(".menu-flotante");
         if (menu_flotante && nav) {

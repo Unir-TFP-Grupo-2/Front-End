@@ -23,9 +23,9 @@ body {
 
   .pagination{
     display: flex;
-    padding-right: 30px;
-    padding-bottom: 10px;
+    margin-top: 20px;
     justify-content: flex-end;
+    background-color: white;
   }
   .pagination ::ng-deep .ngx-pagination .current {
     cursor: pointer;
