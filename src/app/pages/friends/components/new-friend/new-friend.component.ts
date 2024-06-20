@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FriendsService} from '../../../../core/services/friends.service';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-new-friend',
   standalone: true,
@@ -33,9 +34,22 @@ export class NewFriendComponent {
         const friendEmail = this.formGroup.get('friend')?.value;
         const response = await this.friendsService.addFriend(Number(userId), friendEmail);
         console.log(response);
-        this.router.navigateByUrl('/friends');
+        this.cerrarPopup();
+
+        Swal.fire(
+          'Añadido correctamente.',
+        ).then(() => {
+          window.location.reload();
+        });
       } catch (error) {
         console.error('Error añadiendo amigo:', error);
+        this.cerrarPopup();
+        Swal.fire({
+          title: '¡Error!',
+          icon: 'error',
+          confirmButtonColor: 'var(--primary)',
+          confirmButtonText: 'Cerrar'
+        });
       }
     } else {
       console.log('Formulario no válido');

@@ -3,42 +3,77 @@ import { Component, inject } from '@angular/core';
 import { NewFriendComponent } from './components/new-friend/new-friend.component';
 import { ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
-import { FriendsService} from '../../core/services/friends.service';
-import { IUser } from '../../core/interfaces/iuser';
 
+import { IUser } from '../../core/interfaces/iuser';
+import { FriendsService } from '../../core/services/friends.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-friends',
   standalone: true,
   imports: [CommonModule, NewFriendComponent],
   templateUrl: './friends.component.html',
-  styleUrl: './friends.component.css'
+  styleUrls: ['./friends.component.css']
 })
 export class FriendsComponent {
-
   friends: IUser[] = []
-  
 
   friendsService = inject(FriendsService)
   activatedRoute = inject(ActivatedRoute)
 
-  
   async ngOnInit(): Promise<void> {
+    await this.loadFriends();
+  }
+
+  async loadFriends(): Promise<void> {
     try {
       const response = await this.friendsService.getAllFriend();
       this.friends = response;
       console.log('Respuesta del servicio:', response);
     } catch (error: unknown) {
-      console.error('Error al obtener grupos:', error);
+      console.error('Error al obtener amigos:', error);
       if (error instanceof HttpErrorResponse) {
         if (error.status === 403) {
           console.error('No tiene autorización para acceder a este recurso.');
         } else if (error.status === 204) {
-          this.friends = []; // No hay grupos asociados
-          console.log('No hay grupos asociados a este usuario.');
+          this.friends = [];
+          console.log('No hay amigos asociados a este usuario.');
         }
       } else {
         console.error('Ocurrió un error inesperado:', error);
+      }
+    }
+  }
+
+  async deleteFriend(friend:IUser): Promise<void> {
+    const result = await Swal.fire({
+      title: `¿Realmente quieres eliminar a ${friend.name} ${friend.lastname}?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: 'var(--danger)',
+      cancelButtonColor: 'var(--primary)',
+      confirmButtonText: 'Eliminar',
+      cancelButtonText: 'Cancelar'
+    });
+
+    if (result.isConfirmed) {
+      try {
+        const response = await this.friendsService.deleteFriend(friend._id);
+        console.log(response);
+        console.log('Amigo eliminado correctamente');
+        await this.loadFriends(); // Actualizar la lista de amigos después de eliminar
+        Swal.fire(
+          '¡Eliminado!',
+          `${friend.name} ${friend.lastname} a sido eliminado de tu lista de amigos`,
+          'success'
+        );
+      } catch (error) {
+        console.error('Error al eliminar amigo:', error);
+        Swal.fire(
+          'Error!',
+          'Hubo un error al eliminar el amigo.',
+          'error'
+        );
       }
     }
   }
@@ -47,7 +82,7 @@ export class FriendsComponent {
 
   abrirPopup() {
     this.mostrarPopup = true;
-}
+  }
 
   cerrarPopup() {
     this.mostrarPopup = false;

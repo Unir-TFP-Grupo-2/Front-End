@@ -33,7 +33,6 @@ export class FriendsService {
 
     deleteFriend(friendId: string): Promise<void> {
         const url = `${this.baseUrl}/${friendId}`;
-        const headers = this.createHeaders();
-        return firstValueFrom(this.httpClient.delete<void>(url, { headers }));
+        return firstValueFrom(this.httpClient.delete<void>(url,  { headers: this.createHeaders() }));
     }
 }
