@@ -1,8 +1,8 @@
 <div class="mini-group" [ngStyle]="{'background-color': miniGroupColor}">
     <div class="header-group">
         <div class="date">{{ miGroup.creation_date | date: 'dd/MM/yyyy' }}</div>
-        <button class="btn-settings">
-            <img class="settings" src="../../../assets/icons/menu-puntos-vertical.svg" alt="">
+        <button class="btn-settings" (click)="onDelete()">
+            <img class="settings" src="../../../../../assets/icons/eliminar.png" alt="">
         </button>
     </div>
     <button class="btn-group-name" [routerLink]="['/grupo', miGroup.group_id]"><span>{{miGroup.title}}</span></button>

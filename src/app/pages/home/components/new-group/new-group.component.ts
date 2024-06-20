@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output, Inject } from '@angular/core';
+import { Component, EventEmitter, Output, Inject, numberAttribute } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { GroupsService } from '../../../../core/services/groups.service';
 import { Router } from '@angular/router';
@@ -8,6 +8,7 @@ import { IGroup } from '../../../../core/interfaces/igroup';
 import { MatListModule, MatListOption, MatSelectionListChange } from '@angular/material/list';
 import { FriendsService } from '../../../../core/services/friends.service';
 import { UsersService } from '../../../../core/services/users.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-new-group',
@@ -25,7 +26,8 @@ export class NewGroupComponent {
   @Output() cerrar = new EventEmitter<void>();
   dropdownVisible: boolean = false;
   userData: any;
-
+  userID = localStorage.getItem('user_id') || '';
+  
   constructor(
     private formBuilder: FormBuilder,
     private groupsService: GroupsService,
@@ -41,19 +43,19 @@ export class NewGroupComponent {
       groupName: [null, Validators.required],
       groupDescription: null,
       participantInput: null,
-      amigosSelect: this.amigosSelectControl
+      amigosSelect: this.amigosSelectControl,
+      creator_id: null
     });
   }
-
   async ngOnInit(): Promise<void> {
     try {
       // Obtiene la lista de amigos del servicio
       const response = await this.friendsService.getAllFriend();
       this.allFriends = response ? response.map((friend: any) => ({
-        _id: friend.email,
+        _id: `${friend.email}`,
         fullName: `${friend.name} ${friend.lastname}`,
-        ...friend,
       })) : [];
+      console.log(this.allFriends)
     } catch (error) {
       this.handleError(error);
     }
@@ -75,11 +77,10 @@ export class NewGroupComponent {
 
   // Maneja el envío del formulario
   async onSubmit() {
-    const userID = localStorage.getItem('user_id');
-    if (userID) {
+    if (this.userID) {
       try {
         // Obtiene el correo electrónico del usuario actual
-        this.userData = await this.userService.getEmailByUserId(userID);
+        this.userData = await this.userService.getEmailByUserId(this.userID);
         if (this.userData?.email) {
           this.participants.push(this.userData.email);
         }
@@ -88,7 +89,7 @@ export class NewGroupComponent {
         return;
       }
     }
-
+  
     if (this.formGroup.valid) {
       const groupData = this.createGroupData();
       try {
@@ -96,24 +97,45 @@ export class NewGroupComponent {
         const response = await this.groupsService.insert(groupData);
         if (response.group_id) {
           this.cerrarPopup();
-          alert('El grupo se ha añadido correctamente');
-          this.router.navigate([`/grupo/${response.group_id}`]);
+          Swal.fire({
+            title: 'Éxito',
+            text: 'El grupo se ha añadido correctamente',
+            icon: 'success',
+            confirmButtonText: 'OK'
+          }).then(() => {
+            this.router.navigate([`/grupo/${response.group_id}`]);
+          });
         } else {
-          alert('Hubo un problema, inténtalo de nuevo');
+          this.cerrarPopup();
+          Swal.fire({
+            title: 'Error',
+            text: 'Hubo un problema, inténtalo de nuevo',
+            icon: 'error',
+            confirmButtonText: 'OK'
+          });
         }
       } catch (error) {
+        this.cerrarPopup();
         this.showError('Error al crear el grupo:', error);
       }
     } else {
-      alert('Por favor, completa todos los campos requeridos.');
+      this.cerrarPopup();
+      Swal.fire({
+        title: 'Advertencia',
+        text: 'Por favor, completa todos los campos requeridos.',
+        icon: 'warning',
+        confirmButtonText: 'OK'
+      });
     }
   }
+  
 
   // Crea los datos del grupo a partir del formulario
   private createGroupData(): IGroup {
     const amigosSelect = this.formGroup.get('amigosSelect')?.value || [];
     const allParticipants = [...amigosSelect, ...this.participants];
     const uniqueParticipants = [...new Set(allParticipants)];
+ 
     return {
       group_id: '',
       title: this.formGroup.get('groupName')?.value,
@@ -121,6 +143,7 @@ export class NewGroupComponent {
       creation_date: new Date(),
       num_participants: uniqueParticipants.length,
       participants: uniqueParticipants,
+      creator_id:  this.userID, 
     };
   }
 
@@ -129,6 +152,7 @@ export class NewGroupComponent {
     console.error(message, error instanceof HttpErrorResponse ? error.message : error);
     alert('Hubo un problema, inténtalo de nuevo');
   }
+  
 
   // Maneja el cambio en la lista de amigos seleccionados
   onAmigosSelectChange(event: MatSelectionListChange) {

@@ -6,7 +6,7 @@ body {
   }
   
 .img-home{
-  max-width: 440px;
+  max-width: 510px;
   border-radius: 20px;
   background-image: url('../../../assets/img/home-img1.jpeg');
   background-size: cover;

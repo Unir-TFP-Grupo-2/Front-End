@@ -4,7 +4,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MessageService } from './services/message.service';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +20,7 @@ export class AppComponent {
   }
   contactForm(form: any) {
     this._MessageService.sendMessage(form.value).subscribe(() => {
-      swal("Formulario de contacto", "Mensaje enviado correctamente", 'success');
+      Swal.fire("Formulario de contacto", "Mensaje enviado correctamente", 'success');
     });
   }
 }

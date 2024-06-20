@@ -3,9 +3,9 @@ import { Component, Input, NgModule, OnInit, inject } from '@angular/core';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { FormGroup } from '@angular/forms';
 import { IGroup } from '../../../../core/interfaces/igroup';
 import { GroupsService } from '../../../../core/services/groups.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -15,7 +15,7 @@ import { GroupsService } from '../../../../core/services/groups.service';
   templateUrl: './mini-group.component.html',
   styleUrls: ['./mini-group.component.css'] 
 })
-export class MiniGroupComponent implements OnInit {
+export class MiniGroupComponent {
 
   @Input() miGroup!: IGroup
 
@@ -35,6 +35,71 @@ export class MiniGroupComponent implements OnInit {
 
   groupService = inject(GroupsService)
   activatedRouter = inject(ActivatedRoute);
+
+
+  async onDelete() {
+    try {
+      const userId = localStorage.getItem('user_id');
+      if (!userId) {
+        throw new Error('User ID no encontrado en localStorage');
+      }
+  
+      if (userId === this.miGroup.creator_id?.toString()) {
+        const firstConfirmation = await Swal.fire({
+          title: '¿Estás seguro?',
+          text: 'No podrás revertir esto.',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: 'var(--danger)',
+          cancelButtonColor: 'var(--primary)',
+          confirmButtonText: 'Sí, eliminarlo'
+        });
+  
+        if (firstConfirmation.isConfirmed) {
+          const secondConfirmation = await Swal.fire({
+            title: '¿Estás realmente seguro?',
+            text: 'Se eliminaran todos los datos.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: 'var(--danger)',
+            cancelButtonColor: 'var(--primary)',
+            confirmButtonText: 'Sí, eliminarlo definitivamente'
+          });
+  
+          if (secondConfirmation.isConfirmed) {
+            const response = await this.groupService.delete(this.miGroup.group_id.toString());
+            console.log(response);
+            Swal.fire({
+              title: 'Eliminado correctamente.',
+              icon: 'success',
+              confirmButtonText: 'Cerrar',
+              confirmButtonColor: 'var(--primary)',
+            }).then(() => {
+              window.location.reload();
+            });
+          }
+        }
+      } else {
+        Swal.fire({
+          title: '¡Error!',
+          text: 'No eres el administrador del grupo.',
+          icon: 'warning',
+          confirmButtonText: 'Cerrar',
+          confirmButtonColor: 'var(--primary)',
+        });
+      }
+    } catch (error) {
+      console.error('Error eliminando grupo:', error);
+  
+      Swal.fire({
+        title: '¡Error!',
+        text: 'No se pudo eliminar el grupo.',
+        icon: 'error',
+        confirmButtonColor: 'var(--primary)',
+        confirmButtonText: 'Cerrar'
+      });
+    }
+  }
 
   getAbsoluteBalanceDifference(): number {
     return Math.abs(this.miGroup.balance_difference ?? 0);

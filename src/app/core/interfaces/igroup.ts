@@ -8,6 +8,6 @@ export interface IGroup {
         balance_difference?: number;
         gastos?: string[]; 
         participants: string[];
-        
+        creator_id?: string
 }
 
