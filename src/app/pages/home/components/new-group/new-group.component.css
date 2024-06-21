@@ -1,9 +1,9 @@
 .group-section {
-    min-width: 400px;
+    min-width: 280px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 30px;
+    padding: 20px;
     border-radius: 30px;
     width: fit-content;
     gap: 20px;
@@ -18,11 +18,11 @@
 
 .btn-close-popup {
     position: relative;
-    top: -15px;
-    right: -15px;
+    top: -10px;
+    right: -10px;
     color: #123553;
     cursor: pointer;
-    font-size: medium;
+    font-size: large;
     font-weight: 800;
     border: none;
     background-color: transparent;
@@ -37,8 +37,9 @@ h2 {
 }
 
 .group-form {
-    display: flex;
-    gap: 1rem;
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 20px;
 }
 
 .form-container {
@@ -51,7 +52,7 @@ h2 {
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 0.2rem;
+    gap: 5px;
 }
 
 .form-label {
@@ -60,12 +61,15 @@ h2 {
 
 .form-input {
     border: none;
-    border-color: #123553;
-    position: relative;
+    border-bottom: none;
+    font-size: medium;
+    padding: 5px 0;
+    box-shadow: none;
 }
 
 .form-input:focus {
     outline: none;
+    box-shadow: none;
 }
 
 .form-textarea {
@@ -74,21 +78,20 @@ h2 {
     height: 80px;
     border: none;
     background-color: #d6e6e6;
-    padding: 0.2rem;
-    font-size: small;
+    padding: 0.5rem;
+    font-size: medium;
     outline: none;
     overflow-y: hidden;
 }
 
 .btn-add {
-    position: absolute;
-    right: 0;
-    top: 35px;
     cursor: pointer;
     background-color: #d6e6e6;
-    font-size: medium;
+    
     font-weight: 600;
     color: #123553;
+    border: none;
+    border-radius: 5px;
 }
 
 .btn-add,
@@ -96,7 +99,7 @@ h2 {
     cursor: pointer;
     border: none;
     background-color: transparent;
-    font-size: small;
+    font-size: large;
 }
 
 .btn-remove {
@@ -105,12 +108,15 @@ h2 {
 
 .btn-add:hover,
 .btn-remove:hover {
-    transform: scale(1.4);
+    transform: scale(1.2);
 }
 
 .dropdown {
     max-height: 200px;
     overflow-y: auto;
+    border: 1px solid #d6e6e6;
+    border-radius: 5px;
+    background-color: white;
 }
 
 .members-section {
@@ -118,7 +124,7 @@ h2 {
     flex-direction: column;
     justify-content: space-between;
     width: 100%;
-    font-size: small;
+    font-size: medium;
 }
 
 .participants-list {
@@ -129,6 +135,8 @@ h2 {
 
 .participants-header {
     display: flex;
+    font-size: medium;
+    font-weight: 600;
 }
 
 ul {
@@ -137,22 +145,24 @@ ul {
 }
 
 li {
-    font-size: x-small;
+    font-size: small;
     list-style-type: none;
-    justify-content: baseline;
-    padding-left: 0.3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .form-submit {
     cursor: pointer;
-    height: 1.5rem;
-    width: 130px;
+    height: 2rem;
+    width: 100%;
     border-radius: 5px;
     background-color: #d6e6e6;
     font-size: medium;
     font-weight: 600;
     border: none;
     color: #123553;
+    margin-top: 20px;
 }
 
 .form-submit:hover {
@@ -162,18 +172,34 @@ li {
     box-shadow: 0 4px 16px #123553;
 }
 
-@media (max-width: 460px) {
+@media (max-width: 768px) {
     .group-section {
-        width: 360px;
+        width: 100%;
         padding: 20px;
         border-radius: 30px;
     }
 
-    .group-form{
+    .group-form {
         display: flex;
         flex-direction: column;
+        gap: 20px;
     }
 
+    .form-submit {
+        order: 1;
+    }
+
+    .integrants-list{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        margin: auto;
+    }
+}
+
+@media (max-width: 460px) {
+    .group-section {
+        width: 360px;
+    }
 }
 
 @media (max-width: 390px) {
@@ -181,4 +207,15 @@ li {
         width: 280px;
     }
 
+    .form-label {
+        font-size: medium;
+    }
+
+    .form-input {
+        font-size: small;
+    }
+
+    .btn-add {
+        top: 30px;
+    }
 }

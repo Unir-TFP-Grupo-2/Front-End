@@ -18,8 +18,10 @@
 
         <div class="form-group">
           <label for="participantInput" class="form-label">Añadir miembro</label>
-          <input id="participantInput" formControlName="participantInput" class="form-input" placeholder="username/email">
-          <button class="btn-add" type="button" (click)="addParticipant()">+</button>
+          <div class="add-paticipant">
+            <input id="participantInput" formControlName="participantInput" class="form-input" placeholder="email">
+            <button class="btn-add" type="button" (click)="addParticipant()">+</button>
+          </div>
         </div>
 
         <div class="form-group">
@@ -40,7 +42,7 @@
             <div class="participants-header">
               <span>Integrantes</span>
             </div>
-            <ul>
+            <ul class="integrants-list">
               <li *ngFor="let participant of participants; let i = index">
                 {{ participant }}
                 <button class="btn-remove" type="button" (click)="removeParticipant(i)">x</button>
