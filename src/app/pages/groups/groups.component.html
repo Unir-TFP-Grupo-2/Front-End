@@ -10,8 +10,8 @@
                 <div *ngFor="let gasto of participant.gastos_user" class="pagos">
                     <p class="participantes_gasto">{{gasto.description}} - {{gasto.amount}}</p>
                 </div>
-                <p>Total pagado: {{total_amount_user}}</p>
-                <p>Debe: 100</p>
+                <p>Total pagado: {{participant.total_amount}}</p>
+                <p>Debe: {{calcularTotal()}}</p>
             </div>
         </div>
         <div class="grupos_description">
