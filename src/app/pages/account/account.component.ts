@@ -21,6 +21,7 @@ export class AccountComponent {
   passwordVisible = false;
   photo: string | undefined;
   usuarios: any[] = [];
+  id: string | null = null;
 
   
   activatedRouter = inject(ActivatedRoute);
@@ -28,6 +29,7 @@ export class AccountComponent {
   httpClient: HttpClient;
   cambiarpassword: any;
   passwordActual: any;
+  
 
 
   constructor(
@@ -42,7 +44,8 @@ export class AccountComponent {
   }
 
   ngOnInit() {
-    this.activatedRouter.params.subscribe(async (params: any) => {
+    this.id = this.activatedRoute.snapshot.paramMap.get('id');
+    this.activatedRoute.params.subscribe(async (params: any) => {
       this.obtenerUsuarios(params.id);
     }
     );
@@ -82,21 +85,7 @@ export class AccountComponent {
         reader.readAsDataURL(event.target.files[0]);
       }
     }
-  
     async guardarCambios() {
-      try {
-        const id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
-        if (!id) {
-          console.error('El ID es nulo');
-          await this.router.navigate(['/home']);
-          return;
-        }
-    
-        const token = localStorage.getItem('token_usuario');
-        if (!token) {
-          console.error('No se encontró el token de autenticación');
-          return;
-        }
     
         const userDetails: any = {
           name: this.name,
@@ -109,40 +98,12 @@ export class AccountComponent {
           userDetails.password = this.passwordActual;
         }
     
-        await this.updateUser(id);
-        console.log('Cambios guardados con éxito');
-      } catch (error) {
-        console.error('Error al guardar los cambios:', error);
-      }
+        try {
+          await this.usersService.updateUser(userDetails);
+          await this.router.navigate([`/account`]);
+          console.log('Cambios guardados con éxito');
+        } catch (error) {
+          console.error('Error al guardar los cambios:', error);
+        }
+      };
     }
-  updateUser(id: number) {
-    throw new Error('Method not implemented.');
-  }
-  
-    async cambiarPassword(nuevaContraseña: string) {
-      const token = localStorage.getItem('token_usuario');
-      if (!token) {
-        console.error('No se encontró el token de autenticación.');
-        return;
-      }
-    
-      const passwordDetails = {
-        password: nuevaContraseña,
-      };
-    
-      const httpOptions = {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + token
-        })
-      };
-    
-      try {
-        const id = this.activatedRoute.snapshot.paramMap.get('id');
-        await this.http.put(`https://mi-api.com/api/usuarios/${id}/cambiarPassword`, passwordDetails, httpOptions);
-        console.log('Contraseña actualizada con éxito');
-      } catch (error) {
-        console.error('Error al actualizar la contraseña:', error);
-      }
-  }
-}
