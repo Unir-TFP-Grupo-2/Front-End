@@ -1,6 +1,9 @@
 .about-page {
     padding: 20px 80px;
     font-family: Arial, sans-serif;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   .about-page h2 {

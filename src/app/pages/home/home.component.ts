@@ -29,7 +29,7 @@ export class HomeComponent {
   async ngOnInit(): Promise<void> {
     try {
       const response = await this.groupService.getAll();
-      this.groups = response;
+      this.groups = response.sort((a, b) => new Date(b.creation_date).getTime() - new Date(a.creation_date).getTime());
       console.log('Respuesta del servicio:', response);
     } catch (error: unknown) {
       console.error('Error al obtener grupos:', error);

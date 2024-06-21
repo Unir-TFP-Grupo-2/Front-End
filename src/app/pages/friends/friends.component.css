@@ -1,44 +1,44 @@
-.section-primary{
+.section-primary {
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
     padding: 30px 0;
 }
 
-.friends-header{
+.friends-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px;
 }
 
-.btn-add-friend{
+.btn-add-friend {
     cursor: pointer;
     height: 40px;
     border-radius: 10px;
     color: white;
     font-weight: 600;
-    font-size: medium;
+    font-size: large;
     background-color: var(--primary);
     border: 2px solid var(--tertiary);
+}
 
-  }
-  
-  .btn-add-friend:hover {
+.btn-add-friend:hover {
     background-color: var(--tertiary);
     color: #d6e6e6;
     transform: scale(1.05);
-  }
-  
-  .btn-add-friend:active{
-    box-shadow: 0 4px 16px var(--tertiary)
 }
 
-.friend-item{
+.btn-add-friend:active {
+    box-shadow: 0 4px 16px var(--tertiary);
+}
+
+.friend-item {
     display: grid;
-    grid-template-columns: 3fr 3fr 3fr 1fr ;
+    grid-template-columns: 3fr 2fr;
     justify-content: space-between;
     align-items: center;
+    font-size: large;
     border-bottom: 1px solid var(--tertiary);
     padding: 10px;
     color: var(--secondary);
@@ -47,7 +47,7 @@
 .friends-list {
     display: flex;
     flex-direction: column;
-    max-width: 900px;
+    max-width: 90%;
     margin: auto;
     gap: 10px;
     padding: 30px;
@@ -57,13 +57,17 @@
     list-style-type: none;
 }
 
+.friend-info,
+.friend-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
 
-.friend-name{
+.friend-name {
     color: var(--primary);
 }
 
-
-.friend-details{
+.friend-details {
     display: flex;
     gap: 50px;
     align-items: center;
@@ -73,11 +77,11 @@
     background-color: transparent;
     border: none;
     padding: 0;
-    cursor: pointer;   
+    cursor: pointer;
 }
 
 .btn-remove-friend:hover {
-    transform: scale(1.10); 
+    transform: scale(1.10);
 }
 
 .btn-remove-friend img {
@@ -96,4 +100,21 @@
     justify-content: center;
     align-items: center;
     z-index: 9999;
+}
+
+@media (max-width: 992px) {
+    .friend-info {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 540px) {
+    .friend-item {
+        grid-template-columns: 1fr;
+    }
+
+    .friend-actions {
+        display: flex;
+        justify-content: space-between;
+    }
 }

@@ -52,7 +52,8 @@ export class MiniGroupComponent {
           showCancelButton: true,
           confirmButtonColor: 'var(--danger)',
           cancelButtonColor: 'var(--primary)',
-          confirmButtonText: 'Sí, eliminarlo'
+          confirmButtonText: 'Sí, eliminarlo',
+          cancelButtonText: 'Cancelar'
         });
   
         if (firstConfirmation.isConfirmed) {
@@ -63,7 +64,8 @@ export class MiniGroupComponent {
             showCancelButton: true,
             confirmButtonColor: 'var(--danger)',
             cancelButtonColor: 'var(--primary)',
-            confirmButtonText: 'Sí, eliminarlo definitivamente'
+            confirmButtonText: 'Sí, eliminarlo definitivamente',
+            cancelButtonText: 'Cancelar'
           });
   
           if (secondConfirmation.isConfirmed) {
