@@ -20,6 +20,7 @@ export class UsersService {
   private httpClient = inject(HttpClient)
   private router = inject(Router)
   private userService: any;
+  http: any;
  
   
   async fetchUserAccount() {
@@ -140,33 +141,15 @@ export class UsersService {
   });
 
   try {
-    return await firstValueFrom(this.httpClient.get<IUser>(`${this.baseUrl}/account/:id`, { headers }));
+    return await firstValueFrom(this.httpClient.get<IUser>(`${this.baseUrl}/account`, { headers }));
   } catch (error: any) {
     console.error('Error al obtener la información de la cuenta:', error);
-    throw error; // O manejar el error de manera más específica
+    throw error; 
   }
 }
 
- /**
-   * Actualiza la información del usuario.
-   * @param id El ID del usuario a actualizar.
-   * @param userData Los datos del usuario a actualizar.
-   * @returns {Promise<IUser>} - Una promesa que se resuelve con los datos del usuario actualizados.
-   */
- async updateUser(id: number): Promise<IUser> {
-  const token = localStorage.getItem('token_usuario');
-  const headers = new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${token}`
-  });
-
-  try {
-    return await firstValueFrom(this.httpClient.put<IUser>(`${this.baseUrl}/${id}`, { headers }));
-  } catch (error: any) {
-    console.error('Error al actualizar la información del usuario:', error);
-    throw error;
-  }
+updateUser(userDetails: any): Promise<any> {
+  const headers = this.createHeaders(); // Llamada correcta a la función
+  return this.httpClient.put(`${this.baseUrl}/account`, userDetails, { headers }).toPromise();
 }
 }
-
-
