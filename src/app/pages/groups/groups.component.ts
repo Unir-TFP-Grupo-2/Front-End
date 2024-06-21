@@ -28,7 +28,6 @@ export class GroupsComponent {
   async ngOnInit(): Promise<void> {
 
     this.activatedRouter.params.subscribe(async (params: any) => {
-
       let responseGrupo = await this.groupService.getById(params.id);
       this.title = responseGrupo.title;
       this.description = responseGrupo.description;

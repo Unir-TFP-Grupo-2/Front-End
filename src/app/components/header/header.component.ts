@@ -13,11 +13,18 @@ export class HeaderComponent {
 
   authService = inject(UsersService)
   id = 0;
+  token = "";
 
   constructor() {
     this.id = localStorage['id_user'];
+    this.token = "";
   }
   async ngOnInit(): Promise<void> {
+    if (localStorage['token_usuario'] != undefined) {
+      this.token = localStorage['token_usuario'];
+    } else {
+      this.token = "";
+    }
     this.id = localStorage['id_user'];
 
     // Asegurarse de que el DOM esté completamente cargado
