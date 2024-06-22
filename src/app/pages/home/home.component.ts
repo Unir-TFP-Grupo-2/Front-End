@@ -29,8 +29,13 @@ export class HomeComponent {
   async ngOnInit(): Promise<void> {
     try {
       const response = await this.groupService.getAll();
-      this.groups = response.sort((a, b) => new Date(b.creation_date).getTime() - new Date(a.creation_date).getTime());
-      console.log('Respuesta del servicio:', response);
+      
+      if (response && Array.isArray(response)) {
+        this.groups = response.sort((a, b) => new Date(b.creation_date).getTime() - new Date(a.creation_date).getTime());
+      } else {
+        this.groups = []; // Manejar el caso donde response es null o no es un array
+        console.log('No hay grupos asociados a este usuario.');
+      }
     } catch (error: unknown) {
       console.error('Error al obtener grupos:', error);
       if (error instanceof HttpErrorResponse) {
@@ -45,22 +50,8 @@ export class HomeComponent {
       }
     }
   }
-
-
-     /*  this.activatedRoute.queryParams.subscribe((params: any) => {
-        const buscar = params.query
-        console.log(buscar)
-        if (buscar) {
-          let name = this.groupServices.quitarTildes(buscar)
-          let filterGroups = this.groups.filter(group =>
-            this.groupServices.quitarTildes(group.title).includes(title) 
-          )
-          this.groups = filterGroups
-        } if (buscar === undefined || buscar === '') {
-          console.log(buscar)
-          this.groups = response.results
-        }
-      }) */
+  
+  
 
 
   

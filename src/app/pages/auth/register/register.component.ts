@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink, Router, ActivatedRoute } from '@angular/router';
 import { UsersService } from '../../../core/services/users.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -49,15 +50,27 @@ export class RegisterComponent {
 
 
 
-  async onSubmit(){
-    const response = await this.usersService.register(this.formRegister.value)
-    if(response._id !== null) {
-      alert(`El Usuario ${response.name} se ha añadido correctamente`)
-      this.router.navigate(['/login'])
-    }else {
-      alert('Hubo un problema, intentalo de nuevo')
-    }
+async onSubmit() {
+  const response = await this.usersService.register(this.formRegister.value);
+  if (response._id !== null) {
+    Swal.fire({
+      title: 'Te has registrado correctamente',
+      icon: 'success',
+      confirmButtonText: 'Cerrar',
+      confirmButtonColor: 'var(--primary)',
+    }).then(() => {
+      this.router.navigate(['/login']);
+    });
+  } else {
+    Swal.fire({
+      title: 'Error',
+      text: 'Hubo un problema, intentalo de nuevo',
+      icon: 'error',
+      confirmButtonText: 'Cerrar',
+      confirmButtonColor: 'var(--primary)',
+    });
   }
-  }
+}
+}
 
 
