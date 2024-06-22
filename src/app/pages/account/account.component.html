@@ -19,8 +19,8 @@
           Contraseña actual:
           <input [type]="passwordVisible ? 'text' : 'password'" [(ngModel)]="password">
           <button (click)="passwordVisible = !passwordVisible">
-            <i *ngIf="passwordVisible" class="fa-solid fa-eye-slash"></i>
-            <i *ngIf="!passwordVisible" class="fa-solid fa-eye"></i>
+            <i *ngIf="passwordVisible" class="fa-solid fa-eye"></i>
+            <i *ngIf="!passwordVisible" class="fa-solid fa-eye-slash"></i>
           </button>
           <button (click)="cambiarpassword = !cambiarpassword">Cambiar contraseña</button>
         </p>
@@ -28,8 +28,8 @@
           <label>Nueva contraseña: 
             <input [type]="newPasswordVisible ? 'text' : 'password'" #newPassword>
             <button (click)="newPasswordVisible = !newPasswordVisible">
-              <i *ngIf="newPasswordVisible" class="fa-solid fa-eye-slash"></i>
-              <i *ngIf="!newPasswordVisible" class="fa-solid fa-eye"></i>
+              <i *ngIf="newPasswordVisible" class="fa-solid fa-eye"></i>
+              <i *ngIf="!newPasswordVisible" class="fa-solid fa-eye-slash"></i>
             </button>
           </label>          
         </div>

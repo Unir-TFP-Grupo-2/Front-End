@@ -4,7 +4,6 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { UsersService } from '../../core/services/users.service';
-
 @Component({
   selector: 'app-account',
   standalone: true,
@@ -28,7 +27,9 @@ export class AccountComponent {
   baseUrl: string;
   httpClient: HttpClient;
   cambiarpassword: any;
-  passwordActual: any;
+  nuevaPassword: any;
+  newPassword: any;
+  userId: any;
   
 
 
@@ -70,6 +71,8 @@ export class AccountComponent {
         this.name = response.name;
         this.lastname = response.lastname;
         this.email = response.email;
+        this.photo = response.photo;
+        this.password = response.password;//.bcrypt.hashSync(this.password, 8);
       },
       error: (error) => {
         console.error('Error al obtener los usuarios:', error);
@@ -86,24 +89,45 @@ export class AccountComponent {
       }
     }
     async guardarCambios() {
-    
-        const userDetails: any = {
-          name: this.name,
-          lastname: this.lastname,
-          email: this.email,
-          photo: this.photo,
-        };
-    
-        if (this.cambiarpassword && this.passwordActual) {
-          userDetails.password = this.passwordActual;
-        }
-    
-        try {
-          await this.usersService.updateUser(userDetails);
-          await this.router.navigate([`/account`]);
-          console.log('Cambios guardados con éxito');
-        } catch (error) {
-          console.error('Error al guardar los cambios:', error);
-        }
+      // Asegúrate de que userId está definido y es el correcto
+      const userId = localStorage.getItem('user_id');
+      if (!userId) {
+        console.error('El ID del usuario no está definido');
+        return;
+      }
+
+      this.name = '';
+      this.lastname = '';
+      this.email = '';
+      this.photo = '';
+      this.password = '';
+
+      const userDetailsActualizado: any = {
+        name: this.name,
+        lastname: this.lastname,
+        email: this.email,
+        photo: this.photo,
+        password: this.password
       };
+    
+      if (this.cambiarpassword && this.newPassword) {
+        userDetailsActualizado.password = this.newPassword;
+      }
+    
+      try {
+        // Asegúrate de que la URL es correcta y no tiene segmentos duplicados
+        await this.usersService.updateUser(userId, userDetailsActualizado); // Usa el userId obtenido de localStorage
+        await this.router.navigate([`/account`]);
+        console.log('Cambios guardados con éxito');
+      } catch (error) {
+        // Mejora el manejo de errores para proporcionar retroalimentación más específica
+        console.error('Error al guardar los cambios:', error);
+        // Aquí puedes agregar lógica adicional para manejar diferentes tipos de errores, por ejemplo:
+        // if (error.status === 404) {
+        //   console.error('Usuario no encontrado');
+        // } else if (error.status === 500) {
+        //   console.error('Error del servidor');
+        // }
+      }
+    }
     }

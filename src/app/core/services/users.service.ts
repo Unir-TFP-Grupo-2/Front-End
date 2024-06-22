@@ -148,8 +148,10 @@ export class UsersService {
   }
 }
 
-updateUser(userDetails: any): Promise<any> {
-  const headers = this.createHeaders(); // Llamada correcta a la función
-  return this.httpClient.put(`${this.baseUrl}/account`, userDetails, { headers }).toPromise();
+updateUser(userId: string, userDetailsActualizado: any): Promise<any> {
+  const headers = this.createHeaders();
+  const requestObservable = this.httpClient.put(`${this.baseUrl}/${userId}`, userDetailsActualizado, { headers });
+  return firstValueFrom(requestObservable);
 }
+
 }
