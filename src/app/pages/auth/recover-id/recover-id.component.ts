@@ -3,11 +3,12 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators, A
 import { RouterModule, Router, RouterLink } from '@angular/router';
 import { UsersService } from '../../../core/services/users.service';
 import { EmailService } from '../../../core/services/email.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-recover-id',
   standalone: true,
-  imports: [RouterLink, ReactiveFormsModule],
+  imports: [RouterLink, ReactiveFormsModule, CommonModule],
   templateUrl: './recover-id.component.html',
   styleUrls: ['./recover-id.component.css']
 })
@@ -22,23 +23,14 @@ export class RecoverIdComponent {
   newpasswordAct = '';
   errorMessage = '';
 
+  
+
   constructor() {
     this.formRecoverPass = new FormGroup({
-      newpassword: new FormControl('', [Validators.required]),
-      newpasswordAct: new FormControl('', [Validators.required])
+      newpassword: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3)]),
     },);
-  }
-
-  // Validador personalizado para verificar que las contraseñas coincidan
-  passwordMatchValidator(formGroup: FormGroup) {
-    const password = formGroup.get('newpassword')?.value;
-    const confirmPassword = formGroup.get('newpasswordAct')?.value;
-
-    if (password !== confirmPassword) {
-      formGroup.get('newpasswordAct')?.setErrors({ mismatch: true });
-    } else {
-      formGroup.get('newpasswordAct')?.setErrors(null);
-    }
   }
 
   async onSubmit() {
@@ -46,12 +38,7 @@ export class RecoverIdComponent {
     this.newpassword = this.formRecoverPass.get('newpassword')?.value;
     this.newpasswordAct = this.formRecoverPass.get('newpasswordAct')?.value;
 
-    // Validar si las contraseñas coinciden
-    if (this.formRecoverPass.invalid) {
-      // Marcamos el formulario como tocado para mostrar los errores
-      this.formRecoverPass.markAllAsTouched();
-      return;
-    }
+  
 
     try {
       if (!userId || !this.newpassword) {
