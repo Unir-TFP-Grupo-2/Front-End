@@ -15,6 +15,7 @@
           <input type="number" id="expense" formControlName="expense" class="amount-input" placeholder="0">
           <span class="currency-symbol">€</span>
         </div>
+       
       </div>
     </div>
 
@@ -49,18 +50,20 @@
           </mat-list-option>
         </mat-selection-list>
       </div>
-      
-      
-      
-      
-      
+   
     </div>
 
     <div class="subject-section">
       <label class="subject-label">Asunto</label>
       <input id="description" formControlName="description" class="subject-input" type="text" placeholder="Descripción del gasto">
+      @if(checkControl('description', 'required')){
+        <p class="error text-danger">Campo requerido</p>
+    }
+      @if(checkControl('description', 'minlength')){  
+        <p class="error text-danger">Minimo 2 caracteres</p>
+    }
     </div>
 
-    <input type="submit" value="Guardar" class="submit-button">
+    <input type="submit" value="Guardar" class="submit-button" [ngClass]="     {'disabled-button': !formExpense.valid}" [disabled]="!formExpense.valid">
   </form>
 </section>

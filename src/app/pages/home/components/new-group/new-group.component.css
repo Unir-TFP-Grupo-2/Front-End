@@ -154,7 +154,7 @@ li {
 
 .form-submit {
     cursor: pointer;
-    height: 2rem;
+    height: 40px;
     width: 100%;
     border-radius: 5px;
     background-color: #d6e6e6;
@@ -163,13 +163,35 @@ li {
     border: none;
     color: #123553;
     margin-top: 20px;
-}
-
-.form-submit:hover {
+    transition: background-color 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .form-submit:hover {
     background-color: #123553;
     color: #d6e6e6;
     transform: scale(1.05);
     box-shadow: 0 4px 16px #123553;
+  }
+  
+  .form-submit.disabled-button {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+  }
+  
+  .form-submit.disabled-button:hover {
+    background-color: #cccccc;
+    color: #666666;
+    transform: none;
+    box-shadow: none;
+  }
+  
+
+.error{
+    color: var(--danger);
+    font-size: small;
+    font-weight: 600;
+    margin: 0;
 }
 
 @media (max-width: 768px) {
