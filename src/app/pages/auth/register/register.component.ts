@@ -4,6 +4,7 @@ import { RouterLink, Router, ActivatedRoute } from '@angular/router';
 import { UsersService } from '../../../core/services/users.service';
 
 import { CommonModule } from '@angular/common';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -45,10 +46,20 @@ export class RegisterComponent {
     if (this.formRegister.valid) {
       const response = await this.usersService.register(this.formRegister.value);
       if (response._id !== null) {
-        alert(`El Usuario ${response.name} se ha añadido correctamente`);
-        this.router.navigate(['/login']);
+        Swal.fire({
+          title: 'Te has registrado correctamente',
+          icon: 'success',
+          confirmButtonColor: 'var(--primary)'
+        }).then(() => {
+          this.router.navigate(['/login']);
+        });
       } else {
-        alert('Hubo un problema, intentalo de nuevo');
+        Swal.fire({
+          title: 'Error',
+          text: 'Hubo un problema, intentalo de nuevo',
+          icon: 'error',
+          confirmButtonColor: 'var(--primary)'
+        });
       }
     } else {
       this.formRegister.markAllAsTouched(); // Marca todos los campos como tocados para mostrar los mensajes de error

@@ -10,7 +10,7 @@ type RegisterBody = { name: string, lastname: string, email: string, password: s
 type LoginBody = { email: string, password: string };
 type LoginResponse = { error?: string, massage?: string, token?: string, user?: string }
 type RecoverBody = { email: string }
-type account = {name: string, lastname: string, email: string, password: string, phone: string, photo: string, fechaNacimiento: string}
+type account = {name: string, lastname: string, email: string, password: string, photo: string}
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +23,10 @@ export class UsersService {
   
   // BehaviorSubject maneja el estado del token de autenticación y notificar a los suscriptores cuando cambia
   private tokenSubject = new BehaviorSubject<string>(localStorage.getItem('token_usuario') || '');
-  
+  private encryptPassword(password: string): string {
+    // Implementación de cifrado de contraseña (esto es solo un placeholder)
+    return password; // Retorna la contraseña cifrada
+  }
   // Observable público en que los componentes pueden suscribirse para obtener actualizaciones del token
   token$ = this.tokenSubject.asObservable();
   
@@ -155,8 +158,11 @@ export class UsersService {
 
 updateUser(userId: string, userDetailsActualizado: any): Promise<any> {
   const headers = this.createHeaders();
+  // Asegúrate de que solo se envíe la contraseña si ha sido modificada
+  if (userDetailsActualizado.password) {
+    userDetailsActualizado.password = this.encryptPassword(userDetailsActualizado.password);
+  }
   const requestObservable = this.httpClient.put(`${this.baseUrl}/${userId}`, userDetailsActualizado, { headers });
   return firstValueFrom(requestObservable);
 }
-
 }
