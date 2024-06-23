@@ -53,16 +53,7 @@ export const routes: Routes = [
         loadChildren: () => import('./pages/contact/contact.routes').then(m => m.CONTACT_ROUTES)
     },
 
-<<<<<<< HEAD
-
-
-
-
-    {path: "prueba", component: PruebaComponent},
-    {path: "logica", component: GestionGastosComponent},
-    
-=======
     { path: '**', redirectTo: 'welcome' }
->>>>>>> 44b3618543481e633a6a8955fe87fc2a071c60f7
+
     
 ];
