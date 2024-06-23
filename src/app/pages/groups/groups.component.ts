@@ -24,25 +24,29 @@ export class GroupsComponent {
   gastos = Array();
   gastos_user = Array();
   total_amount_user = 0;
+  total_a_pagar = 0;
 
   async ngOnInit(): Promise<void> {
 
     this.activatedRouter.params.subscribe(async (params: any) => {
+
       let responseGrupo = await this.groupService.getById(params.id);
       this.title = responseGrupo.title;
       this.description = responseGrupo.description;
       this.participantsUser = responseGrupo.participants;
       this.total_amount = responseGrupo.total_amount ?? 0;
+      this.total_a_pagar = responseGrupo.total_a_pagar ?? 0;
       this.gastos = responseGrupo.gastos ?? [];
-
-    
+      console.log(responseGrupo);
     }
     );
 
   }
 
-  
 
+  calcularTotal(): number {
+    return this.total_amount_user;
+  }
   mostrarPopup = false;
 
   abrirPopup() {

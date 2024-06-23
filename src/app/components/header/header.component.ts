@@ -1,11 +1,11 @@
 import { Component, inject } from '@angular/core';
-import { NavigationCancel, RouterLink } from '@angular/router';
+import { NavigationCancel, RouterLink, RouterOutlet } from '@angular/router';
 import { UsersService } from '../../core/services/users.service';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, RouterOutlet],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
@@ -17,7 +17,7 @@ export class HeaderComponent {
 
   constructor() {
     this.id = localStorage['id_user'];
-    this.token = "";
+    this.token = localStorage['token_usuario'];
   }
   async ngOnInit(): Promise<void> {
     if (localStorage['token_usuario'] != undefined) {
