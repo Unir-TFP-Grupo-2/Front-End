@@ -8,6 +8,7 @@ export interface IGroup {
         total_a_pagar?: number; 
         balance_difference?: number;
         gastos?: string[]; 
+        pagos?: string[]; 
         participants: string[];
         creator_id?: string
 }

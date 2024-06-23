@@ -31,7 +31,7 @@
         <button class="btn-new-group" (click)="abrirPopup()">Añadir Gasto</button>
     </div>
     <div>
-        <h2>Gastos</h2>
+        <h2>Pagos</h2>
         <div *ngFor="let balance of balances" class="gastos">
             <p>{{balance.to.name}} debe {{balance.amount}} a {{balance.from.name}}</p>
         </div>

@@ -40,7 +40,7 @@ export class GroupsComponent {
         this.gastos = responseGrupo.gastos ?? [];
         this.pagos = responseGrupo.pagos ?? [];
 
-        this.balances = this.calculateDebts(this.pagos);
+        this.balances = this.calculateNetDebts(this.pagos);
         console.log(this.balances);
       } catch (error) {
         console.error("Error fetching group data", error);
@@ -69,51 +69,55 @@ export class GroupsComponent {
     return user ? `${user.name} ${user.lastname}` : 'Unknown User';
   }
 
-  // Función para calcular las deudas
-  calculateDebts(payments: any[]): any[] {
-    const users: any = {};
+  // Función para calcular las deudas netas
+  calculateNetDebts(payments: any[]): any[] {
+    const debtsMap: any = {};
 
     payments.forEach(payment => {
       const payerId = payment.user_id_gasto;
       const receiverId = payment.user_id;
       const amount = parseFloat(payment.amount);
 
-      if (!users[payerId]) {
-        users[payerId] = { paid: 0, owes: {} };
+      if (!debtsMap[payerId]) {
+        debtsMap[payerId] = {};
+      }
+      if (!debtsMap[receiverId]) {
+        debtsMap[receiverId] = {};
       }
 
-      if (!users[receiverId]) {
-        users[receiverId] = { paid: 0, owes: {} };
+      if (!debtsMap[payerId][receiverId]) {
+        debtsMap[payerId][receiverId] = 0;
+      }
+      if (!debtsMap[receiverId][payerId]) {
+        debtsMap[receiverId][payerId] = 0;
       }
 
-      users[payerId].paid += amount;
-      if (!users[payerId].owes[receiverId]) {
-        users[payerId].owes[receiverId] = 0;
-      }
-      users[payerId].owes[receiverId] += amount;
+      debtsMap[payerId][receiverId] += amount;
     });
 
-    const debts: any[] = [];
+    const netDebts: any[] = [];
 
-    Object.keys(users).forEach(payerId => {
-      Object.keys(users[payerId].owes).forEach(receiverId => {
-        if (payerId !== receiverId) {
-          const amount = users[payerId].owes[receiverId];
-          debts.push({
-            from: {
-              id: payerId,
-              name: this.getUserName(parseInt(payerId))
-            },
-            to: {
-              id: receiverId,
-              name: this.getUserName(parseInt(receiverId))
-            },
-            amount: amount.toFixed(2)
-          });
+    Object.keys(debtsMap).forEach(payerId => {
+      Object.keys(debtsMap[payerId]).forEach(receiverId => {
+        if (debtsMap[payerId][receiverId] > 0) {
+          const netAmount = debtsMap[payerId][receiverId] - debtsMap[receiverId][payerId];
+          if (netAmount > 0) {
+            netDebts.push({
+              from: {
+                id: payerId,
+                name: this.getUserName(parseInt(payerId))
+              },
+              to: {
+                id: receiverId,
+                name: this.getUserName(parseInt(receiverId))
+              },
+              amount: netAmount.toFixed(2)
+            });
+          }
         }
       });
     });
 
-    return debts;
+    return netDebts;
   }
 }
