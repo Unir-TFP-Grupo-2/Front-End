@@ -40,8 +40,8 @@ export class GestionGastosComponent {
     this.formExpense = this.formBuilder.group({
       groupId: [null, Validators.required],
       user: [null,],
-      expense: [null, Validators.required],
-      description: [null, Validators.required],
+      expense: [null, [Validators.required]],
+      description: [null, [Validators.required, Validators.minLength(2)]],
       integrants: [[], Validators.required],
     });
   }
@@ -173,6 +173,10 @@ export class GestionGastosComponent {
         input.value = (100 - total).toString();
       }
     }
+  }
+
+  checkControl(formControlName: string, validador: string): boolean | undefined {
+    return this.formExpense.get(formControlName)?.hasError(validador) && this.formExpense.get(formControlName)?.touched;
   }
 
   cerrarPopup(): void {

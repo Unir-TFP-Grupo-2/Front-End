@@ -29,7 +29,7 @@ export class HomeComponent {
   async ngOnInit(): Promise<void> {
     try {
       const response = await this.groupService.getAll();
-      
+      console.log(response)
       if (response && Array.isArray(response)) {
         this.groups = response.sort((a, b) => new Date(b.creation_date).getTime() - new Date(a.creation_date).getTime());
       } else {

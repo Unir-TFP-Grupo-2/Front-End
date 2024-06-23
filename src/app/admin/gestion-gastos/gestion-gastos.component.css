@@ -179,6 +179,18 @@ input[type=number]:focus {
     color: #123553;
 }
 
+.ss{
+    display: flex;
+    flex-direction: column;
+}
+
+.error{
+    color: var(--danger);
+    font-size: small;
+    font-weight: 600;
+    margin: 0;
+}
+
 @media (max-width: 600px) {
     .expense-section {
         width: 340px;

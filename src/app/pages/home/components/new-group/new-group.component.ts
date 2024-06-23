@@ -40,9 +40,11 @@ export class NewGroupComponent {
 
     // Inicializa el formulario
     this.formGroup = this.formBuilder.group({
-      groupName: [null, Validators.required],
+      groupName: [null, [Validators.required, Validators.minLength(2)]],
       groupDescription: null,
-      participantInput: null,
+      participantInput: [null, [
+        Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)
+      ]],
       amigosSelect: this.amigosSelectControl,
       creator_id: null
     });
@@ -181,6 +183,10 @@ export class NewGroupComponent {
     const currentAmigosSelectValues = this.amigosSelectControl.value || [];
     const newAmigosSelectValues = currentAmigosSelectValues.filter(participant => participant !== participantToRemove);
     this.amigosSelectControl.setValue(newAmigosSelectValues);
+  }
+
+  checkControl(formControlName: string, validador: string): boolean | undefined {
+    return this.formGroup.get(formControlName)?.hasError(validador) && this.formGroup.get(formControlName)?.touched;
   }
 
   // Cierra el popup y emite el evento de cierre
