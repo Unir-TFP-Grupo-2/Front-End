@@ -39,11 +39,21 @@
       <div *ngIf="parent === '2'">
         <mat-selection-list formControlName="integrants">
           <mat-list-option *ngFor="let member of allMembers" [value]="member._id">
-            {{ member.fullName }}
-            <input type="text">
+            <div class="member-container">
+              <div class="member-name">{{ member.fullName }}</div>
+              <div class="member-input-container">
+                <input class="member-input" type="number" [id]="member._id" min="0" max="100" [value]="0" (input)="validateInput($event)">
+                <span class="member-percentage">%</span>
+              </div>
+            </div>
           </mat-list-option>
         </mat-selection-list>
       </div>
+      
+      
+      
+      
+      
     </div>
 
     <div class="subject-section">

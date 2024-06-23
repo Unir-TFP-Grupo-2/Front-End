@@ -24,8 +24,8 @@ export class GestionGastosComponent {
 
   formBuilder = inject(FormBuilder);
   usersService = inject(UsersService);
-  groupsService = inject(GroupsService)
-  grupoGastosService = inject(GrupoGastosService)
+  groupsService = inject(GroupsService);
+  grupoGastosService = inject(GrupoGastosService);
   router = inject(Router);
   route = inject(ActivatedRoute);
 
@@ -42,7 +42,7 @@ export class GestionGastosComponent {
       user: [null,],
       expense: [null, Validators.required],
       description: [null, Validators.required],
-      integrants: [[]],
+      integrants: [[], Validators.required],
     });
   }
 
@@ -52,7 +52,7 @@ export class GestionGastosComponent {
 
     try {
       const response = await this.groupsService.getById(this.groupId);
-      this.participants = response.participants
+      this.participants = response.participants;
       console.log('Respuesta del servicio:', this.participants);
       this.allMembers = this.participants.map((participant: any) => {
         return {
@@ -79,6 +79,31 @@ export class GestionGastosComponent {
 
   async onSubmit() {
     console.log('Valor del formulario antes de enviar:', this.formExpense.value);
+    
+    let participants: { id: string; percentage: number }[] = [];
+    
+    if (this.parent === '2') {
+      const inputs = document.querySelectorAll('.member-input');
+      let total = 0;
+      
+      inputs.forEach((element) => {
+        const inputElement = element as HTMLInputElement;
+        const id = inputElement.id;
+        const value = Number(inputElement.value);
+        total += value;
+        participants.push({ id, percentage: value });
+      });
+      
+      if (total !== 100) {
+        alert('La suma de todos los porcentajes debe ser exactamente 100%.');
+        return;
+      }
+    } else {
+      participants = this.formExpense.get('integrants')?.value.map((id: string) => ({ id, percentage: 0 })) || [];
+    }
+    
+    this.formExpense.patchValue({ integrants: participants });
+
     if (this.formExpense.valid) {
       const expenseData: IExpense = {
         expense_id: '',
@@ -86,7 +111,7 @@ export class GestionGastosComponent {
         amount: this.formExpense.get('expense')?.value,
         description: this.formExpense.get('description')?.value,
         group_id: this.formExpense.get('groupId')?.value,
-        participants: this.formExpense.get('integrants')?.value
+        participants
       };
 
       console.log('Datos del gasto a enviar:', expenseData);
@@ -95,7 +120,7 @@ export class GestionGastosComponent {
         const response = await this.grupoGastosService.insert(expenseData);
         if (response.expense_id) {
           alert(`El gasto se ha añadido correctamente`);
-          this.cerrarPopup()
+          this.cerrarPopup();
           this.router.navigate([`/grupo/${expenseData.group_id}`]).then(() => {
             window.location.reload();
           });
@@ -122,12 +147,38 @@ export class GestionGastosComponent {
   onSelectChange(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
     this.parent = selectElement.value;
-    console.log(this.parent)
+    console.log(this.parent);
   }
- 
+
+  validateInput(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const value = Number(input.value);
+    const inputs = document.querySelectorAll('.member-input');
+    let total = 0;
+
+    inputs.forEach((element) => {
+      const inputElement = element as HTMLInputElement;
+      if (inputElement !== input) {
+        total += Number(inputElement.value);
+      }
+    });
+
+    if (value > 100) {
+      input.value = '100';
+    } else if (value < 0) {
+      input.value = '0';
+    } else {
+      const currentTotal = total + value;
+      if (currentTotal > 100) {
+        input.value = (100 - total).toString();
+      }
+    }
+  }
+
   cerrarPopup(): void {
     this.cerrar.emit();
   }
+}
 
   
 /*
@@ -172,4 +223,3 @@ export class GestionGastosComponent {
 
 
 
-}

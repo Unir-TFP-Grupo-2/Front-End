@@ -3,6 +3,6 @@ export interface IExpense {
     user_id_gasto: string;
     description: string;
     amount: number;
-    participants: string[];
+    participants: { id: string; percentage: number }[];
     group_id: number; 
 }
