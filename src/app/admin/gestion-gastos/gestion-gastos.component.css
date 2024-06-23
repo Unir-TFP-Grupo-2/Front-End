@@ -129,6 +129,27 @@ input[type=number]:focus {
     border: none;
 }
 
+.member-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.member-input-container {
+    display: flex;
+    gap: 10px;
+}
+
+.member-input {
+    border: none;
+    width: 30px;
+    font-size: medium;
+}
+
+.member-percentage {
+    font-weight: 900;
+    font-size: medium;
+}
+
 .subject-section {
     display: flex;
     flex-direction: column;
@@ -158,7 +179,6 @@ input[type=number]:focus {
     color: #123553;
 }
 
-/* Media Queries */
 @media (max-width: 600px) {
     .expense-section {
         width: 340px;
@@ -171,11 +191,12 @@ input[type=number]:focus {
         top: -430px;
     }
 
-    .payer-input-group{
+    .payer-input-group {
         display: flex;
         flex-direction: column;
     }
-    .amount-input-group{
+    
+    .amount-input-group {
         justify-content: end;
     }
 }

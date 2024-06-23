@@ -1,12 +1,11 @@
 import { Routes } from '@angular/router';
-import { GestionGastosComponent } from './admin/gestion-gastos/gestion-gastos.component';
-import { PruebaComponent } from './components/prueba/prueba.component';
 import { authGuard } from './shared/guards/auth.guard';
 import { redirectGuard } from './shared/guards/redirect.guard';
 
 export const routes: Routes = [
 
     {path: "", pathMatch: "full", redirectTo: "welcome" },
+    
 
     {
         path:'',
@@ -53,5 +52,7 @@ export const routes: Routes = [
         path:'',
         loadChildren: () => import('./pages/contact/contact.routes').then(m => m.CONTACT_ROUTES)
     },
+
+    { path: '**', redirectTo: 'welcome' }
     
 ];
