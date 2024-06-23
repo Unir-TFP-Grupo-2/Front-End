@@ -30,6 +30,12 @@
         </div>
         <button class="btn-new-group" (click)="abrirPopup()">Añadir Gasto</button>
     </div>
+    <div>
+        <h2>Gastos</h2>
+        <div *ngFor="let balance of balances" class="gastos">
+            <p>{{balance.to.name}} debe {{balance.amount}} a {{balance.from.name}}</p>
+        </div>
+    </div>
 
     <div class="popup-overlay" *ngIf="mostrarPopup">
         <div class="popup-content">
