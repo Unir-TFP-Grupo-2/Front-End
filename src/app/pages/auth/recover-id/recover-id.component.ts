@@ -23,12 +23,10 @@ export class RecoverIdComponent {
   errorMessage = '';
 
   constructor() {
-    this.formRecoverPass = this.formBuilder.group({
+    this.formRecoverPass = new FormGroup({
       newpassword: new FormControl('', [Validators.required]),
       newpasswordAct: new FormControl('', [Validators.required])
-    }, {
-      validators: this.passwordMatchValidator // Validador personalizado para verificar que las contraseñas coincidan
-    });
+    },);
   }
 
   // Validador personalizado para verificar que las contraseñas coincidan
