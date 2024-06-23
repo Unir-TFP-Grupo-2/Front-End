@@ -1,0 +1,22 @@
+<body>
+  <div class="container">
+    <div class="title">
+      Restablecer
+    </div>
+    <form [formGroup]="formRecoverPass" (ngSubmit)="onSubmit()">
+      <div class="field">
+        <input type="password" id="newpassword" formControlName="newpassword" required>
+        <label for="newpassword">Nueva contraseña</label>
+      </div>
+      <div class="field">
+        <input type="password" id="newpasswordAct" formControlName="newpasswordAct" required>
+        <label for="newpasswordAct">Confirmar Contraseña</label>
+      </div>
+      <div class="form-footer">
+        <div class="field">
+          <input type="submit" value="Restablecer" [disabled]="!formRecoverPass.valid">
+        </div>
+      </div>
+    </form>
+  </div>
+</body>

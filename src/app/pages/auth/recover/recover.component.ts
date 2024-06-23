@@ -24,7 +24,8 @@ export class RecoverComponent {
       this.formRecover = new FormGroup({
       email: new FormControl('', [
         Validators.required,
-        Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")
+        Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$"),
+        Validators.email
       ]),
 
     })
@@ -35,6 +36,7 @@ export class RecoverComponent {
         alert(`Si el correo esta registrado en nuestra base de datos se te mandara un Gmail para restablecer la contraseña`);
         const response = await this.usersService.recover(this.formRecover.value)
         console.log(response)
+        
         
         this.router.navigateByUrl('/home');
         
