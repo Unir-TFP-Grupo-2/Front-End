@@ -15,14 +15,12 @@
         </div>
         @if (token.length > 0) {
         <div class="nav-li">
-            <a class="underline nav-li_a" [routerLink]="['/home']">Home</a>
             <a class="underline nav-li_a" [routerLink]="['/about']">About</a>
-            <a class="underline nav-li_a" [routerLink]="['/account']">account</a>
+            <a class="underline nav-li_a" [routerLink]="['/account']">Perfil</a>
             <a class="underline nav-li_a" [routerLink]="['/welcome']" (click)="logout()">Salir</a>
         </div>
         }@else{
         <div class="nav-li">
-            <a class="underline nav-li_a" [routerLink]="['/welcome']">welcome</a>
             <a class="underline nav-li_a" [routerLink]="['/login']">Iniciar Sesión</a>
             <a class="underline nav-li_a" [routerLink]="['/register']">Registrarse</a>
         </div>

@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { firstValueFrom, lastValueFrom } from 'rxjs';
+import { BehaviorSubject, firstValueFrom, lastValueFrom } from 'rxjs';
 import { IUser } from '../interfaces/iuser';
 import { Router } from '@angular/router';
 
@@ -20,9 +20,14 @@ export class UsersService {
   private httpClient = inject(HttpClient)
   private router = inject(Router)
   private userService: any;
-  http: any;
- 
   
+  // BehaviorSubject maneja el estado del token de autenticación y notificar a los suscriptores cuando cambia
+  private tokenSubject = new BehaviorSubject<string>(localStorage.getItem('token_usuario') || '');
+  
+  // Observable público en que los componentes pueden suscribirse para obtener actualizaciones del token
+  token$ = this.tokenSubject.asObservable();
+  
+
   async fetchUserAccount() {
     try {
       const user: any = await this.userService.account();
@@ -75,17 +80,16 @@ export class UsersService {
    * @returns {Promise<LoginResponse>} - Una promesa que se resuelve con la respuesta de inicio de sesión.
    */
   async login(body: LoginBody): Promise<LoginResponse> {
-    const token = localStorage.getItem('authToken'); // Asumiendo que el token se almacena en localStorage
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    });
-
     try {
-      const user = await firstValueFrom(
-        this.httpClient.post<LoginResponse>(`${this.baseUrl}/login`, body, { headers })
+      const response = await firstValueFrom(
+        this.httpClient.post<LoginResponse>(`${this.baseUrl}/login`, body)
       );
-      this.router.navigate(['/login']); // Redirige a la página de inicio
-      return user;
+      if (response.token) {
+        localStorage.setItem('token_usuario', response.token);
+        this.tokenSubject.next(response.token); // Notificar a los suscriptores del cambio
+      }
+      this.router.navigate(['/home']); // Redirige a la página de inicio
+      return response;
     } catch (error) {
       console.error('Error durante el login:', error);
       throw error;
@@ -108,6 +112,7 @@ export class UsersService {
   logout(): void {
     localStorage.removeItem('token_usuario');
     localStorage.removeItem('user_id')
+    this.tokenSubject.next('');
   }
 
 

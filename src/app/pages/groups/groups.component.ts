@@ -12,36 +12,45 @@ import { GestionGastosComponent } from '../../admin/gestion-gastos/gestion-gasto
   standalone: true,
   imports: [MatTabsModule, CommonModule, GestionGastosComponent],
   templateUrl: './groups.component.html',
-  styleUrl: './groups.component.css'
+  styleUrls: ['./groups.component.css']
 })
 export class GroupsComponent {
-  groupService = inject(GroupsService)
-  activatedRouter = inject(ActivatedRoute);
+  private groupService = inject(GroupsService);
+  private activatedRouter = inject(ActivatedRoute);
+
   title = "";
   description = "";
   total_amount = 0;
-  participantsUser = Array();
-  gastos = Array();
-  gastos_user = Array();
+  participantsUser: any[] = [];
+  gastos: any[] = [];
+  pagos: any[] = [];
   total_amount_user = 0;
+  total_a_pagar = 0;
+  balances: any[] = [];
 
   async ngOnInit(): Promise<void> {
-
     this.activatedRouter.params.subscribe(async (params: any) => {
-      let responseGrupo = await this.groupService.getById(params.id);
-      this.title = responseGrupo.title;
-      this.description = responseGrupo.description;
-      this.participantsUser = responseGrupo.participants;
-      this.total_amount = responseGrupo.total_amount ?? 0;
-      this.gastos = responseGrupo.gastos ?? [];
+      try {
+        let responseGrupo = await this.groupService.getById(params.id);
+        this.title = responseGrupo.title;
+        this.description = responseGrupo.description;
+        this.participantsUser = responseGrupo.participants;
+        this.total_amount = responseGrupo.total_amount ?? 0;
+        this.total_a_pagar = responseGrupo.total_a_pagar ?? 0;
+        this.gastos = responseGrupo.gastos ?? [];
+        this.pagos = responseGrupo.pagos ?? [];
 
-    
-    }
-    );
-
+        this.balances = this.calculateNetDebts(this.pagos);
+        console.log(this.balances);
+      } catch (error) {
+        console.error("Error fetching group data", error);
+      }
+    });
   }
 
-  
+  calcularTotal(): number {
+    return this.total_amount_user;
+  }
 
   mostrarPopup = false;
 
@@ -52,4 +61,63 @@ export class GroupsComponent {
   cerrarPopup() {
     this.mostrarPopup = false;
   }
-}  
+
+  // Función para obtener el nombre completo del usuario
+  getUserName(userId: number): string {
+    const user = this.participantsUser.find(participant => participant.user_id === userId);
+    console.log(user);
+    return user ? `${user.name} ${user.lastname}` : 'Unknown User';
+  }
+
+  // Función para calcular las deudas netas
+  calculateNetDebts(payments: any[]): any[] {
+    const debtsMap: any = {};
+
+    payments.forEach(payment => {
+      const payerId = payment.user_id_gasto;
+      const receiverId = payment.user_id;
+      const amount = parseFloat(payment.amount);
+
+      if (!debtsMap[payerId]) {
+        debtsMap[payerId] = {};
+      }
+      if (!debtsMap[receiverId]) {
+        debtsMap[receiverId] = {};
+      }
+
+      if (!debtsMap[payerId][receiverId]) {
+        debtsMap[payerId][receiverId] = 0;
+      }
+      if (!debtsMap[receiverId][payerId]) {
+        debtsMap[receiverId][payerId] = 0;
+      }
+
+      debtsMap[payerId][receiverId] += amount;
+    });
+
+    const netDebts: any[] = [];
+
+    Object.keys(debtsMap).forEach(payerId => {
+      Object.keys(debtsMap[payerId]).forEach(receiverId => {
+        if (debtsMap[payerId][receiverId] > 0) {
+          const netAmount = debtsMap[payerId][receiverId] - debtsMap[receiverId][payerId];
+          if (netAmount > 0) {
+            netDebts.push({
+              from: {
+                id: payerId,
+                name: this.getUserName(parseInt(payerId))
+              },
+              to: {
+                id: receiverId,
+                name: this.getUserName(parseInt(receiverId))
+              },
+              amount: netAmount.toFixed(2)
+            });
+          }
+        }
+      });
+    });
+
+    return netDebts;
+  }
+}

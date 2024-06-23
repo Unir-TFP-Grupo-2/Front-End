@@ -11,7 +11,7 @@
                     <p class="participantes_gasto">{{gasto.description}} - {{gasto.amount}}</p>
                 </div>
                 <p>Total pagado: {{participant.total_amount}}</p>
-                <p>Debe: 100</p>
+                <p>Debe: {{participant.total_a_pagar}}</p>
             </div>
         </div>
         <div class="grupos_description">
@@ -29,6 +29,12 @@
             <p>{{gasto.amount}}</p>
         </div>
         <button class="btn-new-group" (click)="abrirPopup()">Añadir Gasto</button>
+    </div>
+    <div>
+        <h2>Pagos</h2>
+        <div *ngFor="let balance of balances" class="gastos">
+            <p>{{balance.to.name}} debe {{balance.amount}} a {{balance.from.name}}</p>
+        </div>
     </div>
 
     <div class="popup-overlay" *ngIf="mostrarPopup">

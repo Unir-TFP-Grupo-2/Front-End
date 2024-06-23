@@ -34,8 +34,9 @@
 
 @media (min-width: 768px) {
   .grupos {
-    grid-template-columns: repeat(2, 50%);
+    grid-template-columns: repeat(3, 33%);
     margin: 0px 3rem;
+    text-align: center;
   }
 
   .grupos_description {
