@@ -14,10 +14,10 @@
       <div class="user-details-container">
         <p>Nombre: <input [(ngModel)]="name"></p>
         <p>Apellidos: <input [(ngModel)]="lastname"></p>
-        <p>Email: <input [(ngModel)]="email"></p>
+        <p>Email: <input [(ngModel)]="email" readonly></p>
         <p>
           Contraseña actual:
-          <input [type]="passwordVisible ? 'text' : 'password'" [(ngModel)]="password">
+          <input [type]="passwordVisible ? 'text' : 'password'" [(ngModel)]="password" readonly>
           <button (click)="passwordVisible = !passwordVisible">
             <i *ngIf="passwordVisible" class="fa-solid fa-eye"></i>
             <i *ngIf="!passwordVisible" class="fa-solid fa-eye-slash"></i>
