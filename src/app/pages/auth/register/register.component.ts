@@ -62,7 +62,7 @@ export class RegisterComponent {
         });
       }
     } else {
-      this.formRegister.markAllAsTouched(); // Marca todos los campos como tocados para mostrar los mensajes de error
+      this.formRegister.markAllAsTouched();
     }
   }
 }
