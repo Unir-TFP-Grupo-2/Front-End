@@ -8,7 +8,7 @@
       <label for="newpassword">Nueva contraseña</label>
       <div class="error" *ngIf="formRecoverPass.get('newpassword')?.invalid && (formRecoverPass.get('newpassword')?.dirty || formRecoverPass.get('newpassword')?.touched)">
         <div *ngIf="formRecoverPass.get('newpassword')?.hasError('required')">La contraseña es requerida.</div>
-        <div *ngIf="formRecoverPass.get('newpassword')?.hasError('minlength')">La contraseña debe tener más de 3 caracteres.</div>
+        <div *ngIf="formRecoverPass.get('newpassword')?.hasError('minlength')">La contraseña debe tener más de 4 caracteres.</div>
       </div>
     </div>
     <div class="form-footer">

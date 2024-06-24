@@ -29,7 +29,7 @@ export class RecoverIdComponent implements OnInit {
     this.formRecoverPass = this.formBuilder.group({
       newpassword: new FormControl('', [
         Validators.required,
-        Validators.minLength(6)
+        Validators.minLength(4)
       ])
     });
   }
@@ -37,18 +37,12 @@ export class RecoverIdComponent implements OnInit {
   ngOnInit(): void {
     this.token = this.route.snapshot.queryParams['token'];
     this.userId = this.route.snapshot.queryParams['id'];
-    console.log('ngOnInit called');
-    console.log('Token:', this.token);
-    console.log('UserId:', this.userId);
   }
 
 
 
   async onSubmit() {
     this.newpassword = this.formRecoverPass.get('newpassword')?.value;
-    console.log('Form submitted');
-    console.log('UserId:', this.userId);
-    console.log('New Password:', this.newpassword);
 
     try {
       if (!this.userId || !this.newpassword || !this.token) {
