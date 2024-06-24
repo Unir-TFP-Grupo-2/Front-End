@@ -51,7 +51,6 @@ export class AccountComponent {
       this.obtenerUsuarios(this.userId);
     }
     );
-    console.log(localStorage.getItem('token_usuario'));
 
   }
 
@@ -63,14 +62,11 @@ export class AccountComponent {
     });
     this.http.get(`http://localhost:3000/api/usuarios/${id}`, { headers }).subscribe({
       next: (response: any) => {
-        console.log("Respuesta del servidor:", response);
         this.name = response.name;
         this.lastname = response.lastname;
         this.email = response.email;
         this.photo = response.photo_url;
-        this.password = response.password;
         this.usuarios = [response];
-        console.log("Usuarios:", this.usuarios);
       },
       error: (error) => {
         console.error('Error al obtener los usuarios:', error);
@@ -102,8 +98,9 @@ export class AccountComponent {
       photo: this.photo,
       password: this.password
     };
-
     if (this.cambiarpassword && this.newPassword) {
+    console.log(this.newPassword);
+
       userDetailsActualizado.password = this.newPassword;
     }
 

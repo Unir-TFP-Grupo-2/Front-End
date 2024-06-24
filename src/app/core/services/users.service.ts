@@ -159,6 +159,8 @@ export class UsersService {
 updateUser(userId: string, userDetailsActualizado: any): Promise<any> {
   const headers = this.createHeaders();
   // Asegúrate de que solo se envíe la contraseña si ha sido modificada
+  console.log(userDetailsActualizado);
+
   if (userDetailsActualizado.password) {
     userDetailsActualizado.password = this.encryptPassword(userDetailsActualizado.password);
   }

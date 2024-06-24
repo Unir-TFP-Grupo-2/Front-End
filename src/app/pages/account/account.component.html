@@ -1,3 +1,4 @@
+<!-- account.component.html -->
 <div class="account-page">
   <h2>Información de mi perfil</h2>
 
@@ -9,7 +10,6 @@
         [src]="photo ?? 'https://i.pravatar.cc/500?u=mariadelcarmen.herreravillanueva@peticiones.online'"
         alt="Foto de perfil:">
       <input type="file" accept="image/*" (change)="cambiarFoto($event)">
-
     </div>
   </div>
   <div class="name">
@@ -18,17 +18,11 @@
       <p>Apellidos: <input [(ngModel)]="lastname"></p>
       <p>Email: <input [(ngModel)]="email" readonly></p>
       <p>
-        Contraseña actual:
-        <input [type]="passwordVisible ? 'text' : 'password'" [(ngModel)]="password" readonly>
-        <button (click)="passwordVisible = !passwordVisible">
-          <i *ngIf="passwordVisible" class="fa-solid fa-eye"></i>
-          <i *ngIf="!passwordVisible" class="fa-solid fa-eye-slash"></i>
-        </button>
         <button (click)="cambiarpassword = !cambiarpassword">Cambiar contraseña</button>
       </p>
       <div *ngIf="cambiarpassword">
         <label>Nueva contraseña:
-          <input [type]="newPasswordVisible ? 'text' : 'password'" #newPassword>
+          <input [type]="newPasswordVisible ? 'text' : 'password'" [(ngModel)]="newPassword">
           <button (click)="newPasswordVisible = !newPasswordVisible">
             <i *ngIf="newPasswordVisible" class="fa-solid fa-eye"></i>
             <i *ngIf="!newPasswordVisible" class="fa-solid fa-eye-slash"></i>
