@@ -38,9 +38,19 @@
 .participante {
   display: flex;
   gap: 50px;
+  justify-content: center;
 }
 
-@media (min-width: 768px) {
+.div_separador {
+  border-bottom: solid 1px grey;
+  padding: 10px;
+}
+
+@media (min-width: 1366px) {
+  .div_separador {
+    border-bottom: none;
+  }
+
   .grupos {
     grid-template-columns: repeat(3, 33%);
     margin: 0px 3rem;
@@ -54,7 +64,7 @@
   }
 
   .participantes {
-    display: flex;
+    display: grid;
     width: 100%;
     margin: auto;
     justify-content: center;
