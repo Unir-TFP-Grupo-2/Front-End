@@ -41,6 +41,7 @@ export class HeaderComponent implements AfterViewInit, OnDestroy {
 
   addClickEventToNavLinks(): void {
     const navLinks = document.querySelectorAll(".nav-li_a");
+    
     if (navLinks.length > 0) {
       navLinks.forEach(link => {
         link.addEventListener('click', () => {

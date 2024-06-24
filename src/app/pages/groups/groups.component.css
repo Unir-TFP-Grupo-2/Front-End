@@ -1,5 +1,8 @@
 .grupos {
   display: grid;
+  width: 90%;
+  margin: auto;
+  text-align: center;
 
 }
 
@@ -32,6 +35,11 @@
   z-index: 9999;
 }
 
+.participante {
+  display: flex;
+  gap: 50px;
+}
+
 @media (min-width: 768px) {
   .grupos {
     grid-template-columns: repeat(3, 33%);
@@ -52,4 +60,6 @@
     justify-content: center;
     gap: 50px;
   }
+
+
 }
