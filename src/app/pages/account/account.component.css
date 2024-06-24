@@ -5,22 +5,11 @@
     min-height: 800px;
 }
 
-.foto-perfil {
-    display: block;
-    margin-top: 20px;
-    top: 190px;
-    left: 5%;
-    grid-auto-columns: 100%;
-    max-width: 200px;
-}
-
-.photo-container{
-    display: block;
-    margin-top: 20px;
-    top: 190px;
-    left: 5%;
-    grid-auto-columns: 100%;
-    max-width: 200px;
+.foto-perfil, .photo-container {
+    margin: 20px auto;
+    position: relative; /* Cambiado de 'static' para permitir ajustes responsivos */
+    width: 100%; /* Ajusta este valor según sea necesario */
+    max-width: 300px; /* Asegura que la imagen no sea demasiado grande */
 }
 
 .name {
@@ -28,8 +17,10 @@
 }
 
 .user-details-container {
-    position: relative;
-    top: -240px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
 
 .my-element {
@@ -69,7 +60,7 @@ label {
     }
 
     .foto-perfil, .photo-container {
-        position: static;
+       
         margin: 20px auto;
         top: auto; /* Elimina la posición superior fija */
         left: auto; /* Elimina la posición izquierda fija */
