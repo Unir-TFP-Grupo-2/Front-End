@@ -29,6 +29,7 @@ export class FriendsComponent {
     try {
       const response = await this.friendsService.getAllFriend();
       this.friends = response;
+      this.ordenarAlfabeticamente();
       console.log('Respuesta del servicio:', response);
     } catch (error: unknown) {
       console.error('Error al obtener amigos:', error);
@@ -44,6 +45,7 @@ export class FriendsComponent {
       }
     }
   }
+
 
   async deleteFriend(friend:IUser): Promise<void> {
     const result = await Swal.fire({
@@ -64,7 +66,7 @@ export class FriendsComponent {
         await this.loadFriends(); // Actualizar la lista de amigos después de eliminar
         Swal.fire(
           '¡Eliminado!',
-          `${friend.name} ${friend.lastname} a sido eliminado de tu lista de amigos`,
+          `${friend.name} ${friend.lastname} ha sido eliminado de tu lista de amigos`,
           'success'
         );
       } catch (error) {
@@ -76,6 +78,17 @@ export class FriendsComponent {
         );
       }
     }
+  }
+
+  
+  ordenarAlfabeticamente() {
+    this.friends.sort((a, b) => {
+      const nameA = `${a.name} ${a.lastname}`.toLowerCase();
+      const nameB = `${b.name} ${b.lastname}`.toLowerCase();
+      if (nameA < nameB) return -1;
+      if (nameA > nameB) return 1;
+      return 0;
+    });
   }
 
   mostrarPopup = false;

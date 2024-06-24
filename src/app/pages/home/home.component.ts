@@ -51,10 +51,7 @@ export class HomeComponent {
     }
   }
   
-  
-
-
-  
+    
   mostrarPopup = false;
 
   abrirPopup() {

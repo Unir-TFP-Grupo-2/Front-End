@@ -109,7 +109,10 @@
 }
 
 .icon-user-1 {
-  width: 30px;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover; 
 }
 
 .user-actions {

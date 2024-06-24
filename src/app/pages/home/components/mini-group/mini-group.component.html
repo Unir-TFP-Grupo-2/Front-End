@@ -26,10 +26,10 @@
         }
     </div>
     <div class="group-user">
-        <img class="icon-user-1" src="../../../assets/icons/account-blue.png" alt="Imagen creador del grupo">
+        <img class="icon-user-1" [src]="miGroup.creator_url_photo ? miGroup.creator_url_photo : '../../../../../assets/icons/account-blue.png'" alt="Imagen creador del grupo">
         <div class="user-actions">
             <span class="total-users-group">+{{(miGroup.num_participants ?? 0) - 1}}</span>
             <button class="btn-add-user-group" [ngStyle]="{'background-color': addUserButtonColor}">+</button>
         </div>
     </div>
-</div>
+    

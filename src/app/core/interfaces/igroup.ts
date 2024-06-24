@@ -11,5 +11,6 @@ export interface IGroup {
         pagos?: string[]; 
         participants: string[];
         creator_id?: string
+        creator_url_photo?: string
 }
 
