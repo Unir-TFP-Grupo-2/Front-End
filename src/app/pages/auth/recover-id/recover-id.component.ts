@@ -36,21 +36,14 @@ export class RecoverIdComponent {
   async onSubmit() {
     const userId = localStorage.getItem('user_id');
     this.newpassword = this.formRecoverPass.get('newpassword')?.value;
-    this.newpasswordAct = this.formRecoverPass.get('newpasswordAct')?.value;
-
   
-
     try {
       if (!userId || !this.newpassword) {
         throw new Error('Faltan datos necesarios para actualizar la contraseña del usuario');
-        console.log(userId)
       }
-
-      // Datos a enviar en la petición para actualizar el usuario
-      const userDetailsActualizado = { password: this.newpassword };
-
-      // Asegúrate de que la URL es correcta y no tiene segmentos duplicados
-      await this.usersService.updateUser(userId, userDetailsActualizado); // Usa el userId obtenido de localStorage
+  
+      // Llama a la función para actualizar solo la contraseña
+      await this.usersService.updateUserPassword(userId, this.newpassword);
       await this.router.navigate(['/welcome']);
       console.log('Cambios guardados con éxito');
     } catch (error) {

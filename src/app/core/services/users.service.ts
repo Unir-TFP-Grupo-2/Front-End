@@ -167,4 +167,22 @@ updateUser(userId: string, userDetailsActualizado: any): Promise<any> {
   const requestObservable = this.httpClient.put(`${this.baseUrl}/${userId}`, userDetailsActualizado, { headers });
   return firstValueFrom(requestObservable);
 }
+
+updateUserPassword(userId: string, newPassword: string): Promise<any> {
+  const headers = this.createHeaders();
+
+  // Encriptar la nueva contraseña
+  const encryptedPassword = this.encryptPassword(newPassword);
+
+  // Crear el objeto con la contraseña actualizada
+  const passwordUpdate = { password: encryptedPassword };
+
+  // Hacer la petición PUT para actualizar la contraseña
+  const requestObservable = this.httpClient.put(`${this.baseUrl}/${userId}/recover-id`, passwordUpdate, { headers });
+
+  return firstValueFrom(requestObservable);
+}
+
+
+
 }

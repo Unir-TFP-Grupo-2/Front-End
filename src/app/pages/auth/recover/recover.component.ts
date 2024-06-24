@@ -36,8 +36,7 @@ export class RecoverComponent {
         alert(`Si el correo esta registrado en nuestra base de datos se te mandara un Gmail para restablecer la contraseña`);
         const response = await this.usersService.recover(this.formRecover.value)
         console.log(response)
-        
-        
+                
         this.router.navigateByUrl('/home');
         
     } catch (err: any) {
