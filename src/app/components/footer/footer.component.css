@@ -67,7 +67,9 @@
 
 
 @media only screen and (min-width:768px) {
-    .footer-content {}
+    .footer-content {
+        
+    }
 }
 
 @media only screen and (min-width:1024px) {
