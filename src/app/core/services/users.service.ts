@@ -40,16 +40,17 @@ export class UsersService {
     }
   }
 
-  private createHeaders(): HttpHeaders {
-    const token = localStorage.getItem('token_usuario');
-    if (!token) {
-      throw new Error('Token de autenticación no encontrado');
-    }
-    return new HttpHeaders({
-      'Authorization': `Bearer ${token}`
+  createHeaders(token: string | null = null): HttpHeaders {
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
     });
-  }
 
+    if (token) {
+      headers = headers.set('Authorization', `Bearer ${token}`);
+    }
+
+    return headers;
+  }
 
   /**
    * Registra un nuevo usuario.

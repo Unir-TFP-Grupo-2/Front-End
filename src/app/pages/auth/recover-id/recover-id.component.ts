@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
 })
 export class RecoverIdComponent implements OnInit {
   formRecoverPass: FormGroup;
-  token: string | null = null;
+  token: any | null = null;
   userId: string | null = null;
   newpassword = '';
   errorMessage = '';
@@ -41,6 +41,8 @@ export class RecoverIdComponent implements OnInit {
     console.log('Token:', this.token);
     console.log('UserId:', this.userId);
   }
+
+
 
   async onSubmit() {
     this.newpassword = this.formRecoverPass.get('newpassword')?.value;
