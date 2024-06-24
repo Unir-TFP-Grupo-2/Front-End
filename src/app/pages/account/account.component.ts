@@ -1,37 +1,36 @@
+// account.component.ts
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { UsersService } from '../../core/services/users.service';
+
 @Component({
   selector: 'app-account',
   standalone: true,
   imports: [RouterLink, FormsModule, CommonModule, ReactiveFormsModule],
   templateUrl: './account.component.html',
-  styleUrl: './account.component.css'
+  styleUrls: ['./account.component.css']
 })
 export class AccountComponent {
   name = '';
   lastname = '';
   email = '';
   password = '';
+  newPassword = '';
   newPasswordVisible = false;
   passwordVisible = false;
   photo: string | undefined;
   usuarios: any[] = [];
   id: string | null = null;
-
+  photo_url: string | undefined; // Añadir esta propiedad
 
   activatedRouter = inject(ActivatedRoute);
   baseUrl: string;
   httpClient: HttpClient;
-  cambiarpassword: any;
-  nuevaPassword: any;
-  newPassword: any;
+  cambiarpassword = false;
   userId: any;
-
-
 
   constructor(
     private http: HttpClient,
@@ -49,23 +48,21 @@ export class AccountComponent {
     this.activatedRoute.params.subscribe(async (params: any) => {
       this.userId = localStorage.getItem('user_id');
       this.obtenerUsuarios(this.userId);
-    }
-    );
-
+    });
   }
 
   obtenerUsuarios(id: number) {
-
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem('token_usuario')
     });
     this.http.get(`http://localhost:3000/api/usuarios/${id}`, { headers }).subscribe({
       next: (response: any) => {
+        console.log(response);
         this.name = response.name;
         this.lastname = response.lastname;
         this.email = response.email;
-        this.photo = response.photo_url;
+        this.photo_url = response.url_photo;
         this.usuarios = [response];
       },
       error: (error) => {
@@ -73,17 +70,32 @@ export class AccountComponent {
       }
     });
   }
+
   cambiarFoto(event: any) {
     if (event.target.files && event.target.files[0]) {
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        console.log(e.target.result);
-
-        this.photo = e.target.result;
-      };
-      reader.readAsDataURL(event.target.files[0]);
+      const file = event.target.files[0];
+      this.subirFoto(file).subscribe({
+        next: (response: any) => {
+          this.photo_url = response.photo_url; // Asigna la URL de la foto retornada por el servidor
+          console.log('URL de la nueva foto:', this.photo_url);
+        },
+        error: (error) => {
+          console.error('Error al subir la foto:', error);
+        }
+      });
     }
   }
+
+  subirFoto(file: File) {
+    const formData = new FormData();
+    formData.append('file', file);
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + localStorage.getItem('token_usuario')
+    });
+
+    return this.httpClient.post('http://localhost:3000/api/upload', formData, { headers });
+  }
+
   async guardarCambios() {
     const userId = localStorage.getItem('user_id');
     if (!userId) {
@@ -95,14 +107,13 @@ export class AccountComponent {
       name: this.name,
       lastname: this.lastname,
       email: this.email,
-      photo: this.photo,
-      password: this.password
+      photo_url: this.photo_url // Usar la nueva propiedad photo_url
     };
-    if (this.cambiarpassword && this.newPassword) {
-    console.log(this.newPassword);
 
+    if (this.cambiarpassword && this.newPassword) {
       userDetailsActualizado.password = this.newPassword;
     }
+    console.log(userDetailsActualizado);
 
     try {
       await this.usersService.updateUser(userId, userDetailsActualizado);
@@ -112,4 +123,4 @@ export class AccountComponent {
       console.error('Error al guardar los cambios:', error);
     }
   }
-} 
+}
