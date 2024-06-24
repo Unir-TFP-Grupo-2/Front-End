@@ -1,24 +1,24 @@
 import { Component, EventEmitter, Output, inject } from '@angular/core';
-import { GrupoGastosService } from '../../core/services/grupo-gastos.service';
+import { GrupoGastosService } from '../../../core/services/grupo-gastos.service';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import {MatListModule, MatSelectionList,} from '@angular/material/list';
-import {MatSelectModule} from '@angular/material/select';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import { IExpense } from '../../core/interfaces/iexpense';
+import { MatListModule, MatSelectionList } from '@angular/material/list';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { IExpense } from '../../../core/interfaces/iexpense';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
-import { UsersService } from '../../core/services/users.service';
-import { GroupsService } from '../../core/services/groups.service';
+import { UsersService } from '../../../core/services/users.service';
+import { GroupsService } from '../../../core/services/groups.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-gestion-gastos',
   standalone: true,
-  imports: [FormsModule, CommonModule, ReactiveFormsModule, MatSelectionList, MatListModule,MatFormFieldModule, MatSelectModule],
+  imports: [FormsModule, CommonModule, ReactiveFormsModule, MatSelectionList, MatListModule, MatFormFieldModule, MatSelectModule],
   templateUrl: './gestion-gastos.component.html',
   styleUrls: ['./gestion-gastos.component.css'],
 })
-
 export class GestionGastosComponent {
   formExpense: FormGroup;
 
@@ -39,7 +39,7 @@ export class GestionGastosComponent {
   constructor() {
     this.formExpense = this.formBuilder.group({
       groupId: [null, Validators.required],
-      user: [null,],
+      user: [null, Validators.required],
       expense: [null, [Validators.required]],
       description: [null, [Validators.required, Validators.minLength(2)]],
       integrants: [[], Validators.required],
@@ -119,31 +119,49 @@ export class GestionGastosComponent {
       try {
         const response = await this.grupoGastosService.insert(expenseData);
         if (response.expense_id) {
-          alert(`El gasto se ha añadido correctamente`);
           this.cerrarPopup();
-          this.router.navigate([`/grupo/${expenseData.group_id}`]).then(() => {
-            window.location.reload();
-          });
+          Swal.fire({
+            title: 'El gasto se ha añadido correctamente',
+            icon: 'success',
+            confirmButtonColor:  'var(--primary)',
+          })
         } else {
-          alert('Hubo un problema, intentalo de nuevo');
+          this.cerrarPopup();
+          Swal.fire({
+            title: 'Error',
+            text: 'Hubo un problema, intentalo de nuevo',
+            icon: 'error',
+            confirmButtonColor: 'var(--primary)'
+          });
         }
       } catch (error) {
         console.error('Error al crear el gasto:', error);
-
+      
         if (error instanceof HttpErrorResponse) {
           console.error('Detalles del error:', error.message, error.status, error.statusText, error.url);
         } else {
           console.error('Error desconocido:', error);
         }
-
-        alert('Hubo un problema, intentalo de nuevo');
+        this.cerrarPopup();
+        Swal.fire({
+          title: 'Error',
+          text: 'Hubo un problema, intentalo de nuevo',
+          icon: 'error',
+          confirmButtonColor: 'var(--primary)'
+        });
       }
-    } else {
-      alert('Por favor, completa todos los campos requeridos.');
+      } else {
+        this.cerrarPopup();
+        Swal.fire({
+          title: 'Atención',
+          text: 'Por favor, completa todos los campos requeridos.',
+          icon: 'warning',
+          confirmButtonColor: 'var(--primary)',
+        });
+      }
     }
-  }
 
-  //controlador del parent
+ 
   onSelectChange(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
     this.parent = selectElement.value;
@@ -183,47 +201,3 @@ export class GestionGastosComponent {
     this.cerrar.emit();
   }
 }
-
-  
-/*
-  nuevoUsuario = '';
-  nuevoGasto = {
-    usuario: '',
-    cantidad: 0,
-    descripcion: ''
-  };
-  usuarios: string[] = [];
-  gastosIndividuales: { [key: string]: number } = {};
-  deudas: { [key: string]: number } = {};
-  transacciones: { deudor: string, acreedor: string, cantidad: number }[] = [];
-  
-
-
- agregarUsuario(): void {
-    if (this.nuevoUsuario.trim()) {
-      this.grupoGastosService.agregarUsuario(this.nuevoUsuario.trim());
-      this.usuarios = [...this.grupoGastosService['usuarios']];
-      this.nuevoUsuario = '';
-    }
-  }
-
-  registrarGasto(): void {
-    if (this.nuevoGasto.usuario && this.nuevoGasto.cantidad > 0) {
-      this.grupoGastosService.registrarGasto(this.nuevoGasto.usuario, this.nuevoGasto.cantidad, this.nuevoGasto.descripcion);
-      this.nuevoGasto = { usuario: '', cantidad: 0, descripcion: '' };
-      this.actualizarGastos();
-    }
-  }
-
-  actualizarGastos(): void {
-    this.gastosIndividuales = this.grupoGastosService.calcularGastosIndividuales();
-    this.deudas = this.grupoGastosService.calcularDeudas();
-    this.transacciones = this.grupoGastosService.calcularTransacciones();
-  }
-*/
-  //Controlador de parent
- 
-
-
-
-

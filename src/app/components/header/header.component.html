@@ -15,6 +15,7 @@
         </div>
         @if (token.length > 0) {
         <div class="nav-li">
+            <a class="underline nav-li_a" [routerLink]="['/friends']">Amigos</a>
             <a class="underline nav-li_a" [routerLink]="['/about']">About</a>
             <a class="underline nav-li_a" [routerLink]="['/account']">Perfil</a>
             <a class="underline nav-li_a" [routerLink]="['/welcome']" (click)="logout()">Salir</a>

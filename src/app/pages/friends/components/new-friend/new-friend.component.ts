@@ -3,10 +3,11 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router } from '@angular/router';
 import { FriendsService} from '../../../../core/services/friends.service';
 import Swal from 'sweetalert2';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-new-friend',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './new-friend.component.html',
   styleUrl: './new-friend.component.css'
 })
@@ -20,7 +21,10 @@ export class NewFriendComponent {
 
   constructor() {
     this.formGroup = this.formBuilder.group({
-      friend: [null, Validators.required],
+      friend: [null, [
+        Validators.required,
+        Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)
+      ]],
     });
   }
 
@@ -46,6 +50,7 @@ export class NewFriendComponent {
         this.cerrarPopup();
         Swal.fire({
           title: '¡Error!',
+          text: 'Asegurate que el email está registrado',
           icon: 'error',
           confirmButtonColor: 'var(--primary)',
           confirmButtonText: 'Cerrar'
@@ -54,6 +59,10 @@ export class NewFriendComponent {
     } else {
       console.log('Formulario no válido');
     }
+  }
+
+  checkControl(formControlName: string, validador: string): boolean | undefined {
+    return this.formGroup.get(formControlName)?.hasError(validador) && this.formGroup.get(formControlName)?.touched;
   }
 
   cerrarPopup(): void {

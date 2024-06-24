@@ -5,7 +5,7 @@ import { GroupsService } from '../../core/services/groups.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { GestionGastosComponent } from '../../admin/gestion-gastos/gestion-gastos.component';
+import { GestionGastosComponent } from './gestion-gastos/gestion-gastos.component';
 
 @Component({
   selector: 'app-groups',
