@@ -37,7 +37,7 @@ export class RecoverComponent {
         const response = await this.usersService.recover(this.formRecover.value)
         console.log(response)
                 
-        this.router.navigateByUrl('/home');
+        this.router.navigateByUrl('/welcome');
         
     } catch (err: any) {
       console.log(err.error.error);   

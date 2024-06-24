@@ -108,7 +108,7 @@ export class UsersService {
    */
   recover(body: RecoverBody): Promise<any> {
     return firstValueFrom(
-      this.httpClient.post<RecoverBody>(`${this.baseUrl}/recover`, body)
+      this.httpClient.post<RecoverBody>(`${this.baseUrl}/request-password-reset`, body)
     );
   } 
 
@@ -168,17 +168,19 @@ updateUser(userId: string, userDetailsActualizado: any): Promise<any> {
   return firstValueFrom(requestObservable);
 }
 
-updateUserPassword(userId: string, newPassword: string): Promise<any> {
+updateUserPassword(userId: string, newPassword: string, token: any): Promise<any> {
   const headers = this.createHeaders();
 
   // Encriptar la nueva contraseña
   const encryptedPassword = this.encryptPassword(newPassword);
 
   // Crear el objeto con la contraseña actualizada
-  const passwordUpdate = { password: encryptedPassword };
-
+    const passwordUpdate = {
+      "id": userId,
+      "newPassword": newPassword
+    };
   // Hacer la petición PUT para actualizar la contraseña
-  const requestObservable = this.httpClient.put(`${this.baseUrl}/${userId}/recover-id`, passwordUpdate, { headers });
+  const requestObservable = this.httpClient.put(`${this.baseUrl}/${userId}`, passwordUpdate, { headers });
 
   return firstValueFrom(requestObservable);
 }
