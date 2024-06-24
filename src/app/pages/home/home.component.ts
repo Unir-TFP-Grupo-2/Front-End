@@ -6,7 +6,6 @@ import { IGroup } from '../../core/interfaces/igroup';
 import { GroupsService } from '../../core/services/groups.service';
 import { ActivatedRoute } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { firstValueFrom } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 
 
@@ -33,7 +32,7 @@ export class HomeComponent {
       if (response && Array.isArray(response)) {
         this.groups = response.sort((a, b) => new Date(b.creation_date).getTime() - new Date(a.creation_date).getTime());
       } else {
-        this.groups = []; // Manejar el caso donde response es null o no es un array
+        this.groups = [];
         console.log('No hay grupos asociados a este usuario.');
       }
     } catch (error: unknown) {
@@ -42,7 +41,7 @@ export class HomeComponent {
         if (error.status === 403) {
           console.error('No tiene autorización para acceder a este recurso.');
         } else if (error.status === 204) {
-          this.groups = []; // No hay grupos asociados
+          this.groups = []; 
           console.log('No hay grupos asociados a este usuario.');
         }
       } else {

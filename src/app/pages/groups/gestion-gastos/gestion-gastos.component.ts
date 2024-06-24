@@ -68,7 +68,7 @@ export class GestionGastosComponent {
         if (error.status === 403) {
           console.error('No tiene autorización para acceder a este recurso.');
         } else if (error.status === 204) {
-          this.allMembers = []; // No hay grupos asociados
+          this.allMembers = [];
           console.log('No hay grupos asociados a este usuario.');
         }
       } else {
@@ -123,8 +123,10 @@ export class GestionGastosComponent {
           Swal.fire({
             title: 'El gasto se ha añadido correctamente',
             icon: 'success',
-            confirmButtonColor:  'var(--primary)',
-          })
+            confirmButtonColor: 'var(--primary)',
+          }).then(() => {
+            window.location.reload();
+          });
         } else {
           this.cerrarPopup();
           Swal.fire({

@@ -77,11 +77,10 @@ export class NewGroupComponent {
     }
   }
 
-  // Maneja el envío del formulario
+
   async onSubmit() {
     if (this.userID) {
       try {
-        // Obtiene el correo electrónico del usuario actual
         this.userData = await this.userService.getEmailByUserId(this.userID);
         if (this.userData?.email) {
           this.participants.push(this.userData.email);
@@ -95,7 +94,6 @@ export class NewGroupComponent {
     if (this.formGroup.valid) {
       const groupData = this.createGroupData();
       try {
-        // Inserta el nuevo grupo
         const response = await this.groupsService.insert(groupData);
         if (response.group_id) {
           this.cerrarPopup();
@@ -166,8 +164,7 @@ export class NewGroupComponent {
     this.dropdownVisible = !this.dropdownVisible;
   }
 
-  // Añade un participante a la lista
-  addParticipant() {
+   addParticipant() {
     const participantInput = this.formGroup.get('participantInput');
     const participantValue = participantInput?.value.trim();
     if (participantValue) {

@@ -63,7 +63,7 @@ export class FriendsComponent {
         const response = await this.friendsService.deleteFriend(friend._id);
         console.log(response);
         console.log('Amigo eliminado correctamente');
-        await this.loadFriends(); // Actualizar la lista de amigos después de eliminar
+        await this.loadFriends();
         Swal.fire(
           '¡Eliminado!',
           `${friend.name} ${friend.lastname} ha sido eliminado de tu lista de amigos`,
