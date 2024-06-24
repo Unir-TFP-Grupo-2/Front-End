@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { MatTabsModule } from '@angular/material/tabs';
 import { IGroup } from '../../core/interfaces/igroup';
 import { GroupsService } from '../../core/services/groups.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { GestionGastosComponent } from '../../admin/gestion-gastos/gestion-gastos.component';
@@ -17,6 +17,7 @@ import { GestionGastosComponent } from '../../admin/gestion-gastos/gestion-gasto
 export class GroupsComponent {
   private groupService = inject(GroupsService);
   private activatedRouter = inject(ActivatedRoute);
+  router = inject(Router);
 
   title = "";
   description = "";
@@ -27,6 +28,7 @@ export class GroupsComponent {
   total_amount_user = 0;
   total_a_pagar = 0;
   balances: any[] = [];
+  usuarioEncontrado = false;
 
   async ngOnInit(): Promise<void> {
     this.activatedRouter.params.subscribe(async (params: any) => {
@@ -41,11 +43,28 @@ export class GroupsComponent {
         this.pagos = responseGrupo.pagos ?? [];
 
         this.balances = this.calculateNetDebts(this.pagos);
+
+        // Itera sobre cada participante
+        this.participantsUser.forEach(element => {
+          if (element.user_id == parseInt(localStorage.getItem('user_id') || '0', 10)) {
+            this.usuarioEncontrado = true;
+          }
+        });
+
+        // Verifica si el usuario fue encontrado
+        if (!this.usuarioEncontrado) {
+          // Si no fue encontrado, redirige al home
+          this.router.navigate(['/home']);
+        }
+
         console.log(this.balances);
       } catch (error) {
         console.error("Error fetching group data", error);
+        this.router.navigate(['/home']);
+
       }
     });
+
   }
 
   calcularTotal(): number {
