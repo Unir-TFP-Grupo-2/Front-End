@@ -2,7 +2,7 @@
   <form [formGroup]="formExpense" (ngSubmit)="onSubmit()" class="expense-form">
     <div class="header-section">
       <h2 class="expense-title">Nuevo Gasto</h2>
-      <button class="close-button" (click)="cerrarPopup()">X</button>
+      <button type="button" class="close-button" (click)="cerrarPopup()">X</button>
     </div>
     
     <div class="payer-section">
@@ -15,8 +15,8 @@
           <input type="number" id="expense" formControlName="expense" class="amount-input" placeholder="0">
           <span class="currency-symbol">€</span>
         </div>
-       
       </div>
+        <div *ngIf="checkControl('user', 'required')" class="error text-danger">Campo requerido</div>
     </div>
 
     <div class="recipient-section">
@@ -33,7 +33,9 @@
 
       <div *ngIf="parent === '1'">
         <mat-selection-list formControlName="integrants">
-          <mat-list-option *ngFor="let member of allMembers" [value]="member._id">{{ member.fullName }}</mat-list-option>
+          <mat-list-option *ngFor="let member of allMembers" [value]="member._id">
+            <div class="member-container">{{ member.fullName }}</div>
+          </mat-list-option>
         </mat-selection-list>
       </div>
 
@@ -50,20 +52,15 @@
           </mat-list-option>
         </mat-selection-list>
       </div>
-   
     </div>
 
     <div class="subject-section">
       <label class="subject-label">Asunto</label>
       <input id="description" formControlName="description" class="subject-input" type="text" placeholder="Descripción del gasto">
-      @if(checkControl('description', 'required')){
-        <p class="error text-danger">Campo requerido</p>
-    }
-      @if(checkControl('description', 'minlength')){  
-        <p class="error text-danger">Minimo 2 caracteres</p>
-    }
+      <div *ngIf="checkControl('description', 'required')" class="error text-danger">Campo requerido</div>
+      <div *ngIf="checkControl('description', 'minlength')" class="error text-danger">Mínimo 2 caracteres</div>
     </div>
 
-    <input type="submit" value="Guardar" class="submit-button" [ngClass]="     {'disabled-button': !formExpense.valid}" [disabled]="!formExpense.valid">
+    <input type="submit" value="Guardar" class="form-submit" [ngClass]="{'disabled-button': !formExpense.valid}" [disabled]="!formExpense.valid">
   </form>
 </section>

@@ -8,6 +8,8 @@
             <label for="friend" class="form-label"></label>
             <input id="friend" formControlName="friend" class="form-input" placeholder="Introduce el email de tu amigo" />
         </div>
-        <input type="submit" value="Añadir" class="form-submit" />
+        @if(checkControl('friend', 'pattern')){
+            <p class="error text-danger">Introduce un Email válido</p>}
+        <input type="submit" value="Añadir" class="form-submit" [ngClass]="     {'disabled-button': !formGroup.valid}" [disabled]="!formGroup.valid">
     </form>
 </section>
