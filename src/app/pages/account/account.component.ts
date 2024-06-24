@@ -18,7 +18,7 @@ export class AccountComponent {
   password = '';
   newPasswordVisible = false;
   passwordVisible = false;
-  photo: Blob | undefined;
+  photo: string | undefined;
   usuarios: any[] = [];
   id: string | null = null;
 
@@ -67,7 +67,7 @@ export class AccountComponent {
         this.name = response.name;
         this.lastname = response.lastname;
         this.email = response.email;
-        this.photo = response.photo;
+        this.photo = response.photo_url;
         this.password = response.password;
         this.usuarios = [response];
         console.log("Usuarios:", this.usuarios);
@@ -81,6 +81,8 @@ export class AccountComponent {
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
       reader.onload = (e: any) => {
+        console.log(e.target.result);
+
         this.photo = e.target.result;
       };
       reader.readAsDataURL(event.target.files[0]);
