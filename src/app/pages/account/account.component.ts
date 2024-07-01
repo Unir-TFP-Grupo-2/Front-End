@@ -5,6 +5,7 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { UsersService } from '../../core/services/users.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-account',
@@ -100,6 +101,11 @@ export class AccountComponent {
     const userId = localStorage.getItem('user_id');
     if (!userId) {
       console.error('El ID del usuario no está definido');
+      Swal.fire(
+        "Error",
+        "El ID del usuario no está definido.",
+        "error"
+      );
       return;
     }
 
@@ -119,8 +125,18 @@ export class AccountComponent {
       await this.usersService.updateUser(userId, userDetailsActualizado);
       await this.router.navigate([`/account`]);
       console.log('Cambios guardados con éxito');
+      Swal.fire(
+        "Cambios Guardados",
+        "Tus cambios han sido guardados con éxito.",
+        "success"
+      );
     } catch (error) {
       console.error('Error al guardar los cambios:', error);
+      Swal.fire(
+        "Error al Guardar",
+        "Hubo un problema al guardar tus cambios.",
+        "error"
+      );
     }
-  }
+}
 }
